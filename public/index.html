@@ -12,7 +12,7 @@
 <meta property="og:description" content="Custom laser engraving and 3D printing, made to bring your ideas down to earth.">
 <meta property="og:url" content="https://cosmicvibezcreations.com/">
 <meta property="og:image" content="https://cosmicvibezcreations.com/logo.png">
-<link rel="icon" href="favicon.png">
+<link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -78,7 +78,7 @@ main,header,footer{position:relative;z-index:1}
 .hero-art .halo{position:absolute;inset:6%;border-radius:50%;background:conic-gradient(from 0deg,var(--cyan),var(--violet),var(--pink),var(--gold),var(--cyan));filter:blur(34px);opacity:.45;animation:spin 18s linear infinite}
 .hero-art .planet{position:relative;width:62%;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 30% 26%,#fff 0,var(--cyan) 10%,var(--violet) 52%,#241468 100%);box-shadow:inset -22px -26px 50px rgba(0,0,0,.45),0 0 60px rgba(124,92,255,.55)}
 .hero-art .ring{position:absolute;width:96%;height:30%;border-radius:50%;border:3px solid rgba(255,200,87,.7);transform:rotate(-18deg);box-shadow:0 0 22px rgba(255,200,87,.35)}
-.hero-art .hero-logo{position:absolute;width:44%;height:auto}
+.hero-art .hero-logo{position:relative;width:62%;height:auto;filter:drop-shadow(0 0 40px rgba(124,92,255,.55))}
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero-art{order:-1;max-width:260px}}
 @media(max-width:520px){.eyebrow{letter-spacing:.08em;font-size:11px}}
@@ -194,7 +194,7 @@ footer a{color:var(--cyan)}
 
 <header class="nav" id="top">
   <div class="wrap">
-    <a class="brand" href="#top" aria-label="Cosmic Vibez Creations home"><span class="orb" aria-hidden="true"></span><span>COSMIC VIBEZ</span></a>
+    <a class="brand" href="#top" aria-label="Cosmic Vibez Creations home"><img src="/logo.png" width="36" height="36" alt=""><span>COSMIC VIBEZ</span></a>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="links">&#9776;</button>
     <nav class="links" id="links">
       <a href="#services">Services</a>
@@ -225,7 +225,7 @@ footer a{color:var(--cyan)}
     </div>
     <div class="hero-art" aria-hidden="true">
       <div class="halo"></div>
-      <div class="planet"></div>
+      <img class="hero-logo" src="/logo.png" width="512" height="512" alt="">
       <div class="ring"></div>
     </div>
   </div>
@@ -528,15 +528,40 @@ footer a{color:var(--cyan)}
     e.target.value='';renderFiles();
   });
 
-  /* form (backend not connected in this preview) */
-  $('#quoteForm').addEventListener('submit',function(e){
-    e.preventDefault();var msg=$('#formMsg');msg.className='err';
-    var f=e.target;
-    if(!$('#qName').value.trim()){msg.textContent='Please add your name.';$('#qName').focus();return}
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value.trim())){msg.textContent='Please enter a valid email.';f.email.focus();return}
-    if(!needBoxes.some(function(b){return b.checked})){msg.textContent='Pick Laser Engraving, 3D Printing or both.';return}
-    if(!f.message.value.trim()){msg.textContent='Tell us a little about what you want.';f.message.focus();return}
-    msg.className='ok';msg.textContent='Preview only. The quote form goes live once the backend is connected.';
+  /* quote form: create the request, upload files one at a time, then finish */
+  var form=$('#quoteForm'),sending=false;
+  function say(cls,t){var m=$('#formMsg');m.className=cls;m.textContent=t}
+  form.addEventListener('submit',async function(e){
+    e.preventDefault();if(sending)return;
+    var name=$('#qName').value.trim(),email=$('#qEmail').value.trim(),msg=$('#qMsg').value.trim();
+    if(!name){say('err','Please add your name.');$('#qName').focus();return}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){say('err','Please enter a valid email.');$('#qEmail').focus();return}
+    var need=needBoxes.filter(function(b){return b.checked}).map(function(b){return b.value});
+    if(!need.length){say('err','Pick Laser Engraving, 3D Printing or both.');return}
+    if(!msg){say('err','Tell us a little about what you want.');$('#qMsg').focus();return}
+    var aud=$('input[name=audience]:checked');
+    var payload={name:name,phone:$('#qPhone').value.trim(),email:email,need:need,audience:aud?aud.value:'',quantity:$('#qQty').value.trim(),needed_by:$('#qDate').value,item:$('#qItem').value.trim(),message:msg,heard:$('#qHeard').value,website:form.elements['website'].value,file_count:files.length};
+    var btn=form.querySelector('button[type=submit]');sending=true;btn.disabled=true;say('ok','Sending...');
+    try{
+      var r=await fetch('/api/quote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      var j=await r.json().catch(function(){return{}});
+      if(!r.ok||!j.id){throw new Error(j.error||'Something went wrong. Please text 908-248-2374.')}
+      var failed=[];
+      for(var i=0;i<files.length;i++){
+        say('ok','Uploading file '+(i+1)+' of '+files.length+'...');
+        try{
+          var fr=await fetch('/api/quote/'+j.id+'/files?token='+encodeURIComponent(j.token)+'&name='+encodeURIComponent(files[i].name),{method:'POST',headers:{'Content-Type':'application/octet-stream'},body:files[i]});
+          if(!fr.ok)failed.push(files[i].name);
+        }catch(x){failed.push(files[i].name)}
+      }
+      var dr=await fetch('/api/quote/'+j.id+'/done?token='+encodeURIComponent(j.token),{method:'POST'});
+      if(!dr.ok){throw new Error('We saved your request but could not finish sending it. Please text 908-248-2374 so we know it came through.')}
+      form.reset();files=[];renderFiles();syncPicks();
+      var first=name.split(/\s+/)[0];
+      say('ok','Request sent. Thanks, '+first+'! Check your email for a confirmation. We will reply with your free quote.'+(failed.length?' These files did not upload: '+failed.join(', ')+'. Please text or email them to us.':''));
+      $('#formMsg').scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'});
+    }catch(err){say('err',err.message||'Something went wrong. Please text 908-248-2374.')}
+    finally{sending=false;btn.disabled=false}
   });
   syncPicks();
 })();
