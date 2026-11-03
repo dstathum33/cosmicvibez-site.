@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark only">
+<title>Custom Laser Engraving &amp; 3D Printing in Keyport, NJ | Cosmic Vibez Creations</title>
+<meta name="description" content="Custom laser engraving on wood, metal, leather and more, plus 3D printing from your file, in Keyport, NJ. Personalized gifts to bulk business orders. Request a free quote.">
+<link rel="canonical" href="https://cosmicvibezcreations.com/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Cosmic Vibez Creations | Laser Engraving &amp; 3D Printing">
+<meta property="og:description" content="Custom laser engraving and 3D printing, made to bring your ideas down to earth.">
+<meta property="og:url" content="https://cosmicvibezcreations.com/">
+<meta property="og:image" content="https://cosmicvibezcreations.com/logo.png">
+<link rel="icon" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"LocalBusiness","name":"Cosmic Vibez Creations","url":"https://cosmicvibezcreations.com/","telephone":"+1-908-248-2374","email":"Cosmicvibezcreations@gmail.com","image":"https://cosmicvibezcreations.com/logo.png","address":{"@type":"PostalAddress","addressLocality":"Keyport","addressRegion":"NJ","postalCode":"07735","addressCountry":"US"},"description":"Custom laser engraving and 3D printing in Keyport, New Jersey.","makesOffer":[{"@type":"Offer","itemOffered":{"@type":"Service","name":"Laser Engraving"}},{"@type":"Offer","itemOffered":{"@type":"Service","name":"3D Printing"}}]}
+</script>
+<style>
+:root{
+  --space:#0a0919; --space2:#0f0d26; --panel:#15122f; --panel2:#1b1740; --line:#2c2762;
+  --violet:#7c5cff; --cyan:#35e4e8; --pink:#ff5fa2; --gold:#ffc857;
+  --text:#ece9ff; --muted:#a9a4d6;
+  --r:18px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--space);color-scheme:dark only;scroll-behavior:smooth;scroll-padding-top:76px;-webkit-text-size-adjust:100%}
+body{background:var(--space);color:var(--text);font:400 16px/1.65 Inter,system-ui,sans-serif;overflow-x:hidden}
+img,video,canvas{max-width:100%;height:auto;display:block}
+a{color:inherit}
+h1,h2,h3{font-family:Sora,Inter,sans-serif;line-height:1.15;letter-spacing:-.01em}
+.wrap{width:100%;max-width:1120px;margin:0 auto;padding:0 18px}
+section{position:relative;padding:72px 0}
+.eyebrow{font:600 12px/1 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px;display:block}
+h2{font-size:clamp(28px,5vw,44px);font-weight:800;margin-bottom:14px}
+.lead{color:var(--muted);max-width:640px;font-size:17px}
+.grad{background:linear-gradient(90deg,var(--cyan),var(--violet) 50%,var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* stars */
+#stars{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.7}
+main,header,footer{position:relative;z-index:1}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,9,25,.86);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font:800 15px/1 Sora,sans-serif;letter-spacing:.12em}
+.orb{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff 0,var(--cyan) 14%,var(--violet) 55%,#2b1a7a 100%);box-shadow:0 0 18px rgba(124,92,255,.7);flex:none}
+.brand img{width:36px;height:36px;object-fit:contain}
+.links{display:flex;gap:22px;align-items:center}
+.links a{text-decoration:none;font-size:14px;color:var(--muted);font-weight:500}
+.links a:hover{color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 24px;font:600 15px/1 Inter,sans-serif;cursor:pointer;text-decoration:none;color:#0a0919;background:linear-gradient(90deg,var(--cyan),var(--violet) 60%,var(--pink));transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,92,255,.45)}
+.btn.ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
+.btn.ghost:hover{border-color:var(--cyan);box-shadow:none}
+.nav .btn{padding:10px 18px;font-size:14px;color:#0a0919}
+.burger{display:none;background:none;border:1.5px solid var(--line);color:var(--text);border-radius:10px;width:42px;height:42px;font-size:20px;cursor:pointer}
+@media(max-width:860px){
+  .burger{display:block}
+  .links{position:absolute;left:0;right:0;top:64px;background:var(--space2);border-bottom:1px solid var(--line);flex-direction:column;align-items:stretch;gap:0;padding:8px 18px 16px;display:none}
+  .links.open{display:flex}
+  .links a{padding:13px 4px;font-size:16px;border-bottom:1px solid var(--line)}
+  .links .btn{margin-top:12px;border-bottom:0}
+}
+
+/* hero */
+.hero{padding:64px 0 40px}
+.hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}
+.hero h1{font-size:clamp(38px,7vw,68px);font-weight:800;margin:6px 0 18px}
+.hero p.lead{margin-bottom:26px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:26px}
+.badges{display:flex;flex-wrap:wrap;gap:10px}
+.badge{border:1px solid var(--line);background:rgba(27,23,64,.7);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--muted)}
+.hero-art{position:relative;display:grid;place-items:center;aspect-ratio:1/1;max-width:420px;width:100%;margin:0 auto}
+.hero-art .halo{position:absolute;inset:6%;border-radius:50%;background:conic-gradient(from 0deg,var(--cyan),var(--violet),var(--pink),var(--gold),var(--cyan));filter:blur(34px);opacity:.45;animation:spin 18s linear infinite}
+.hero-art .planet{position:relative;width:62%;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 30% 26%,#fff 0,var(--cyan) 10%,var(--violet) 52%,#241468 100%);box-shadow:inset -22px -26px 50px rgba(0,0,0,.45),0 0 60px rgba(124,92,255,.55)}
+.hero-art .ring{position:absolute;width:96%;height:30%;border-radius:50%;border:3px solid rgba(255,200,87,.7);transform:rotate(-18deg);box-shadow:0 0 22px rgba(255,200,87,.35)}
+.hero-art .hero-logo{position:absolute;width:44%;height:auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero-art{order:-1;max-width:260px}}
+@media(max-width:520px){.eyebrow{letter-spacing:.08em;font-size:11px}}
+
+/* services */
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:22px;margin-top:34px}
+.card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:28px;display:flex;flex-direction:column;gap:14px}
+.card h3{font-size:24px;font-weight:700}
+.card p{color:var(--muted)}
+.card ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.card li{font-size:13px;border:1px solid var(--line);border-radius:999px;padding:6px 12px;color:var(--text)}
+.card .btn{margin-top:auto;align-self:flex-start}
+.toggle[aria-pressed="true"]{background:var(--panel);color:var(--cyan);border:1.5px solid var(--cyan);box-shadow:none}
+@media(max-width:760px){.cards{grid-template-columns:1fr}}
+
+/* studio */
+.studio .box{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:26px;margin-top:30px;display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start}
+.field label,.fl{display:block;font-weight:600;font-size:14px;margin-bottom:8px}
+input[type=text],input[type=tel],input[type=email],input[type=number],input[type=date],select,textarea{width:100%;background:var(--space2);color:var(--text);border:1.5px solid var(--line);border-radius:12px;padding:13px 14px;font:400 16px/1.4 Inter,sans-serif;appearance:none;-webkit-appearance:none;color-scheme:dark}
+select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%23a9a4d6' stroke-width='2'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:38px}
+textarea{min-height:120px;resize:vertical}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--cyan);outline-offset:1px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0}
+.chip span{display:inline-block;border:1.5px solid var(--line);border-radius:999px;padding:9px 16px;font-size:14px;font-weight:500;color:var(--muted);background:var(--space2);pointer-events:none}
+.chip input:checked+span{border-color:var(--cyan);color:var(--cyan);background:rgba(53,228,232,.08)}
+.chip input:focus-visible+span{outline:2px solid var(--cyan);outline-offset:2px}
+.gap{display:grid;gap:18px}
+.canvas-wrap{border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000;cursor:pointer;aspect-ratio:16/10;position:relative}
+#engrave{width:100%;height:100%;display:block}
+.hint{font-size:13px;color:var(--muted);margin-top:10px}
+@media(max-width:860px){.studio .box{grid-template-columns:1fr}}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:30px;list-style:none;counter-reset:s}
+.steps li{counter-increment:s;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:22px}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--cyan),var(--violet));color:#0a0919;font:800 15px Sora,sans-serif;margin-bottom:12px}
+.steps strong{display:block;margin-bottom:4px}
+.steps span{color:var(--muted);font-size:14.5px}
+@media(max-width:860px){.steps{grid-template-columns:1fr 1fr}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+
+/* serve */
+.serve{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:30px}
+.serve .card h3 span{font-style:normal;margin-right:8px}
+@media(max-width:860px){.serve{grid-template-columns:1fr}}
+
+/* about */
+.about .wrap{max-width:760px}
+.about p{color:var(--muted);margin-bottom:16px;font-size:17px}
+.about .quote{font:700 clamp(20px,3.4vw,28px)/1.3 Sora,sans-serif;color:var(--text);margin-top:26px}
+
+/* form */
+.formbox{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:var(--r);padding:26px}
+.quote-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:26px;margin-top:30px;align-items:start}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.req{color:var(--pink)}
+.drop{display:block;border:1.5px dashed var(--line);border-radius:12px;padding:18px;text-align:center;color:var(--muted);cursor:pointer;background:var(--space2)}
+.drop strong{color:var(--cyan)}
+.drop small{display:block;margin-top:4px;font-size:13px}
+.drop input{position:absolute;width:1px;height:1px;opacity:0}
+#fileList{list-style:none;margin-top:10px;display:grid;gap:6px;font-size:14px}
+#fileList li{display:flex;justify-content:space-between;gap:10px;background:var(--space2);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+#fileList button{background:none;border:0;color:var(--pink);cursor:pointer;font-size:14px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#formMsg{margin-top:14px;font-size:15px;min-height:22px}
+#formMsg.err{color:var(--pink)} #formMsg.ok{color:var(--cyan)}
+.side{display:grid;gap:14px}
+.side .btn{width:100%}
+.side p{color:var(--muted)}
+.mini{font-size:14px;color:var(--muted)}
+.mini a{color:var(--cyan)}
+@media(max-width:860px){.quote-grid{grid-template-columns:1fr}.two{grid-template-columns:1fr}}
+
+/* faq */
+.faq{max-width:760px;margin-top:28px;display:grid;gap:10px}
+details{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:0}
+summary{cursor:pointer;list-style:none;padding:18px 20px;font-weight:600;display:flex;justify-content:space-between;gap:12px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";color:var(--cyan);font-size:22px;line-height:1}
+details[open] summary::after{content:"\2212"}
+details p{padding:0 20px 18px;color:var(--muted)}
+details a{color:var(--cyan)}
+
+/* final cta + footer */
+.final{text-align:center}
+.final .wrap{max-width:720px}
+.final .lead{margin:0 auto 24px}
+footer{border-top:1px solid var(--line);padding:38px 0 90px;background:var(--space2)}
+footer .wrap{display:grid;gap:8px;text-align:center;color:var(--muted);font-size:14px}
+footer strong{color:var(--text);font:800 14px Sora,sans-serif;letter-spacing:.12em}
+footer a{color:var(--cyan)}
+
+/* floating bar */
+.pickbar{position:fixed;left:50%;bottom:16px;transform:translate(-50%,120px);z-index:60;background:var(--panel2);border:1.5px solid var(--cyan);border-radius:999px;padding:10px 12px 10px 20px;display:flex;align-items:center;gap:14px;font-weight:600;font-size:14px;white-space:nowrap;box-shadow:0 10px 36px rgba(0,0,0,.5);visibility:hidden;opacity:0;transition:transform .3s,opacity .3s,visibility 0s .3s}
+.pickbar.show{transform:translate(-50%,0);visibility:visible;opacity:1;transition:transform .3s,opacity .3s,visibility 0s}
+@media(prefers-reduced-motion:reduce){.pickbar,.pickbar.show{transition:none}}
+.pickbar .btn{padding:10px 16px;font-size:14px}
+
+/* reveal */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+  .hero-art .halo{animation:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+<canvas id="stars" aria-hidden="true"></canvas>
+
+<header class="nav" id="top">
+  <div class="wrap">
+    <a class="brand" href="#top" aria-label="Cosmic Vibez Creations home"><span class="orb" aria-hidden="true"></span><span>COSMIC VIBEZ</span></a>
+    <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="links">&#9776;</button>
+    <nav class="links" id="links">
+      <a href="#services">Services</a>
+      <a href="#studio">Preview Engraving</a>
+      <a href="#serve">Who We Serve</a>
+      <a href="#about">About</a>
+      <a class="btn" href="#quote">Free Quote</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Laser Engraving &bull; 3D Printing &bull; Keyport, NJ</span>
+      <h1>Ideas from out there, <span class="grad">made right here.</span></h1>
+      <p class="lead">Custom laser engraving and 3D printing, made to bring your ideas down to earth. From personalized gifts to bulk business orders, we design and create pieces that are uniquely yours.</p>
+      <div class="cta">
+        <a class="btn" href="#quote">Request A Free Quote</a>
+        <a class="btn ghost" href="#studio">Try The Engraving Preview</a>
+      </div>
+      <div class="badges">
+        <span class="badge">Wood, Metal, Leather &amp; More</span>
+        <span class="badge">Send Your Own 3D File</span>
+        <span class="badge">One Piece Or A Thousand</span>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="halo"></div>
+      <div class="planet"></div>
+      <div class="ring"></div>
+    </div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <span class="eyebrow reveal">What We Do</span>
+    <h2 class="reveal">Two ways to make it real.</h2>
+    <p class="lead reveal">Pick one or both. Tap <strong>Add To My Quote</strong> and we'll carry it into your request.</p>
+    <div class="cards">
+      <article class="card reveal">
+        <h3>Laser Engraving</h3>
+        <p>Precision laser engraving on wood, metal, leather and more. Perfect for personalized gifts, corporate branding, wedding favors and promotional products, crafted with detail that lasts.</p>
+        <ul><li>Personalized Gifts</li><li>Corporate Branding</li><li>Wedding Favors</li><li>Promo Products</li></ul>
+        <button class="btn toggle" type="button" data-svc="Laser Engraving" aria-pressed="false">Add To My Quote</button>
+      </article>
+      <article class="card reveal">
+        <h3>3D Printing</h3>
+        <p>Bring your ideas to life in three dimensions. From custom prototypes to one-of-a-kind decor and personalized designs, we print with precision and care.</p>
+        <ul><li>Prototypes</li><li>Custom Decor</li><li>Personalized Designs</li><li>Your Own File</li></ul>
+        <button class="btn toggle" type="button" data-svc="3D Printing" aria-pressed="false">Add To My Quote</button>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="studio" id="studio">
+  <div class="wrap">
+    <span class="eyebrow reveal">Engraving Preview</span>
+    <h2 class="reveal">See your words burned in.</h2>
+    <p class="lead reveal">Type a name, a date or a short message, pick a material and watch the laser go. Tap the preview to run it again.</p>
+    <div class="box reveal">
+      <div class="gap">
+        <div class="field">
+          <label for="pvText">Your Text</label>
+          <input id="pvText" type="text" maxlength="28" value="Out Of This World" autocomplete="off">
+        </div>
+        <div>
+          <span class="fl">Material</span>
+          <div class="chips" id="pvMat">
+            <label class="chip"><input type="radio" name="pvmat" value="wood" checked><span>Wood</span></label>
+            <label class="chip"><input type="radio" name="pvmat" value="slate"><span>Slate</span></label>
+            <label class="chip"><input type="radio" name="pvmat" value="metal"><span>Metal</span></label>
+            <label class="chip"><input type="radio" name="pvmat" value="leather"><span>Leather</span></label>
+          </div>
+        </div>
+        <div>
+          <span class="fl">Style</span>
+          <div class="chips" id="pvStyle">
+            <label class="chip"><input type="radio" name="pvstyle" value="bold" checked><span>Bold</span></label>
+            <label class="chip"><input type="radio" name="pvstyle" value="script"><span>Script</span></label>
+            <label class="chip"><input type="radio" name="pvstyle" value="classic"><span>Classic</span></label>
+          </div>
+        </div>
+        <button class="btn" type="button" id="pvUse">Use This In My Quote</button>
+      </div>
+      <div>
+        <div class="canvas-wrap" id="pvWrap" title="Tap to run again"><canvas id="engrave" width="800" height="500" aria-label="Engraving preview"></canvas></div>
+        <p class="hint">A rough preview only. Your real piece gets a proper design and approval before anything is engraved.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="print3d">
+  <div class="wrap">
+    <span class="eyebrow reveal">3D Printing</span>
+    <h2 class="reveal">Have a file ready?</h2>
+    <p class="lead reveal">Turn your digital designs into real, tangible creations. Send us your file and we'll bring it to life, ready for your home, business, or next big idea.</p>
+    <ol class="steps">
+      <li class="reveal"><strong>Send your file</strong><span>Upload it with your quote request below.</span></li>
+      <li class="reveal"><strong>Pick material and finish</strong><span>Tell us what you have in mind.</span></li>
+      <li class="reveal"><strong>Get a free quote</strong><span>No obligation. Priced on size, material and complexity.</span></li>
+      <li class="reveal"><strong>We print it</strong><span>With precision and care, then it's yours.</span></li>
+    </ol>
+  </div>
+</section>
+
+<section id="serve">
+  <div class="wrap">
+    <span class="eyebrow reveal">Who We Serve</span>
+    <h2 class="reveal">One gift or a thousand pieces.</h2>
+    <div class="serve">
+      <article class="card reveal"><h3><span aria-hidden="true">&#127873;</span>For Individuals</h3><p>Looking for a gift that actually means something? We create custom keychains, ornaments, home decor and more, personalized just for you or someone you love.</p></article>
+      <article class="card reveal"><h3><span aria-hidden="true">&#128640;</span>For Businesses</h3><p>Need branded merchandise, awards, or promotional products in bulk? We help businesses stand out with custom engraving and printing at scale, from small batches to large orders.</p></article>
+      <article class="card reveal"><h3>Why choose us</h3><p>Every piece is made with care, right here from concept to creation. Whether you need one custom item or a thousand, we bring precision, creativity and a bit of cosmic magic to every order.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap">
+    <span class="eyebrow reveal">About Us</span>
+    <h2 class="reveal">Everyday objects, made personal.</h2>
+    <p class="reveal">Cosmic Vibez Creations started with a simple idea: everyday objects could carry something personal, something made just for you.</p>
+    <p class="reveal">Today, we combine laser precision and 3D printing technology to turn ideas into keepsakes, gifts and branded products that feel truly one of a kind. Whether you're celebrating a milestone, growing your business, or just looking for something special, we're here to help you create it, down to the smallest detail.</p>
+    <p class="quote reveal">Good design shouldn't feel ordinary. It should feel out of this world.</p>
+  </div>
+</section>
+
+<section id="quote">
+  <div class="wrap">
+    <span class="eyebrow reveal">Get In Touch</span>
+    <h2 class="reveal">Request a free quote.</h2>
+    <p class="lead reveal">Ready to bring your idea to life? Tell us what you're dreaming up.</p>
+    <div class="quote-grid">
+      <form class="formbox reveal gap" id="quoteForm" novalidate>
+        <div class="two">
+          <div class="field"><label for="qName">Name <span class="req">*</span></label><input id="qName" name="name" type="text" autocomplete="name" required></div>
+          <div class="field"><label for="qPhone">Phone</label><input id="qPhone" name="phone" type="tel" autocomplete="tel"></div>
+        </div>
+        <div class="field"><label for="qEmail">Email <span class="req">*</span></label><input id="qEmail" name="email" type="email" autocomplete="email" required></div>
+        <div>
+          <span class="fl">What do you need? <span class="req">*</span></span>
+          <div class="chips" id="qNeed">
+            <label class="chip"><input type="checkbox" name="need" value="Laser Engraving"><span>Laser Engraving</span></label>
+            <label class="chip"><input type="checkbox" name="need" value="3D Printing"><span>3D Printing</span></label>
+          </div>
+        </div>
+        <div>
+          <span class="fl">This is for</span>
+          <div class="chips">
+            <label class="chip"><input type="radio" name="audience" value="Me / A Gift"><span>Me / A Gift</span></label>
+            <label class="chip"><input type="radio" name="audience" value="A Business"><span>A Business</span></label>
+          </div>
+        </div>
+        <div class="two">
+          <div class="field"><label for="qQty">Quantity</label><input id="qQty" name="quantity" type="number" min="1" inputmode="numeric"></div>
+          <div class="field"><label for="qDate">Needed by</label><input id="qDate" name="needed_by" type="date"></div>
+        </div>
+        <div class="field"><label for="qItem">Item or material</label><input id="qItem" name="item" type="text" placeholder="Cutting board, tumbler, leather wallet..."></div>
+        <div class="field"><label for="qMsg">Tell us about it <span class="req">*</span></label><textarea id="qMsg" name="message" required></textarea></div>
+        <div>
+          <span class="fl">Files (logo, artwork or 3D file)</span>
+          <label class="drop" for="qFiles"><strong>Tap to add files</strong><small>Images, PDF, STL, OBJ or 3MF</small></label>
+          <input id="qFiles" class="hp" type="file" multiple accept="image/*,.pdf,.stl,.obj,.3mf" tabindex="-1">
+          <ul id="fileList"></ul>
+        </div>
+        <div class="field"><label for="qHeard">How did you hear about us?</label>
+          <select id="qHeard" name="heard"><option value="">Choose one</option><option>Instagram</option><option>Facebook</option><option>Google</option><option>A friend</option><option>Other</option></select>
+        </div>
+        <div class="hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+        <button class="btn" type="submit">Send My Quote Request</button>
+        <p id="formMsg" role="status" aria-live="polite"></p>
+      </form>
+      <aside class="formbox side reveal">
+        <h3>Rather reach out directly?</h3>
+        <p>Call, text or email. We'd love to hear what you're dreaming up.</p>
+        <a class="btn" href="tel:+19082482374">908-248-2374</a>
+        <a class="btn ghost" href="sms:+19082482374">Text Us</a>
+        <a class="btn ghost" href="mailto:Cosmicvibezcreations@gmail.com">Cosmicvibezcreations@gmail.com</a>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap">
+    <span class="eyebrow reveal">Questions</span>
+    <h2 class="reveal">Good to know.</h2>
+    <div class="faq reveal">
+      <details><summary>What can you engrave on?</summary><p>Wood, metal, leather and more. Tell us the item in your quote request and we'll confirm it works.</p></details>
+      <details><summary>How is 3D printing priced?</summary><p>Every project is priced on size, material and complexity. Send your file and preferred material and finish, and we'll give you a free, no-obligation quote.</p></details>
+      <details><summary>Do you take bulk business orders?</summary><p>Yes. Branded merchandise, awards and promotional products, from small batches to large orders.</p></details>
+      <details><summary>I don't have a design. Can you help?</summary><p>Yes. Tell us your idea and we'll design a piece that's uniquely yours.</p></details>
+      <details><summary>Where are you located?</summary><p>Keyport, New Jersey.</p></details>
+      <details><summary>What are your store policies?</summary><p>Proofs, payment, turnaround, returns and more are on our <a href="policies">Store Policies</a> page.</p></details>
+      <details><summary>Is the quote really free?</summary><p>Yes. Free and no obligation.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 class="reveal">Let's make something <span class="grad">out of this world.</span></h2>
+    <p class="lead reveal">Gifts, keepsakes, prototypes, branded products. Start with a free quote.</p>
+    <a class="btn reveal" href="#quote">Request A Free Quote</a>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <strong>COSMIC VIBEZ CREATIONS</strong>
+    <span>Laser Engraving &bull; 3D Printing</span>
+    <span><a href="https://maps.google.com/?q=Keyport%2C%20NJ%2007735" target="_blank" rel="noopener">Keyport, NJ 07735</a> &bull; <a href="policies">Store Policies</a></span>
+    <span><a href="tel:+19082482374">908-248-2374</a> &bull; <a href="mailto:Cosmicvibezcreations@gmail.com">Email</a></span>
+    <span>&copy; 2023 CosmicVibezCreations LLC</span>
+  </div>
+</footer>
+
+<div class="pickbar" id="pickbar" role="status"><span id="pickTxt">0 services picked</span><a class="btn" href="#quote">Go To Quote</a></div>
+
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(s,r){return (r||document).querySelector(s)};
+  var $$ = function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+
+  /* mobile menu */
+  var burger=$('#burger'), links=$('#links');
+  burger.addEventListener('click',function(){var o=links.classList.toggle('open');burger.setAttribute('aria-expanded',o)});
+  $$('#links a').forEach(function(a){a.addEventListener('click',function(){links.classList.remove('open');burger.setAttribute('aria-expanded','false')})});
+
+  /* scroll reveal with stagger */
+  var rev=$$('.reveal');
+  if(reduce||!('IntersectionObserver' in window)){rev.forEach(function(e){e.classList.add('in')})}
+  else{
+    var io=new IntersectionObserver(function(es){es.forEach(function(en){if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}})},{threshold:.12,rootMargin:'0px 0px -30px 0px'});
+    rev.forEach(function(e,i){e.style.transitionDelay=((i%4)*70)+'ms';io.observe(e)});
+  }
+
+  /* star field */
+  var sc=$('#stars'),sx=sc.getContext('2d'),stars=[],sw=0,sh=0,raf=null;
+  function sizeStars(){sw=sc.width=window.innerWidth;sh=sc.height=window.innerHeight;var n=Math.round(sw*sh/9000);stars=[];for(var i=0;i<n;i++)stars.push({x:Math.random()*sw,y:Math.random()*sh,r:Math.random()*1.4+.2,p:Math.random()*6.28,s:Math.random()*.02+.005})}
+  function drawStars(){sx.clearRect(0,0,sw,sh);stars.forEach(function(s){s.p+=s.s;var a=.35+.65*Math.abs(Math.sin(s.p));sx.globalAlpha=a;sx.fillStyle='#cfc8ff';sx.beginPath();sx.arc(s.x,s.y,s.r,0,6.283);sx.fill()});sx.globalAlpha=1;if(!reduce)raf=requestAnimationFrame(drawStars)}
+  sizeStars();drawStars();
+  var rt;window.addEventListener('resize',function(){clearTimeout(rt);rt=setTimeout(function(){sizeStars();if(reduce)drawStars()},200)});
+
+  /* add to quote toggles + floating bar */
+  var needBoxes=$$('input[name=need]'), pickbar=$('#pickbar'), pickTxt=$('#pickTxt');
+  function syncPicks(){
+    var n=needBoxes.filter(function(b){return b.checked}).length;
+    pickTxt.textContent=n+(n===1?' service picked':' services picked');
+    pickbar.classList.toggle('show',n>0);
+    $$('.toggle').forEach(function(t){var box=needBoxes.filter(function(b){return b.value===t.dataset.svc})[0];var on=!!(box&&box.checked);t.setAttribute('aria-pressed',on);t.textContent=on?'Added To My Quote':'Add To My Quote'});
+  }
+  $$('.toggle').forEach(function(t){t.addEventListener('click',function(){var box=needBoxes.filter(function(b){return b.value===t.dataset.svc})[0];if(box){box.checked=!box.checked;syncPicks()}})});
+  needBoxes.forEach(function(b){b.addEventListener('change',syncPicks)});
+  var qSec=$('#quote');
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(en){pickbar.style.display=en.isIntersecting?'none':''})},{threshold:.15}).observe(qSec)}
+
+  /* engraving preview */
+  var cv=$('#engrave'),cx=cv.getContext('2d'),W=cv.width,H=cv.height;
+  var MAT={
+    wood:{base:['#c8975a','#a8743a'],ink:'#2a1305',glow:'#ff7a2a',grain:'rgba(90,50,15,.18)'},
+    slate:{base:['#4b4f58','#2c2f36'],ink:'#d8dce6',glow:'#9ad8ff',grain:'rgba(255,255,255,.05)'},
+    metal:{base:['#b9bec7','#8a909b'],ink:'#2b2f38',glow:'#ffffff',grain:'rgba(255,255,255,.18)'},
+    leather:{base:['#7a4a2b','#552f19'],ink:'#2a140a',glow:'#ffb24a',grain:'rgba(0,0,0,.14)'}
+  };
+  var FONT={bold:'800 {s}px Sora, Arial Black, sans-serif',script:'italic 600 {s}px "Brush Script MT","Segoe Script","Snell Roundhand",cursive',classic:'500 {s}px Georgia, "Times New Roman", serif'};
+  var anim=null,progress=1,started=false;
+  function mat(){return $('input[name=pvmat]:checked').value}
+  function sty(){return $('input[name=pvstyle]:checked').value}
+  function txt(){return ($('#pvText').value||'').trim()||'Your Text Here'}
+  function fit(t,style){var s=140;do{cx.font=FONT[style].replace('{s}',s);s-=6}while(cx.measureText(t).width>W*.86&&s>20);return s+6}
+  function drawBase(m){
+    var g=cx.createLinearGradient(0,0,W,H);g.addColorStop(0,m.base[0]);g.addColorStop(1,m.base[1]);cx.fillStyle=g;cx.fillRect(0,0,W,H);
+    cx.fillStyle=m.grain;for(var i=0;i<46;i++){cx.fillRect(0,(i*H/46)+Math.sin(i*1.7)*3,W,1+(i%3))}
+    var v=cx.createRadialGradient(W/2,H/2,H*.2,W/2,H/2,H*.9);v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(1,'rgba(0,0,0,.4)');cx.fillStyle=v;cx.fillRect(0,0,W,H);
+  }
+  function frame(p){
+    var m=MAT[mat()],style=sty(),t=txt();
+    drawBase(m);
+    var s=fit(t,style);cx.font=FONT[style].replace('{s}',s);cx.textAlign='center';cx.textBaseline='middle';
+    var tw=cx.measureText(t).width,x0=W/2-tw/2,cut=x0+tw*p;
+    cx.save();cx.beginPath();cx.rect(0,0,cut,H);cx.clip();
+    cx.shadowColor='rgba(0,0,0,.35)';cx.shadowBlur=2;cx.shadowOffsetY=1;
+    cx.fillStyle=m.ink;cx.fillText(t,W/2,H/2);cx.restore();
+    if(p<1){
+      var lx=cut,ly=H/2+Math.sin(p*60)*s*.28;
+      var gl=cx.createRadialGradient(lx,ly,0,lx,ly,60);gl.addColorStop(0,'#fff');gl.addColorStop(.25,m.glow);gl.addColorStop(1,'rgba(255,255,255,0)');
+      cx.fillStyle=gl;cx.beginPath();cx.arc(lx,ly,60,0,6.283);cx.fill();
+      cx.strokeStyle='rgba(255,60,60,.55)';cx.lineWidth=2;cx.beginPath();cx.moveTo(lx,0);cx.lineTo(lx,ly);cx.stroke();
+    }
+  }
+  function run(){
+    cancelAnimationFrame(anim);
+    if(reduce){frame(1);return}
+    var t0=null,dur=2600;
+    function step(ts){if(!t0)t0=ts;progress=Math.min(1,(ts-t0)/dur);frame(progress);if(progress<1)anim=requestAnimationFrame(step)}
+    anim=requestAnimationFrame(step);
+  }
+  frame(1);
+  if('IntersectionObserver' in window){new IntersectionObserver(function(es,o){if(es[0].isIntersecting&&!started){started=true;run();o.disconnect()}},{threshold:.35}).observe($('#pvWrap'))}
+  else{run()}
+  $('#pvWrap').addEventListener('click',run);
+  $('#pvText').addEventListener('input',function(){cancelAnimationFrame(anim);frame(1)});
+  $$('input[name=pvmat],input[name=pvstyle]').forEach(function(i){i.addEventListener('change',run)});
+  $('#pvUse').addEventListener('click',function(){
+    var box=needBoxes.filter(function(b){return b.value==='Laser Engraving'})[0];box.checked=true;syncPicks();
+    var line='Engraving idea: "'+txt()+'" on '+mat()+', '+sty()+' style.';
+    var ta=$('#qMsg'),rest=ta.value.replace(/Engraving idea:[^\n]*\n?/,'').trim();
+    ta.value=rest?line+'\n'+rest:line;
+    $('#quote').scrollIntoView({behavior:reduce?'auto':'smooth'});
+  });
+
+  /* files */
+  var files=[],MAXF=10*1024*1024,OK=/\.(png|jpe?g|gif|webp|heic|pdf|stl|obj|3mf)$/i;
+  function renderFiles(){var ul=$('#fileList');ul.innerHTML='';files.forEach(function(f,i){var li=document.createElement('li');var s=document.createElement('span');s.textContent=f.name+' ('+Math.max(1,Math.round(f.size/1024))+' KB)';var b=document.createElement('button');b.type='button';b.textContent='Remove';b.addEventListener('click',function(){files.splice(i,1);renderFiles()});li.appendChild(s);li.appendChild(b);ul.appendChild(li)})}
+  $('#qFiles').addEventListener('change',function(e){
+    var msg=$('#formMsg');msg.className='';msg.textContent='';
+    Array.prototype.slice.call(e.target.files).forEach(function(f){
+      if(!OK.test(f.name)&&f.type.indexOf('image/')!==0){msg.className='err';msg.textContent=f.name+' is not a supported file type.';return}
+      if(f.size>MAXF){msg.className='err';msg.textContent=f.name+' is over 10 MB.';return}
+      if(files.length>=6){msg.className='err';msg.textContent='Up to 6 files per request.';return}
+      files.push(f);
+    });
+    e.target.value='';renderFiles();
+  });
+
+  /* form (backend not connected in this preview) */
+  $('#quoteForm').addEventListener('submit',function(e){
+    e.preventDefault();var msg=$('#formMsg');msg.className='err';
+    var f=e.target;
+    if(!$('#qName').value.trim()){msg.textContent='Please add your name.';$('#qName').focus();return}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f.email.value.trim())){msg.textContent='Please enter a valid email.';f.email.focus();return}
+    if(!needBoxes.some(function(b){return b.checked})){msg.textContent='Pick Laser Engraving, 3D Printing or both.';return}
+    if(!f.message.value.trim()){msg.textContent='Tell us a little about what you want.';f.message.focus();return}
+    msg.className='ok';msg.textContent='Preview only. The quote form goes live once the backend is connected.';
+  });
+  syncPicks();
+})();
+</script>
+</body>
+</html>
