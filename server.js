@@ -478,7 +478,7 @@ function serveStatic(req, res, pathRaw) {
   let p;
   try { p = decodeURIComponent(pathRaw); } catch (e) { return text(res, 400, 'Bad request'); }
   if (p.includes('\0')) return text(res, 400, 'Bad request');
-  const map = { '/': '/index.html', '/policies': '/policies.html', '/admin': '/admin.html', '/admin/': '/admin.html' };
+  const map = { '/': '/index.html', '/policies': '/policies.html', '/shop': '/shop.html', '/customize': '/customize.html', '/admin': '/admin.html', '/admin/': '/admin.html' };
   p = map[p] || p;
   if (p.split('/').some((seg) => seg.startsWith('.'))) return text(res, 404, 'Not found');
   const abs = path.resolve(PUBLIC, '.' + p);
@@ -514,7 +514,7 @@ async function handle(req, res) {
   if (pathRaw === '/text' && req.method === 'GET') return textPage(res, query);
   if (pathRaw === '/robots.txt') return text(res, 200, 'User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: ' + c.siteUrl + '/sitemap.xml\n');
   if (pathRaw === '/sitemap.xml') {
-    return text(res, 200, '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>' + c.siteUrl + '/</loc></url>\n<url><loc>' + c.siteUrl + '/policies</loc></url>\n</urlset>\n', 'application/xml; charset=utf-8');
+    return text(res, 200, '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>' + c.siteUrl + '/</loc></url>\n<url><loc>' + c.siteUrl + '/shop</loc></url>\n<url><loc>' + c.siteUrl + '/policies</loc></url>\n</urlset>\n', 'application/xml; charset=utf-8');
   }
   return serveStatic(req, res, pathRaw);
 }
