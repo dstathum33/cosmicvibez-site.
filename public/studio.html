@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark only">
+<title>Mock-Up Studio: Engraving and 3D Printing | Cosmic Vibez Creations</title>
+<meta name="description" content="Preview your custom laser engraving or describe your 3D print, answer a few quick questions, and Cosmic Vibez Creations in Keyport, NJ sends you a proof and quote.">
+<link rel="canonical" href="https://cosmicvibezcreations.com/studio">
+<link rel="icon" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&family=Great+Vibes&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Bebas+Neue&family=Pacifico&display=swap" rel="stylesheet">
+<style>
+:root{--space:#0a0919;--space2:#0f0d26;--panel:#15122f;--panel2:#1b1740;--line:#2c2762;--violet:#7c5cff;--cyan:#35e4e8;--pink:#ff5fa2;--gold:#ffc857;--text:#ece9ff;--muted:#a9a4d6}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--space);color-scheme:dark only;scroll-behavior:smooth;scroll-padding-top:84px;-webkit-text-size-adjust:100%}
+body{background:var(--space);color:var(--text);font:400 16px/1.7 Inter,system-ui,sans-serif;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--cyan)}
+.wrap{width:100%;max-width:1040px;margin:0 auto;padding:0 18px}
+.nav{position:sticky;top:0;z-index:50;background:rgba(10,9,25,.9);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav .wrap{max-width:1120px;display:flex;align-items:center;justify-content:space-between;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);font:800 15px/1 Sora,sans-serif;letter-spacing:.12em}
+.orb{width:34px;height:34px;border-radius:50%;background:radial-gradient(circle at 32% 28%,#fff 0,var(--cyan) 14%,var(--violet) 55%,#2b1a7a 100%);box-shadow:0 0 18px rgba(124,92,255,.7);flex:none}
+.brand .brand-icon{width:44px;height:auto;flex:none}
+.brand .brand-word{height:28px;width:auto}
+@media(max-width:860px){.brand .brand-word{height:24px}}
+.nav .r{display:flex;gap:10px;align-items:center}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:999px;padding:10px 18px;font:600 14px/1 Inter,sans-serif;text-decoration:none;color:#0a0919;background:linear-gradient(90deg,var(--cyan),var(--violet) 60%,var(--pink))}
+.btn.ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
+footer{border-top:1px solid var(--line);padding:34px 0 50px;background:var(--space2);margin-top:30px}
+footer .wrap{display:grid;gap:8px;text-align:center;color:var(--muted);font-size:14px}
+footer strong{font:800 14px Sora,sans-serif;letter-spacing:.12em}
+
+h1,h2{font-family:Sora,Inter,sans-serif;line-height:1.15;letter-spacing:-.01em}
+h1{font-size:clamp(32px,6vw,50px);font-weight:800;margin-bottom:12px}
+h2{font-size:22px;font-weight:700;margin-bottom:12px}
+p{color:#d6d2f3;margin-bottom:12px}
+.eyebrow{font:600 12px/1 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:var(--cyan);margin-bottom:14px;display:block}
+.lead{color:var(--muted);font-size:17px}
+.tbc{background:rgba(255,200,87,.12);border:1px dashed var(--gold);color:var(--gold);border-radius:6px;padding:1px 7px;font-weight:600;font-size:.9em}
+.btn{font-size:15px;padding:12px 22px}
+.btn.ghost{padding:10px 16px}
+@media(max-width:640px){.nav .r .ghost{display:none}.nav .r .btn{white-space:nowrap;padding:10px 16px;font-size:14px}}
+
+.head{padding:40px 0 18px}
+.layout{display:grid;grid-template-columns:minmax(0,420px) minmax(0,1fr);gap:28px;align-items:start;padding-bottom:30px}
+@media(max-width:860px){.layout{grid-template-columns:1fr}}
+.pv{position:sticky;top:84px;background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:18px;padding:14px}
+@media(max-width:860px){.pv{position:static}}
+.stage{position:relative;border-radius:12px;overflow:hidden;background:#c9c4b8;aspect-ratio:1/1}
+.stage img{width:100%;height:100%;object-fit:cover;display:block}
+.eng{position:absolute;left:48.5%;top:62%;width:38%;transform:translate(-50%,-50%);text-align:center;color:#2a120a;opacity:.82;text-shadow:0 1px 0 rgba(255,220,190,.25);line-height:1.15;word-break:break-word;pointer-events:none;font-size:clamp(14px,4.4vw,26px)}
+.eng div{min-height:1em}
+.f-classic{font-family:"Playfair Display",Georgia,serif;font-weight:600}
+.f-modern{font-family:Sora,Inter,sans-serif;font-weight:700;letter-spacing:.04em}
+.f-script{font-family:"Dancing Script",cursive;font-weight:600}
+.f-block{font-family:Inter,sans-serif;font-weight:800;text-transform:uppercase;letter-spacing:.1em}
+.pvnote{font-size:13px;color:var(--muted);margin:10px 2px 0}
+.form{display:grid;gap:16px}
+fieldset{border:1px solid var(--line);border-radius:16px;padding:16px 18px 18px;background:var(--panel);display:grid;gap:12px;min-width:0}
+legend{padding:0 8px;font:700 14px Sora,sans-serif;letter-spacing:.06em;text-transform:uppercase;color:var(--cyan)}
+label{display:grid;gap:6px;font-size:14px;font-weight:600}
+label small,.hint{font-weight:400;color:var(--muted);font-size:13px}
+input[type=text],input[type=email],input[type=tel],input[type=number],input[type=date],textarea{width:100%;background:var(--space2);border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;font:16px Inter,sans-serif;color:var(--text);appearance:none;-webkit-appearance:none;color-scheme:dark}
+textarea{min-height:90px;resize:vertical}
+input:focus,textarea:focus{outline:2px solid var(--violet);outline-offset:1px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:520px){.two{grid-template-columns:1fr}}
+.fonts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fonts label{position:relative;cursor:pointer}
+.fonts input{position:absolute;opacity:0;inset:0}
+.fonts span{display:block;text-align:center;padding:12px 8px;border:1.5px solid var(--line);border-radius:12px;background:var(--space2);font-size:18px;font-weight:400}
+.fonts input:checked+span{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(53,228,232,.25)}
+.fonts input:focus-visible+span{outline:2px solid var(--violet);outline-offset:2px}
+.check{display:flex;gap:10px;align-items:center;font-weight:500}
+.check input{width:20px;height:20px;accent-color:var(--cyan)}
+#back{display:none}
+#back.on{display:grid}
+.files{list-style:none;margin:0;display:grid;gap:6px}
+.files li{display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:14px;background:var(--space2);border:1px solid var(--line);border-radius:10px;padding:6px 10px}
+.files button{background:none;border:0;color:var(--pink);font:600 13px Inter;cursor:pointer;padding:6px}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+button.btn{cursor:pointer;font-size:16px;padding:15px 26px}
+button.btn:disabled{opacity:.6;cursor:wait}
+#msg{font-size:15px;min-height:1.4em}
+#msg.ok{color:var(--cyan)}
+#msg.err{color:var(--pink)}
+footer{border-top:1px solid var(--line);padding:34px 0 50px;background:var(--space2);margin-top:30px}
+footer .wrap{display:grid;gap:8px;text-align:center;color:var(--muted);font-size:14px}
+footer strong{font:800 14px Sora,sans-serif;letter-spacing:.12em}
+
+.tabs{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.tabs button{flex:1 1 160px;max-width:260px;cursor:pointer;border:1.5px solid var(--line);background:var(--panel);color:var(--text);border-radius:999px;padding:13px 18px;font:700 15px Sora,sans-serif}
+.tabs button[aria-selected=true]{border-color:var(--cyan);background:linear-gradient(160deg,var(--panel2),var(--panel));box-shadow:0 0 0 2px rgba(53,228,232,.22)}
+.tabs button:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.stage{background:#1b1740}
+.stage svg{width:100%;height:auto;display:block;touch-action:none}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.chip{flex:1 1 auto;min-width:0;cursor:pointer;border:1.5px solid var(--line);background:var(--space2);color:var(--text);border-radius:12px;padding:10px 10px;font:600 14px Inter,sans-serif;text-align:center}
+.chip[aria-pressed=true]{border-color:var(--cyan);box-shadow:0 0 0 2px rgba(53,228,232,.22)}
+.chip:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.fontchips .chip{font-size:20px;line-height:1.15;font-weight:400}
+.swatches{display:flex;gap:10px;flex-wrap:wrap}
+.sw{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
+.sw[aria-pressed=true]{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(53,228,232,.3)}
+.sw:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.dims{font-size:14px;color:var(--text);margin:10px 2px 0}
+.warn{font-size:13px;color:#ffb5a1;background:rgba(255,95,60,.12);border:1px solid rgba(255,120,90,.4);border-radius:10px;padding:8px 10px;margin:8px 0 0}
+input[type=range]{width:100%;accent-color:var(--cyan)}
+select{width:100%;background:var(--space2);border:1.5px solid var(--line);border-radius:10px;padding:11px 12px;font:16px Inter,sans-serif;color:var(--text);color-scheme:dark}
+select:focus{outline:2px solid var(--violet);outline-offset:1px}
+.three{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+@media(max-width:520px){.three{grid-template-columns:1fr 1fr 1fr}}
+.qs{display:grid;gap:12px}
+.sub{font:600 13px Inter,sans-serif;color:var(--muted);margin:0}
+.stl{font-size:14px;color:var(--cyan);margin:0}
+[hidden]{display:none!important}
+#nudge{font-size:14px;color:var(--muted);margin:0 0 4px}
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Cosmic Vibez Creations home"><img class="brand-icon" src="/logo-icon.png" width="44" height="43" alt=""><img class="brand-word" src="/logo-wordmark.png" width="177" height="28" alt="Cosmic Vibez Creations"></a>
+    <div class="r"><a class="btn ghost" href="/">Home</a><a class="btn ghost" href="/shop">Shop</a><a class="btn" href="/#quote">Free Quote</a></div>
+  </div>
+</header>
+<main class="wrap">
+  <div class="head">
+    <span class="eyebrow">Mock-Up Studio</span>
+    <h1>Design it, then send it to us</h1>
+    <p class="lead">Preview your engraving or describe your 3D print, answer a few quick questions, and we reply with a proof and a quote. Nothing is charged until you approve.</p>
+    <div class="tabs" role="tablist" aria-label="Service">
+      <button type="button" role="tab" id="tabE" aria-selected="true">Laser Engraving</button>
+      <button type="button" role="tab" id="tabP" aria-selected="false">3D Printing</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <aside class="pv" aria-label="Preview">
+      <div class="stage"><svg id="svg" viewBox="0 0 520 400" role="img" aria-label="Preview of your design"></svg></div>
+      <p class="pvnote" id="cap"></p>
+      <p class="dims" id="dims"></p>
+      <p class="warn" id="warn" hidden></p>
+      <div class="row">
+        <button type="button" class="btn ghost" id="center">Center it</button>
+        <button type="button" class="btn ghost" id="png">Download preview</button>
+      </div>
+    </aside>
+
+    <form class="form" id="form" novalidate>
+      <!-- ENGRAVING -->
+      <div class="form" id="engPanels">
+        <fieldset>
+          <legend>1. Pick a product</legend>
+          <div class="row" id="products" style="margin:0"></div>
+        </fieldset>
+        <fieldset>
+          <legend>2. Your engraving</legend>
+          <label>Line 1 <input type="text" id="l1" maxlength="40" autocomplete="off" placeholder="Name or short text"></label>
+          <label>Line 2 <small>(optional)</small><input type="text" id="l2" maxlength="40" autocomplete="off"></label>
+          <label>Line 3 <small>(optional)</small><input type="text" id="l3" maxlength="40" autocomplete="off"></label>
+          <span class="sub">Font style</span>
+          <div class="row fontchips" id="fonts" style="margin:0"></div>
+          <label>Text size <input type="range" id="size" min="30" max="100" value="80"></label>
+          <div class="row" id="align" style="margin:0"></div>
+          <p class="hint" style="margin:0">Drag the text on the preview to move it. It stays inside the engraving area.</p>
+        </fieldset>
+        <fieldset>
+          <legend id="qTitle">3. A few questions about this product</legend>
+          <div class="qs" id="prodQs"></div>
+        </fieldset>
+      </div>
+
+      <!-- 3D PRINTING -->
+      <div class="form" id="prtPanels" hidden>
+        <fieldset>
+          <legend>1. What are we printing?</legend>
+          <label>Describe it <textarea id="pWhat" maxlength="1500" placeholder="Example: a replacement knob for a dishwasher, about the size of a golf ball."></textarea></label>
+          <label>Do you have a 3D file?
+            <select id="pFile">
+              <option value="Yes, I will upload it">Yes, I will upload it (STL, OBJ, 3MF)</option>
+              <option value="No, I need it designed">No, I need it designed</option>
+              <option value="I have a sketch or photo">I have a sketch or photo</option>
+              <option value="I want a copy of an existing part">I want a copy of an existing part</option>
+            </select>
+          </label>
+          <p class="stl" id="stlInfo" hidden></p>
+        </fieldset>
+        <fieldset>
+          <legend>2. Size</legend>
+          <div class="three">
+            <label>Length <input type="number" id="pL" min="0" step="any" inputmode="decimal"></label>
+            <label>Width <input type="number" id="pW" min="0" step="any" inputmode="decimal"></label>
+            <label>Height <input type="number" id="pH" min="0" step="any" inputmode="decimal"></label>
+          </div>
+          <label>Units
+            <select id="pU"><option value="in">inches</option><option value="mm">millimeters</option></select>
+          </label>
+          <p class="hint" style="margin:0">Not sure? Leave it blank and describe it above. If you upload an STL file we read the size for you.</p>
+        </fieldset>
+        <fieldset>
+          <legend>3. Material and color</legend>
+          <span class="sub">Color (shown in the preview)</span>
+          <div class="swatches" id="swatches" role="group" aria-label="Color"></div>
+          <label id="pColorOtherWrap" hidden>Which color? <input type="text" id="pColorOther" maxlength="60" autocomplete="off"></label>
+          <label>Material
+            <select id="pMat">
+              <option value="Not sure, recommend for me">Not sure, recommend for me</option>
+              <option value="PLA (standard, good for display)">PLA (standard, good for display)</option>
+              <option value="PETG (tougher, some heat and water resistance)">PETG (tougher, some heat and water resistance)</option>
+              <option value="TPU (flexible)">TPU (flexible)</option>
+              <option value="ABS or ASA (strong, outdoor)">ABS or ASA (strong, outdoor)</option>
+            </select>
+          </label>
+          <label>Print quality
+            <select id="pQual">
+              <option value="Standard">Standard</option>
+              <option value="Draft (faster, rougher layers)">Draft (faster, rougher layers)</option>
+              <option value="Fine detail (slower, smoother)">Fine detail (slower, smoother)</option>
+            </select>
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>4. How will it be used?</legend>
+          <label>Main use
+            <select id="pUse">
+              <option value="Display or decor">Display or decor</option>
+              <option value="Functional part">Functional part</option>
+              <option value="Needs to hold weight or take stress">Needs to hold weight or take stress</option>
+              <option value="Used outdoors or in heat">Used outdoors or in heat</option>
+              <option value="Prototype or test fit">Prototype or test fit</option>
+              <option value="Gift or keepsake">Gift or keepsake</option>
+            </select>
+          </label>
+          <label>Will it touch food or drinks?
+            <select id="pFood"><option value="No">No</option><option value="Yes (we will talk about options)">Yes</option></select>
+          </label>
+          <label>Finish
+            <select id="pFin">
+              <option value="As printed">As printed</option>
+              <option value="Sanded smooth">Sanded smooth</option>
+              <option value="Painted (we will ask about colors)">Painted</option>
+              <option value="Not sure">Not sure</option>
+            </select>
+          </label>
+        </fieldset>
+      </div>
+
+      <!-- SHARED -->
+      <fieldset>
+        <legend id="upTitle">Artwork or logo</legend>
+        <p class="hint" style="margin:0" id="upHint"></p>
+        <input type="file" id="files" multiple>
+        <ul class="files" id="fileList"></ul>
+      </fieldset>
+
+      <fieldset>
+        <legend>Order details</legend>
+        <div class="two">
+          <label>How many <input type="number" id="qty" min="1" max="100000" value="1" inputmode="numeric"></label>
+          <label>This is for
+            <select id="aud"><option value="">Choose</option><option value="Me / A Gift">Me or a gift</option><option value="A Business">A business or group</option></select>
+          </label>
+        </div>
+        <label>When do you need it?
+          <select id="when">
+            <option value="No rush">No rush, standard turnaround</option>
+            <option value="By a date">I need it by a date</option>
+            <option value="Rush">Rush, as soon as possible</option>
+          </select>
+        </label>
+        <label id="dateWrap" hidden>Needed by <input type="date" id="date"></label>
+        <p class="hint" id="rushNote" style="margin:0" hidden>Rush work may cost extra. We confirm timing and any rush fee in your quote.</p>
+        <label>How will you get it?
+          <select id="deliv">
+            <option value="Pickup in Keyport, NJ">Pickup in Keyport, NJ</option>
+            <option value="Local delivery">Local delivery</option>
+            <option value="Ship to me">Ship to me</option>
+          </select>
+        </label>
+        <label id="zipWrap" hidden>Delivery ZIP code <input type="text" id="zip" maxlength="10" inputmode="numeric" autocomplete="postal-code"></label>
+        <div class="eng-only" id="engOnly">
+          <label>Who supplies the item?
+            <select id="supply">
+              <option value="We supply the item">You supply the item</option>
+              <option value="I am bringing my own item">I am bringing my own item</option>
+            </select>
+          </label>
+          <p class="hint" style="margin:6px 0 0">Bringing your own item may add an up charge to cover any damage that may occur.</p>
+        </div>
+        <label>Budget <small>(optional)</small><input type="text" id="budget" maxlength="40" autocomplete="off" placeholder="Example: around $40 each"></label>
+        <label>Anything else we should know <small>(optional)</small><textarea id="notes" maxlength="1200" placeholder="Back side text, special requests, deadline details."></textarea></label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Your info</legend>
+        <label>Name <input type="text" id="name" autocomplete="name" required></label>
+        <div class="two">
+          <label>Email <input type="email" id="email" autocomplete="email" required></label>
+          <label>Phone <small>(optional)</small><input type="tel" id="phone" autocomplete="tel"></label>
+        </div>
+      </fieldset>
+
+      <div class="hp" aria-hidden="true"><label>Website<input type="text" id="hp" tabindex="-1" autocomplete="off"></label></div>
+      <button class="btn" type="submit" id="send">Send my design</button>
+      <p id="msg" role="status" aria-live="polite"></p>
+      <p class="hint">Nothing is made or charged yet. We review it, send a proof and a secure payment link, and start once you approve and pay. Details are on our <a href="/policies">Store Policies</a>. The preview is a visual guide, not a final cut file.</p>
+    </form>
+  </div>
+</main>
+<footer>
+  <div class="wrap">
+    <strong>COSMIC VIBEZ CREATIONS</strong>
+    <span>Laser Engraving &bull; 3D Printing</span>
+    <span><a href="https://maps.google.com/?q=Keyport%2C%20NJ%2007735" target="_blank" rel="noopener">Keyport, NJ 07735</a> &bull; <a href="/">Home</a> &bull; <a href="/shop">Shop</a> &bull; <a href="/policies">Store Policies</a></span>
+    <span>&copy; 2023 CosmicVibezCreations LLC</span>
+  </div>
+</footer>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  var NS='http://www.w3.org/2000/svg';
+
+  /* ============ SETTINGS (edit these to change products, fonts, questions) ============ */
+  var PRODUCTS=[
+    {id:'tag',name:'Leather Keychain Tag',size:[3.2,3.2],area:[1.0,1.5,1.1,.95],material:'leatherphoto',shape:'rect',radius:0,photo:'/img/leather-tag.jpg',
+     qs:[{k:'Sides',t:'select',o:['Front only','Front and back (put back text in Notes)']},
+         {k:'Leather color',t:'select',o:['Brown (shown)','Black','Tan','Other, I will explain in Notes']}]},
+    {id:'board',name:'Cutting Board',size:[11,8],area:[1.5,1.5,8,5],material:'wood',shape:'rect',radius:.5,
+     qs:[{k:'Wood',t:'select',o:['Not sure, recommend for me','Maple','Walnut','Cherry','Bamboo']},
+         {k:'Board size',t:'select',o:['Medium (about 11 x 8 in)','Small (about 8 x 6 in)','Large (about 15 x 11 in)','Custom, I will explain in Notes']},
+         {k:'Used for food',t:'select',o:['Yes (we suggest a food-safe finish)','Display only']},
+         {k:'Engrave both sides',t:'select',o:['No','Yes (put back text in Notes)']}]},
+    {id:'coaster',name:'Slate Coaster',size:[4,4],area:[.6,.6,2.8,2.8],material:'slate',shape:'round',
+     qs:[{k:'Set size',t:'select',o:['Single coaster','Set of 4','Set of 6','Other, I will explain in Notes']},
+         {k:'Shape',t:'select',o:['Round (shown)','Square']},
+         {k:'Cork backing',t:'select',o:['Yes','No','Not sure']},
+         {k:'Same text on every coaster',t:'select',o:['Yes','No, different text on each (list them in Notes)']}]},
+    {id:'tumbler',name:'20 oz Tumbler',size:[3.4,7.2],area:[.35,2.2,2.7,3.4],material:'steel',shape:'tumbler',
+     qs:[{k:'Tumbler size',t:'select',o:['20 oz','30 oz','40 oz','Other, I will explain in Notes']},
+         {k:'Tumbler color',t:'text',p:'Example: black, white, navy'},
+         {k:'Wraps around the cup',t:'select',o:['No, one spot on the front','Yes, wrap-around design']},
+         {k:'Needs lid or straw',t:'select',o:['No','Yes']}]},
+    {id:'sign',name:'Acrylic Sign',size:[12,8],area:[1,1,10,6],material:'acrylic',shape:'rect',radius:.3,
+     qs:[{k:'Acrylic color',t:'select',o:['Clear','White','Black','Frosted']},
+         {k:'Thickness',t:'select',o:['Not sure, recommend for me','1/8 inch','1/4 inch']},
+         {k:'Sign size',t:'text',p:'Example: 12 x 8 in'},
+         {k:'How it displays',t:'select',o:['Standing base','Wall mount','Hanging']}]},
+    {id:'patch',name:'Leather Patch',size:[3.5,2.25],area:[.35,.3,2.8,1.65],material:'leather',shape:'rect',radius:.35,
+     qs:[{k:'Goes on',t:'select',o:['Hat','Jacket or bag','Other, I will explain in Notes']},
+         {k:'How it attaches',t:'select',o:['Not sure, recommend for me','Sew-on','Adhesive backing']},
+         {k:'Leather color',t:'select',o:['Brown (shown)','Black','Tan']}]}
+  ];
+  var FONTS=[
+    {name:'Script',css:"'Great Vibes', cursive",family:'Great Vibes'},
+    {name:'Classic',css:"'Playfair Display', serif",family:'Playfair Display',weight:700},
+    {name:'Modern',css:"'Montserrat', sans-serif",family:'Montserrat',weight:700},
+    {name:'Bold',css:"'Bebas Neue', sans-serif",family:'Bebas Neue'},
+    {name:'Fun',css:"'Pacifico', cursive",family:'Pacifico'}
+  ];
+  var COLORS=[['Black','#1c1c1f'],['White','#f2f2f2'],['Gray','#8b8f96'],['Red','#d83a3a'],['Orange','#f08a24'],['Yellow','#f2c52d'],['Green','#2fa65a'],['Blue','#2f6fe0'],['Purple','#7c4fe0'],['Pink','#f06ab0'],['Other','#555a66']];
+  var MIN_LETTER_IN=0.12;
+  /* ================================================================================== */
+
+  var MAT={
+    wood:{base:['#e6c08e','#c99560'],grain:'#8a5a2b',burn:'#3a210f',glow:'rgba(255,240,215,.55)',blur:.45},
+    slate:{base:['#4b4f55','#33363b'],grain:'#22252a',burn:'#d9dcde',glow:'rgba(0,0,0,.45)',blur:.35},
+    steel:{base:['#1f3b5a','#132639'],grain:'#0d1b29',burn:'#e9eef2',glow:'rgba(0,0,0,.4)',blur:.2,metal:true},
+    acrylic:{base:['#dfeef3','#c9e2ea'],grain:'#a9c9d4',burn:'#ffffff',glow:'rgba(40,80,100,.35)',blur:.6},
+    leather:{base:['#8a5532','#6d3f22'],grain:'#4a2a14',burn:'#2a160a',glow:'rgba(255,220,190,.35)',blur:.5},
+    leatherphoto:{base:['#5a3020','#4a2616'],grain:'#2a160a',burn:'#160803',glow:'rgba(255,205,165,.5)',blur:.5}
+  };
+  var svg=$('#svg'),W=520,H=400,PPI=40,view=null,drag=null;
+  var st={mode:'engrave',p:0,f:0,align:'middle',size:80,ox:0,oy:0,color:2,qa:{}};
+  var files=[],MAXF=10*1024*1024,sending=false;
+
+  function el(tag,a,parent){var n=document.createElementNS(NS,tag);for(var k in a)n.setAttribute(k,a[k]);if(parent)parent.appendChild(n);return n}
+  function lines(){return [$('#l1').value,$('#l2').value,$('#l3').value].map(function(s){return s.trim()}).filter(Boolean)}
+  function say(c,t){var m=$('#msg');m.className=c;m.textContent=t}
+  function shade(hex,amt){var n=parseInt(hex.slice(1),16),r=n>>16,g=n>>8&255,b=n&255,t=amt<0?0:255,p=Math.abs(amt);
+    function m(c){return Math.round((t-c)*p+c)}return 'rgb('+m(r)+','+m(g)+','+m(b)+')'}
+
+  /* ---------- engraving preview (adapted from the live engraving preview) ---------- */
+  function drawProduct(p){
+    PPI=Math.min((W-40)/p.size[0],(H-40)/p.size[1]);
+    var w=p.size[0]*PPI,h=p.size[1]*PPI,ox=(W-w)/2,oy=(H-h)/2,m=MAT[p.material];
+    view={ox:ox,oy:oy,w:w,h:h,a:{x:ox+p.area[0]*PPI,y:oy+p.area[1]*PPI,w:p.area[2]*PPI,h:p.area[3]*PPI}};
+    var d=el('defs',{},svg);
+    var g=el('linearGradient',{id:'base',x1:0,y1:0,x2:p.shape==='tumbler'?1:0,y2:p.shape==='tumbler'?0:1},d);
+    if(p.shape==='tumbler'){[[0,m.base[1]],[.22,m.base[0]],[.45,m.base[1]],[.8,m.base[0]],[1,m.base[1]]].forEach(function(s){el('stop',{offset:s[0],'stop-color':s[1]},g)})}
+    else{el('stop',{offset:0,'stop-color':m.base[0]},g);el('stop',{offset:1,'stop-color':m.base[1]},g)}
+    var gf=el('filter',{id:'grain',x:0,y:0,width:1,height:1},d);
+    el('feTurbulence',{type:'fractalNoise',baseFrequency:p.material==='wood'?'0.006 0.22':p.material.indexOf('leather')===0?'0.9':'0.5',numOctaves:3,seed:7,result:'n'},gf);
+    el('feColorMatrix',{type:'matrix',values:'0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 '+(p.material==='wood'?'.55':'.22')+' 0'},gf);
+    var burn=el('filter',{id:'burn',x:'-5%',y:'-20%',width:'110%',height:'140%'},d);
+    el('feTurbulence',{type:'fractalNoise',baseFrequency:'1.4',numOctaves:1,seed:3,result:'r'},burn);
+    el('feDisplacementMap',{'in':'SourceGraphic',in2:'r',scale:p.material==='wood'?1.2:.6,result:'d'},burn);
+    el('feGaussianBlur',{'in':'d',stdDeviation:m.blur},burn);
+    var clip=el('clipPath',{id:'shape'},d);
+    if(p.shape==='round')el('circle',{cx:ox+w/2,cy:oy+h/2,r:w/2},clip);
+    else el('rect',{x:ox,y:oy,width:w,height:h,rx:p.shape==='tumbler'?w*.12:(p.radius||0)*PPI},clip);
+    if(!p.photo)el('ellipse',{cx:W/2,cy:oy+h+8,rx:w*.46,ry:7,fill:'rgba(0,0,0,.25)'},svg);
+    var body=el('g',{'clip-path':'url(#shape)'},svg);
+    if(p.photo){var im=el('image',{x:ox,y:oy,width:w,height:h,preserveAspectRatio:'xMidYMid slice'},body);im.setAttribute('href',p.photo);return body}
+    el('rect',{x:ox,y:oy,width:w,height:h,fill:'url(#base)'},body);
+    el('rect',{x:ox,y:oy,width:w,height:h,fill:m.grain,filter:'url(#grain)'},body);
+    if(p.shape==='tumbler'){el('rect',{x:ox,y:oy,width:w,height:16,fill:'#c9ced3'},body);el('rect',{x:ox+w*.18,y:oy,width:w*.1,height:h,fill:'rgba(255,255,255,.12)'},body)}
+    return body;
+  }
+  function drawText(body,p){
+    var L=lines(),m=MAT[p.material],f=FONTS[st.f],a=view.a,notes=[];
+    if(!L.length)L=['Your Text Here'];
+    var g=el('g',{'class':'design'},body);
+    var fs=a.h/L.length*.78*st.size/100,lh=1.12,xs=st.align==='start'?a.x:st.align==='end'?a.x+a.w:a.x+a.w/2;
+    function build(size){
+      while(g.firstChild)g.removeChild(g.firstChild);
+      [[m.glow,.9],[m.burn,0]].forEach(function(layer){
+        var t=el('text',{'font-family':f.css,'font-weight':f.weight||400,'font-size':size,'text-anchor':st.align,fill:layer[0],filter:'url(#burn)'},g);
+        if(m.metal&&!layer[1])t.setAttribute('fill-opacity','.95');
+        L.forEach(function(s,i){var ts=el('tspan',{x:xs+layer[1]*.6,dy:i?size*lh:0},t);ts.textContent=s});
+        t.setAttribute('y',a.y+size*.82+layer[1]*.6);
+      });
+      return g.getBBox();
+    }
+    var bb=build(fs),k=Math.min(1,a.w/bb.width,a.h/bb.height);
+    if(k<1){fs*=k*.98;bb=build(fs)}
+    var room={x:a.x-bb.x,y:a.y-bb.y,w:a.w-bb.width,h:a.h-bb.height};
+    st.ox=Math.max(-room.w/2,Math.min(room.w/2,st.ox));st.oy=Math.max(-room.h/2,Math.min(room.h/2,st.oy));
+    g.setAttribute('transform','translate('+(room.x+room.w/2+st.ox)+' '+(room.y+room.h/2+st.oy)+')');
+    if(fs*.7/PPI<MIN_LETTER_IN)notes.push('Letters are under '+MIN_LETTER_IN+' in tall and may not engrave cleanly. Shorten the text or use fewer lines.');
+    return {box:bb,notes:notes};
+  }
+  var engSpec={};
+  function renderEngrave(){
+    var p=PRODUCTS[st.p];
+    while(svg.firstChild)svg.removeChild(svg.firstChild);
+    var body=drawProduct(p),r=drawText(body,p),a=view.a;
+    el('rect',{'class':'guide',x:a.x,y:a.y,width:a.w,height:a.h,fill:'none',stroke:'rgba(255,255,255,.6)','stroke-dasharray':'5 5','stroke-width':1.2,rx:4,'pointer-events':'none'},svg);
+    var wIn=r.box.width/PPI,hIn=r.box.height/PPI,cx=st.ox/PPI,cy=st.oy/PPI;
+    var px=Math.abs(cx)<.1?'':Math.abs(cx).toFixed(2)+' in '+(cx>0?'right':'left'),py=Math.abs(cy)<.1?'':Math.abs(cy).toFixed(2)+' in '+(cy>0?'down':'up');
+    var pos=!px&&!py?'centered':[px,py].filter(Boolean).join(' and ')+' from center';
+    $('#dims').textContent='Engraving size about '+wIn.toFixed(2)+' x '+hIn.toFixed(2)+' in on a '+(p.id==='tag'?'round leather tag':p.name.toLowerCase())+', '+pos+'.';
+    $('#warn').hidden=!r.notes.length;$('#warn').textContent=r.notes.join(' ');
+    engSpec={size:wIn.toFixed(2)+' x '+hIn.toFixed(2)+' in',pos:pos};
+    $('#cap').textContent=p.id==='tag'?'Size is estimated from the photo. We confirm real sizes on your proof.':'Drag your text to move it. This is a visual guide, we send a proof first.';
+  }
+
+  /* ---------- 3D print preview: your color on a layered part, plus the size ---------- */
+  function renderPrint(){
+    while(svg.firstChild)svg.removeChild(svg.firstChild);
+    var c=COLORS[st.color][1],d=el('defs',{},svg);
+    var g=el('linearGradient',{id:'pg',x1:0,y1:0,x2:1,y2:0},d);
+    [[0,shade(c,-.35)],[.3,shade(c,.15)],[.55,c],[1,shade(c,-.45)]].forEach(function(s){el('stop',{offset:s[0],'stop-color':s[1]},g)});
+    var cp=el('clipPath',{id:'pclip'},d);
+    var path='M205 80 C 150 140, 140 235, 190 312 L 330 312 C 380 235, 370 140, 315 80 Z';
+    el('path',{d:path},cp);
+    el('ellipse',{cx:260,cy:330,rx:190,ry:30,fill:'#2b2760',stroke:'#4a43a0','stroke-width':2},svg);
+    el('ellipse',{cx:260,cy:322,rx:150,ry:16,fill:'rgba(0,0,0,.3)'},svg);
+    el('path',{d:path,fill:'url(#pg)'},svg);
+    var grp=el('g',{'clip-path':'url(#pclip)'},svg);
+    for(var y=84;y<312;y+=6){el('line',{x1:120,x2:400,y1:y,y2:y,stroke:'rgba(0,0,0,.22)','stroke-width':1.6},grp);el('line',{x1:120,x2:400,y1:y+2.5,y2:y+2.5,stroke:'rgba(255,255,255,.07)','stroke-width':1},grp)}
+    el('ellipse',{cx:232,cy:170,rx:14,ry:70,fill:'rgba(255,255,255,.16)',transform:'rotate(8 232 170)'},grp);
+    var t=el('text',{x:260,y:390,'text-anchor':'middle','font-family':'Inter,sans-serif','font-size':15,fill:'#ece9ff'},svg);
+    t.textContent=COLORS[st.color][0]==='Other'?'Your color':COLORS[st.color][0];
+    var L=$('#pL').value,Wd=$('#pW').value,Hh=$('#pH').value,u=$('#pU').value;
+    $('#dims').textContent=(L||Wd||Hh)?'Size about '+(L||'?')+' x '+(Wd||'?')+' x '+(Hh||'?')+' '+(u==='in'?'in':'mm')+'.':'Add a size, or upload an STL file and we read it for you.';
+    $('#warn').hidden=true;
+    $('#cap').textContent='Color preview. The real shape comes from your file or your description.';
+  }
+  function render(){
+    W=(st.mode==='engrave'&&PRODUCTS[st.p].photo)?400:520;H=400;svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    if(st.mode==='engrave')renderEngrave();else renderPrint();
+  }
+
+  /* ---------- chips and questions ---------- */
+  function chips(box,items,isOn,onPick,styleOf){
+    box.innerHTML='';
+    items.forEach(function(it,i){
+      var b=document.createElement('button');b.type='button';b.className='chip';b.textContent=it.name||it.v;b.setAttribute('aria-pressed',isOn(i));
+      if(styleOf)b.setAttribute('style',styleOf(it));
+      b.addEventListener('click',function(){onPick(i);[].forEach.call(box.children,function(c,j){c.setAttribute('aria-pressed',isOn(j))});render()});
+      box.appendChild(b);
+    });
+  }
+  function renderQs(){
+    var p=PRODUCTS[st.p],box=$('#prodQs');box.innerHTML='';
+    $('#qTitle').textContent='3. A few questions about the '+(p.id==='tag'?'leather tag':p.name.toLowerCase());
+    st.qa={};
+    p.qs.forEach(function(q,i){
+      var lab=document.createElement('label'),inp;lab.appendChild(document.createTextNode(q.k+' '));
+      if(q.t==='select'){inp=document.createElement('select');q.o.forEach(function(o){var op=document.createElement('option');op.value=o;op.textContent=o;inp.appendChild(op)});st.qa[q.k]=q.o[0]}
+      else{inp=document.createElement('input');inp.type='text';inp.maxLength=80;inp.autocomplete='off';if(q.p)inp.placeholder=q.p;st.qa[q.k]=''}
+      inp.addEventListener('input',function(){st.qa[q.k]=inp.value});
+      lab.appendChild(inp);box.appendChild(lab);
+    });
+  }
+  chips($('#products'),PRODUCTS,function(i){return i===st.p},function(i){st.p=i;st.ox=st.oy=0;renderQs()});
+  chips($('#fonts'),FONTS,function(i){return i===st.f},function(i){st.f=i},function(f){return 'font-family:'+f.css+';font-weight:'+(f.weight||400)});
+  var ALIGN=[{name:'Left',v:'start'},{name:'Center',v:'middle'},{name:'Right',v:'end'}];
+  chips($('#align'),ALIGN,function(i){return ALIGN[i].v===st.align},function(i){st.align=ALIGN[i].v});
+  ['#l1','#l2','#l3'].forEach(function(s){$(s).addEventListener('input',render)});
+  $('#size').addEventListener('input',function(){st.size=+this.value;render()});
+  $('#center').addEventListener('click',function(){st.ox=st.oy=0;render()});
+  ['#pL','#pW','#pH','#pU'].forEach(function(s){$(s).addEventListener('input',render)});
+  (function(){
+    var box=$('#swatches');
+    COLORS.forEach(function(c,i){
+      var b=document.createElement('button');b.type='button';b.className='sw';b.style.background=c[1];b.setAttribute('aria-label',c[0]);b.title=c[0];b.setAttribute('aria-pressed',i===st.color);
+      b.addEventListener('click',function(){st.color=i;[].forEach.call(box.children,function(x,j){x.setAttribute('aria-pressed',j===i)});$('#pColorOtherWrap').hidden=c[0]!=='Other';render()});
+      box.appendChild(b);
+    });
+  })();
+  renderQs();
+
+  /* ---------- mode switch ---------- */
+  function setMode(m){
+    st.mode=m;
+    $('#tabE').setAttribute('aria-selected',m==='engrave');$('#tabP').setAttribute('aria-selected',m==='print');
+    $('#engPanels').hidden=m!=='engrave';$('#prtPanels').hidden=m!=='print';$('#engOnly').hidden=m!=='engrave';
+    $('#center').hidden=m!=='engrave';$('#png').hidden=m!=='engrave';
+    $('#upTitle').textContent=m==='engrave'?'Artwork or logo (optional)':'Your 3D file (optional)';
+    $('#upHint').textContent=m==='engrave'?'Upload a logo or picture to engrave. PNG, JPG or PDF. We also attach your preview automatically. Up to 5 files, 10 MB each.':'Upload an STL, OBJ or 3MF file, or a photo or sketch of what you want. Up to 6 files, 10 MB each.';
+    $('#files').accept=m==='engrave'?'.png,.jpg,.jpeg,.gif,.webp,.heic,.pdf,image/*':'.stl,.obj,.3mf,.png,.jpg,.jpeg,.heic,.pdf,image/*';
+    files=[];renderFiles();$('#stlInfo').hidden=true;say('','');render();
+  }
+  $('#tabE').addEventListener('click',function(){setMode('engrave')});
+  $('#tabP').addEventListener('click',function(){setMode('print')});
+
+  $('#when').addEventListener('change',function(){$('#dateWrap').hidden=this.value!=='By a date';$('#rushNote').hidden=this.value!=='Rush'});
+  $('#deliv').addEventListener('change',function(){$('#zipWrap').hidden=this.value==='Pickup in Keyport, NJ'});
+  (function(){var t=new Date();t.setMinutes(t.getMinutes()-t.getTimezoneOffset());$('#date').min=t.toISOString().slice(0,10)})();
+
+  /* ---------- drag to move text ---------- */
+  function pt(e){var q=svg.createSVGPoint();q.x=e.clientX;q.y=e.clientY;return q.matrixTransform(svg.getScreenCTM().inverse())}
+  svg.addEventListener('pointerdown',function(e){if(st.mode!=='engrave'||!e.target.closest('.design'))return;var q=pt(e);drag={x:q.x-st.ox,y:q.y-st.oy};svg.setPointerCapture(e.pointerId);e.preventDefault()});
+  svg.addEventListener('pointermove',function(e){if(!drag)return;var q=pt(e);st.ox=q.x-drag.x;st.oy=q.y-drag.y;render()});
+  function endDrag(){drag=null}svg.addEventListener('pointerup',endDrag);svg.addEventListener('pointercancel',endDrag);
+
+  /* ---------- preview PNG (download, and attached to the request) ---------- */
+  var fontCache={};
+  function embedFonts(){
+    var f=FONTS[st.f],url='https://fonts.googleapis.com/css2?family='+f.family.replace(/ /g,'+')+(f.weight?':wght@'+f.weight:'');
+    if(fontCache[url])return Promise.resolve(fontCache[url]);
+    return fetch(url).then(function(r){return r.text()}).then(function(css){
+      var src=(css.match(/url\((https:[^)]+)\)/g)||[]).pop();if(!src)return '';
+      return fetch(src.slice(4,-1)).then(function(r){return r.blob()}).then(toData).then(function(data){return fontCache[url]="@font-face{font-family:'"+f.family+"';font-weight:"+(f.weight||400)+";src:url("+data+")}"});
+    }).catch(function(){return ''});
+  }
+  function toData(b){return new Promise(function(ok){var fr=new FileReader();fr.onload=function(){ok(fr.result)};fr.readAsDataURL(b)})}
+  function pngBlob(){
+    return embedFonts().then(function(css){
+      var copy=svg.cloneNode(true);copy.setAttribute('xmlns',NS);copy.setAttribute('width',W*2);copy.setAttribute('height',H*2);
+      [].forEach.call(copy.querySelectorAll('.guide'),function(n){n.remove()});
+      if(css){var s=document.createElementNS(NS,'style');s.textContent=css;copy.insertBefore(s,copy.firstChild)}
+      var imgs=[].slice.call(copy.querySelectorAll('image'));
+      return Promise.all(imgs.map(function(im){
+        return fetch(im.getAttribute('href')).then(function(r){return r.blob()}).then(toData).then(function(d){im.setAttribute('href',d)}).catch(function(){});
+      })).then(function(){
+        return new Promise(function(ok,bad){
+          var img=new Image();
+          img.onload=function(){var c=document.createElement('canvas');c.width=W*2;c.height=H*2;var x=c.getContext('2d');x.fillStyle='#1b1740';x.fillRect(0,0,c.width,c.height);x.drawImage(img,0,0);c.toBlob(function(b){b?ok(b):bad(new Error('png'))},'image/png')};
+          img.onerror=function(){bad(new Error('img'))};
+          img.src='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(new XMLSerializer().serializeToString(copy));
+        });
+      });
+    });
+  }
+  $('#png').addEventListener('click',function(){
+    pngBlob().then(function(b){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='engraving-preview.png';a.click();setTimeout(function(){URL.revokeObjectURL(a.href)},1000)}).catch(function(){say('err','Could not make the preview image on this device.')});
+  });
+
+  /* ---------- files, with an STL size reader for 3D printing ---------- */
+  var OK=/\.(png|jpe?g|gif|webp|heic|pdf|stl|obj|3mf)$/i;
+  function renderFiles(){
+    var ul=$('#fileList');ul.innerHTML='';
+    files.forEach(function(f,i){
+      var li=document.createElement('li'),s=document.createElement('span'),b=document.createElement('button');
+      s.textContent=f.name+' ('+Math.max(1,Math.round(f.size/1024))+' KB)';
+      b.type='button';b.textContent='Remove';b.setAttribute('aria-label','Remove '+f.name);
+      b.addEventListener('click',function(){files.splice(i,1);renderFiles()});
+      li.appendChild(s);li.appendChild(b);ul.appendChild(li);
+    });
+  }
+  function stlBox(buf){
+    var dv=new DataView(buf),n=buf.byteLength>=84?dv.getUint32(80,true):0,min=[1e30,1e30,1e30],max=[-1e30,-1e30,-1e30],i,j,v;
+    function add(a,b,c){var q=[a,b,c];for(var k=0;k<3;k++){if(q[k]<min[k])min[k]=q[k];if(q[k]>max[k])max[k]=q[k]}}
+    if(n>0&&buf.byteLength===84+n*50){
+      for(i=0;i<n;i++){var o=84+i*50+12;for(j=0;j<3;j++){add(dv.getFloat32(o+j*12,true),dv.getFloat32(o+j*12+4,true),dv.getFloat32(o+j*12+8,true))}}
+    }else{
+      var txt=new TextDecoder().decode(buf),re=/vertex\s+(\S+)\s+(\S+)\s+(\S+)/g,m,c=0;
+      while((m=re.exec(txt))){add(parseFloat(m[1]),parseFloat(m[2]),parseFloat(m[3]));c++}
+      if(!c)return null;
+    }
+    var d=[max[0]-min[0],max[1]-min[1],max[2]-min[2]];
+    return d.every(function(x){return isFinite(x)&&x>0})?d:null;
+  }
+  function readStl(f){
+    if(!/\.stl$/i.test(f.name))return;
+    var fr=new FileReader();
+    fr.onload=function(){
+      var d;try{d=stlBox(fr.result)}catch(e){d=null}
+      if(!d)return;
+      $('#pU').value='mm';$('#pL').value=d[0].toFixed(1);$('#pW').value=d[1].toFixed(1);$('#pH').value=d[2].toFixed(1);
+      $('#stlInfo').hidden=false;$('#stlInfo').textContent='Read from '+f.name+': about '+d[0].toFixed(1)+' x '+d[1].toFixed(1)+' x '+d[2].toFixed(1)+' mm ('+(d[0]/25.4).toFixed(2)+' x '+(d[1]/25.4).toFixed(2)+' x '+(d[2]/25.4).toFixed(2)+' in), assuming the file is in millimeters. Fix it above if that looks wrong.';
+      render();
+    };
+    fr.readAsArrayBuffer(f);
+  }
+  $('#files').addEventListener('change',function(e){
+    say('','');
+    var cap=st.mode==='engrave'?5:6;
+    Array.prototype.slice.call(e.target.files).forEach(function(f){
+      if(!OK.test(f.name)){say('err',f.name+' is not a supported file type.');return}
+      if(f.size>MAXF){say('err',f.name+' is over 10 MB.');return}
+      if(files.length>=cap){say('err','Up to '+cap+' files per request.');return}
+      files.push(f);if(st.mode==='print')readStl(f);
+    });
+    e.target.value='';renderFiles();
+  });
+
+  /* ---------- build the message and send ---------- */
+  function val(id){return $(id).value.trim()}
+  function buildMessage(){
+    var out=[],q=function(k,v){if(v)out.push(k+': '+v)};
+    if(st.mode==='engrave'){
+      var p=PRODUCTS[st.p],L=lines();
+      out.push('MOCK-UP STUDIO REQUEST: LASER ENGRAVING');
+      q('Product',p.name);
+      q('Engraving text',L.length?L.map(function(l){return '"'+l+'"'}).join(' / '):'(artwork only, see files)');
+      q('Font',FONTS[st.f].family+', alignment '+(st.align==='start'?'left':st.align==='end'?'right':'center')+', size '+st.size+'%');
+      q('Preview size and position',engSpec.size+', '+engSpec.pos);
+      out.push('--- Product questions');
+      p.qs.forEach(function(x){q(x.k,st.qa[x.k])});
+      q('Item supply',$('#supply').value);
+    }else{
+      out.push('MOCK-UP STUDIO REQUEST: 3D PRINTING');
+      q('What to print',val('#pWhat'));
+      q('3D file',$('#pFile').value);
+      var L=val('#pL'),Wd=val('#pW'),Hh=val('#pH');
+      if(L||Wd||Hh)q('Size',(L||'?')+' x '+(Wd||'?')+' x '+(Hh||'?')+' '+$('#pU').value);
+      var cn=COLORS[st.color][0];q('Color',cn==='Other'?'Other: '+(val('#pColorOther')||'not specified'):cn);
+      q('Material',$('#pMat').value);q('Print quality',$('#pQual').value);
+      q('Main use',$('#pUse').value);q('Touches food or drinks',$('#pFood').value);q('Finish',$('#pFin').value);
+    }
+    out.push('--- Order');
+    q('For',$('#aud').value);
+    var w=$('#when').value;q('Timing',w==='By a date'?'Needed by '+($('#date').value||'(date not given)'):w);
+    q('Getting it',$('#deliv').value+($('#deliv').value!=='Pickup in Keyport, NJ'&&val('#zip')?' (ZIP '+val('#zip')+')':''));
+    q('Budget',val('#budget'));q('Notes',val('#notes'));
+    return out.join('\n').slice(0,3900);
+  }
+  $('#form').addEventListener('submit',async function(e){
+    e.preventDefault();if(sending)return;
+    var name=val('#name'),email=val('#email'),qty=String(parseInt($('#qty').value,10)||'');
+    if(st.mode==='engrave'&&!lines().length&&!files.length){say('err','Add some text to engrave, or upload your artwork.');$('#l1').focus();return}
+    if(st.mode==='print'&&!val('#pWhat')&&!files.length){say('err','Tell us what you want printed, or upload a file.');$('#pWhat').focus();return}
+    if(!qty){say('err','Please enter how many you need.');$('#qty').focus();return}
+    if($('#when').value==='By a date'&&!$('#date').value){say('err','Pick the date you need it by.');$('#date').focus();return}
+    if($('#deliv').value!=='Pickup in Keyport, NJ'&&!val('#zip')){say('err','Please add your delivery ZIP code.');$('#zip').focus();return}
+    if(!name){say('err','Please add your name.');$('#name').focus();return}
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){say('err','Please enter a valid email.');$('#email').focus();return}
+    var item=st.mode==='engrave'?PRODUCTS[st.p].name+' (custom engraving)':'3D print: '+(val('#pWhat').slice(0,80)||'see files');
+    var send=files.slice();
+    var btn=$('#send');sending=true;btn.disabled=true;say('ok','Preparing...');
+    try{
+      if(st.mode==='engrave'){try{var pb=await pngBlob();pb.name='engraving-preview.png';send.push(pb)}catch(x){}}
+      var payload={name:name,phone:val('#phone'),email:email,need:[st.mode==='engrave'?'Laser Engraving':'3D Printing'],audience:$('#aud').value,quantity:qty,needed_by:$('#when').value==='By a date'?$('#date').value:'',item:item.slice(0,150),message:buildMessage(),heard:'',website:$('#hp').value,file_count:send.length};
+      say('ok','Sending...');
+      var r=await fetch('/api/quote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+      var j=await r.json().catch(function(){return{}});
+      if(!r.ok||!j.id)throw new Error(j.error||'Something went wrong. Please text 908-248-2374.');
+      var failed=[];
+      for(var i=0;i<send.length;i++){
+        say('ok','Uploading file '+(i+1)+' of '+send.length+'...');
+        try{
+          var fr=await fetch('/api/quote/'+j.id+'/files?token='+encodeURIComponent(j.token)+'&name='+encodeURIComponent(send[i].name),{method:'POST',headers:{'Content-Type':'application/octet-stream'},body:send[i]});
+          if(!fr.ok)failed.push(send[i].name);
+        }catch(x){failed.push(send[i].name)}
+      }
+      var dr=await fetch('/api/quote/'+j.id+'/done?token='+encodeURIComponent(j.token),{method:'POST'});
+      if(!dr.ok)throw new Error('We saved your request but could not finish sending it. Please text 908-248-2374 so we know it came through.');
+      $('#form').reset();files=[];renderFiles();$('#stlInfo').hidden=true;$('#dateWrap').hidden=true;$('#zipWrap').hidden=true;$('#rushNote').hidden=true;renderQs();render();
+      say('ok','Request sent. Thanks, '+name.split(/\s+/)[0]+'! Check your email for a confirmation. We will reply with a proof and a quote.'+(failed.length?' These files did not upload: '+failed.join(', ')+'. Please text or email them to us.':''));
+      $('#msg').scrollIntoView({block:'center',behavior:'smooth'});
+    }catch(err){say('err',err.message||'Something went wrong. Please text 908-248-2374.')}
+    finally{sending=false;btn.disabled=false}
+  });
+
+  /* ---------- start ---------- */
+  var qp=new URLSearchParams(location.search),want=qp.get('p');
+  if(want){PRODUCTS.forEach(function(p,i){if(p.id===want)st.p=i});chips($('#products'),PRODUCTS,function(i){return i===st.p},function(i){st.p=i;st.ox=st.oy=0;renderQs()});renderQs()}
+  setMode(qp.get('tab')==='print'?'print':'engrave');
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(render);
+})();
+</script>
+</body>
+</html>
