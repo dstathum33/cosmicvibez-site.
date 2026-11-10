@@ -127,8 +127,9 @@ async function sendMail({ to, subject, html, text: plain, replyTo }) {
   if (!key) return { ok: false, error: 'RESEND_API_KEY is not set' };
   const c = C();
   const attempt = (from) => {
-    const body = { from, to: [to], subject, html, text: plain };
-    if (replyTo) body.reply_to = replyTo;
+    const list = (x) => String(x || '').split(/[,;\s]+/).filter(Boolean);
+    const body = { from, to: list(to), subject, html, text: plain };
+    if (replyTo) body.reply_to = list(replyTo);
     return fetch('https://api.resend.com/emails', {
       method: 'POST', headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/json' },
       body: JSON.stringify(body), signal: AbortSignal.timeout(12000),

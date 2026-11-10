@@ -106,6 +106,7 @@ footer strong{font:800 14px Sora,sans-serif;letter-spacing:.12em}
 .sw{width:44px;height:44px;border-radius:50%;border:2px solid var(--line);cursor:pointer;padding:0}
 .sw[aria-pressed=true]{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(53,228,232,.3)}
 .sw:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
+.price{font:600 15px Inter,sans-serif;color:var(--gold);margin:8px 2px 0}
 .dims{font-size:14px;color:var(--text);margin:10px 2px 0}
 .warn{font-size:13px;color:#ffb5a1;background:rgba(255,95,60,.12);border:1px solid rgba(255,120,90,.4);border-radius:10px;padding:8px 10px;margin:8px 0 0}
 input[type=range]{width:100%;accent-color:var(--cyan)}
@@ -140,6 +141,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
       <p class="pvnote" id="cap"></p>
       <p class="dims" id="dims"></p>
       <p class="warn" id="warn" hidden></p>
+      <p class="price" id="priceLine"></p>
       <div class="row">
         <button type="button" class="btn ghost" id="center">Center it</button>
         <button type="button" class="btn ghost" id="png">Download preview</button>
@@ -235,7 +237,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
 <footer>
   <div class="wrap">
     <strong>COSMIC VIBEZ CREATIONS</strong>
-    <span>Laser Engraving &bull; 3D Printing</span>
+    <span>Laser Engraving</span>
     <span><a href="https://maps.google.com/?q=Keyport%2C%20NJ%2007735" target="_blank" rel="noopener">Keyport, NJ 07735</a> &bull; <a href="/">Home</a> &bull; <a href="/shop">Shop</a> &bull; <a href="/policies">Store Policies</a></span>
     <span>&copy; 2023 CosmicVibezCreations LLC</span>
   </div>
@@ -282,6 +284,14 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     {name:'Bold',css:"'Bebas Neue', sans-serif",family:'Bebas Neue'},
     {name:'Fun',css:"'Pacifico', cursive",family:'Pacifico'}
   ];
+  /* PRICES: fill in your real prices by size. Leave blank and customers see "we'll send your quote".
+     Format: productId: { q: 'the question label', p: { 'answer text': '$25' } } */
+  var PRICES={
+    board:{q:'Board size',p:{'Small (about 8 x 6 in)':'','Medium (about 11 x 8 in)':'','Large (about 15 x 11 in)':''}},
+    coaster:{q:'Set size',p:{'Single coaster':'','Set of 4':'','Set of 6':''}},
+    tumbler:{q:'Tumbler size',p:{'20 oz':'','30 oz':'','40 oz':''}},
+    sign:{q:'Thickness',p:{'1/8 inch':'','1/4 inch':''}}
+  };
   var MIN_LETTER_IN=0.12;
   /* ================================================================================== */
 
@@ -366,7 +376,12 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     $('#cap').textContent=p.id==='tag'?'Size is estimated from the photo. We confirm real sizes on your proof.':'Drag your text to move it. This is a visual guide, we send a proof first.';
   }
 
+  function priceText(){
+    var p=PRODUCTS[st.p],pr=PRICES[p.id],v=pr&&pr.p[st.qa[pr.q]];
+    return v?'Starting at '+v+' each for this size. Final price is confirmed with your proof.':"Pricing: we'll reply with your quote.";
+  }
   function render(){
+    $('#priceLine').textContent=priceText();
     W=PRODUCTS[st.p].photo?400:520;H=400;svg.setAttribute('viewBox','0 0 '+W+' '+H);
     renderEngrave();
   }
@@ -385,11 +400,12 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     var p=PRODUCTS[st.p],box=$('#prodQs');box.innerHTML='';
     $('#qTitle').textContent='3. A few questions about the '+(p.id==='tag'?'leather tag':p.name.toLowerCase());
     st.qa={};
+    setTimeout(function(){render()},0);
     p.qs.forEach(function(q,i){
       var lab=document.createElement('label'),inp;lab.appendChild(document.createTextNode(q.k+' '));
       if(q.t==='select'){inp=document.createElement('select');q.o.forEach(function(o){var op=document.createElement('option');op.value=o;op.textContent=o;inp.appendChild(op)});st.qa[q.k]=q.o[0]}
       else{inp=document.createElement('input');inp.type='text';inp.maxLength=80;inp.autocomplete='off';if(q.p)inp.placeholder=q.p;st.qa[q.k]=''}
-      inp.addEventListener('input',function(){st.qa[q.k]=inp.value});
+      inp.addEventListener('input',function(){st.qa[q.k]=inp.value;render()});
       lab.appendChild(inp);box.appendChild(lab);
     });
   }
@@ -481,7 +497,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     q('Preview size and position',engSpec.size+', '+engSpec.pos);
     out.push('--- Product questions');
     p.qs.forEach(function(x){q(x.k,st.qa[x.k])});
-  q('Item supply',$('#supply').value);
+  q('Item supply',$('#supply').value);q('Price shown to customer',priceText());
     out.push('--- Order');
     q('For',$('#aud').value);
     var w=$('#when').value;q('Timing',w==='By a date'?'Needed by '+($('#date').value||'(date not given)'):w);
