@@ -255,8 +255,9 @@ function markPaid(s) {
 }
 
 /* ---------- admin auth ---------- */
-const adminReady = () => String(env('ADMIN_PASSWORD', '')).length >= 10;
-const adminKey = () => sha('cosmic-admin-v1:' + env('ADMIN_PASSWORD', ''));
+const adminPw = () => String(env('ADMIN_PASSWORD', '')).trim();
+const adminReady = () => adminPw().length >= 10;
+const adminKey = () => sha('cosmic-admin-v1:' + adminPw());
 function makeSession() {
   const exp = String(Date.now() + 12 * HOUR);
   return exp + '.' + crypto.createHmac('sha256', adminKey()).update(exp).digest('base64url');
@@ -392,7 +393,7 @@ async function adminApi(req, res, p, query) {
     const ip = getIp(req);
     if (count('login-ip:' + ip, 15 * 60 * 1000) >= 5 || count('login-all', 15 * 60 * 1000) >= 20) throw httpErr(429, 'Too many attempts. Try again in 15 minutes.');
     const b = await readJson(req, 2048);
-    if (typeof b.password !== 'string' || !safeEq(b.password, env('ADMIN_PASSWORD'))) {
+    if (typeof b.password !== 'string' || !safeEq(b.password.trim(), adminPw())) {
       record('login-ip:' + ip); record('login-all');
       throw httpErr(401, 'Wrong password.');
     }
