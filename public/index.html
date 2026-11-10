@@ -67,7 +67,7 @@ main,header,footer{position:relative;z-index:1}
 }
 
 /* hero */
-.hero{padding:64px 0 40px}
+.hero{padding:64px 0 40px;overflow-x:clip}
 .hero .wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:36px;align-items:center}
 .hero h1{font-size:clamp(38px,7vw,68px);font-weight:800;margin:6px 0 18px}
 .hero p.lead{margin-bottom:26px}
@@ -76,11 +76,28 @@ main,header,footer{position:relative;z-index:1}
 .badge{border:1px solid var(--line);background:rgba(27,23,64,.7);border-radius:999px;padding:8px 14px;font-size:13px;color:var(--muted)}
 .hero-art{position:relative;display:grid;place-items:center;aspect-ratio:1/1;max-width:420px;width:100%;margin:0 auto}
 .hero-art .halo{position:absolute;inset:6%;border-radius:50%;background:conic-gradient(from 0deg,var(--cyan),var(--violet),var(--pink),var(--gold),var(--cyan));filter:blur(34px);opacity:.45;animation:spin 18s linear infinite}
-.hero-art .planet{position:relative;width:62%;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 30% 26%,#fff 0,var(--cyan) 10%,var(--violet) 52%,#241468 100%);box-shadow:inset -22px -26px 50px rgba(0,0,0,.45),0 0 60px rgba(124,92,255,.55)}
-.hero-art .ring{position:absolute;width:96%;height:30%;border-radius:50%;border:3px solid rgba(255,200,87,.7);transform:rotate(-18deg);box-shadow:0 0 22px rgba(255,200,87,.35)}
-.hero-art .hero-logo{position:relative;width:62%;height:auto;filter:drop-shadow(0 0 40px rgba(124,92,255,.55))}
+.hero-art{--u:1px}
+.hero-art .hero-logo{position:relative;z-index:2;width:30%;height:auto;filter:drop-shadow(0 0 26px rgba(255,200,87,.45)) drop-shadow(0 0 46px rgba(124,92,255,.6));animation:sunpulse 5s ease-in-out infinite}
+.hero-art .orbit{position:absolute;inset:var(--in);border-radius:50%;border:1px dashed rgba(169,164,214,.24);transform:rotate(var(--a));animation:orbit var(--t) linear infinite}
+.hero-art .pl{position:absolute;top:0;left:50%;width:calc(var(--s)*var(--u));height:calc(var(--s)*var(--u));margin:calc(var(--s)*var(--u)/-2) 0 0 calc(var(--s)*var(--u)/-2);border-radius:50%;background:radial-gradient(circle at 30% 28%,var(--c1) 0,var(--c2) 55%,var(--c3) 100%);box-shadow:0 0 calc(10*var(--u)) var(--g);transform:rotate(calc(var(--a)*-1));animation:spinback var(--t) linear infinite}
+.hero-art .pl.moonhost .moon{position:absolute;inset:calc(-8*var(--u));border-radius:50%;animation:orbit 3.4s linear infinite}
+.hero-art .pl.moonhost .moon::after{content:"";position:absolute;top:0;left:50%;width:calc(4*var(--u));height:calc(4*var(--u));margin:calc(-2*var(--u)) 0 0 calc(-2*var(--u));border-radius:50%;background:#fff;box-shadow:0 0 6px #fff}
+.hero-art .pl.ringed::before{content:"";position:absolute;left:50%;top:50%;width:215%;height:58%;border:calc(2*var(--u)) solid rgba(255,200,87,.8);border-radius:50%;transform:translate(-50%,-50%) rotate(-22deg)}
+.o1{--in:28%;--t:9s;--a:20deg}
+.o2{--in:21%;--t:15s;--a:140deg}
+.o3{--in:14%;--t:24s;--a:250deg}
+.o4{--in:7%;--t:36s;--a:60deg}
+.o5{--in:1%;--t:54s;--a:300deg}
+.p1{--s:9;--c1:#ece9ff;--c2:#8d86c9;--c3:#3a3470;--g:rgba(169,164,214,.6)}
+.p2{--s:13;--c1:#fff3c8;--c2:#ffc857;--c3:#a8701a;--g:rgba(255,200,87,.7)}
+.p3{--s:14;--c1:#d9fbff;--c2:#35e4e8;--c3:#14507f;--g:rgba(53,228,232,.7)}
+.p4{--s:11;--c1:#ffd6e6;--c2:#ff5fa2;--c3:#8f2b5d;--g:rgba(255,95,162,.7)}
+.p5{--s:17;--c1:#e0d6ff;--c2:#7c5cff;--c3:#2a1a78;--g:rgba(124,92,255,.75)}
+@keyframes orbit{from{transform:rotate(var(--a,0deg))}to{transform:rotate(calc(var(--a,0deg) + 360deg))}}
+@keyframes spinback{from{transform:rotate(calc(var(--a)*-1))}to{transform:rotate(calc(var(--a)*-1 - 360deg))}}
+@keyframes sunpulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero-art{order:-1;max-width:260px}}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr}.hero-art{order:-1;max-width:300px;--u:.7px}}
 @media(max-width:520px){.eyebrow{letter-spacing:.08em;font-size:11px}}
 
 /* services */
@@ -184,7 +201,7 @@ footer a{color:var(--cyan)}
 .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   .reveal{opacity:1;transform:none;transition:none}
-  .hero-art .halo{animation:none}
+  .hero-art .halo,.hero-art .hero-logo,.hero-art .orbit,.hero-art .pl,.hero-art .pl .moon{animation:none}
   html{scroll-behavior:auto}
 }
 </style>
@@ -226,7 +243,11 @@ footer a{color:var(--cyan)}
     <div class="hero-art" aria-hidden="true">
       <div class="halo"></div>
       <img class="hero-logo" src="/logo.png" width="512" height="512" alt="">
-      <div class="ring"></div>
+      <div class="orbit o1"><i class="pl p1"></i></div>
+      <div class="orbit o2"><i class="pl p2"></i></div>
+      <div class="orbit o3"><i class="pl p3 moonhost"><b class="moon"></b></i></div>
+      <div class="orbit o4"><i class="pl p4"></i></div>
+      <div class="orbit o5"><i class="pl p5 ringed"></i></div>
     </div>
   </div>
 </section>
