@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark only">
-<title>Mock-Up Studio: Engraving and 3D Printing | Cosmic Vibez Creations</title>
-<meta name="description" content="Preview your custom laser engraving or describe your 3D print, answer a few quick questions, and Cosmic Vibez Creations in Keyport, NJ sends you a proof and quote.">
+<title>Mock-Up Studio: Custom Laser Engraving | Cosmic Vibez Creations</title>
+<meta name="description" content="Preview your custom laser engraving, answer a few quick questions, and Cosmic Vibez Creations in Keyport, NJ sends you a proof and quote.">
 <link rel="canonical" href="https://cosmicvibezcreations.com/studio">
 <link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -131,11 +131,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
   <div class="head">
     <span class="eyebrow">Mock-Up Studio</span>
     <h1>Design it, then send it to us</h1>
-    <p class="lead">Preview your engraving or describe your 3D print, answer a few quick questions, and we reply with a proof and a quote. Nothing is charged until you approve.</p>
-    <div class="tabs" role="tablist" aria-label="Service">
-      <button type="button" role="tab" id="tabE" aria-selected="true">Laser Engraving</button>
-      <button type="button" role="tab" id="tabP" aria-selected="false">3D Printing</button>
-    </div>
+    <p class="lead">Preview your engraving, answer a few quick questions, and we reply with a proof and a quote. Nothing is charged until you approve.</p>
   </div>
 
   <div class="layout">
@@ -174,86 +170,11 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
         </fieldset>
       </div>
 
-      <!-- 3D PRINTING -->
-      <div class="form" id="prtPanels" hidden>
-        <fieldset>
-          <legend>1. What are we printing?</legend>
-          <label>Describe it <textarea id="pWhat" maxlength="1500" placeholder="Example: a replacement knob for a dishwasher, about the size of a golf ball."></textarea></label>
-          <label>Do you have a 3D file?
-            <select id="pFile">
-              <option value="Yes, I will upload it">Yes, I will upload it (STL, OBJ, 3MF)</option>
-              <option value="No, I need it designed">No, I need it designed</option>
-              <option value="I have a sketch or photo">I have a sketch or photo</option>
-              <option value="I want a copy of an existing part">I want a copy of an existing part</option>
-            </select>
-          </label>
-          <p class="stl" id="stlInfo" hidden></p>
-        </fieldset>
-        <fieldset>
-          <legend>2. Size</legend>
-          <div class="three">
-            <label>Length <input type="number" id="pL" min="0" step="any" inputmode="decimal"></label>
-            <label>Width <input type="number" id="pW" min="0" step="any" inputmode="decimal"></label>
-            <label>Height <input type="number" id="pH" min="0" step="any" inputmode="decimal"></label>
-          </div>
-          <label>Units
-            <select id="pU"><option value="in">inches</option><option value="mm">millimeters</option></select>
-          </label>
-          <p class="hint" style="margin:0">Not sure? Leave it blank and describe it above. If you upload an STL file we read the size for you.</p>
-        </fieldset>
-        <fieldset>
-          <legend>3. Material and color</legend>
-          <span class="sub">Color (shown in the preview)</span>
-          <div class="swatches" id="swatches" role="group" aria-label="Color"></div>
-          <label id="pColorOtherWrap" hidden>Which color? <input type="text" id="pColorOther" maxlength="60" autocomplete="off"></label>
-          <label>Material
-            <select id="pMat">
-              <option value="Not sure, recommend for me">Not sure, recommend for me</option>
-              <option value="PLA (standard, good for display)">PLA (standard, good for display)</option>
-              <option value="PETG (tougher, some heat and water resistance)">PETG (tougher, some heat and water resistance)</option>
-              <option value="TPU (flexible)">TPU (flexible)</option>
-              <option value="ABS or ASA (strong, outdoor)">ABS or ASA (strong, outdoor)</option>
-            </select>
-          </label>
-          <label>Print quality
-            <select id="pQual">
-              <option value="Standard">Standard</option>
-              <option value="Draft (faster, rougher layers)">Draft (faster, rougher layers)</option>
-              <option value="Fine detail (slower, smoother)">Fine detail (slower, smoother)</option>
-            </select>
-          </label>
-        </fieldset>
-        <fieldset>
-          <legend>4. How will it be used?</legend>
-          <label>Main use
-            <select id="pUse">
-              <option value="Display or decor">Display or decor</option>
-              <option value="Functional part">Functional part</option>
-              <option value="Needs to hold weight or take stress">Needs to hold weight or take stress</option>
-              <option value="Used outdoors or in heat">Used outdoors or in heat</option>
-              <option value="Prototype or test fit">Prototype or test fit</option>
-              <option value="Gift or keepsake">Gift or keepsake</option>
-            </select>
-          </label>
-          <label>Will it touch food or drinks?
-            <select id="pFood"><option value="No">No</option><option value="Yes (we will talk about options)">Yes</option></select>
-          </label>
-          <label>Finish
-            <select id="pFin">
-              <option value="As printed">As printed</option>
-              <option value="Sanded smooth">Sanded smooth</option>
-              <option value="Painted (we will ask about colors)">Painted</option>
-              <option value="Not sure">Not sure</option>
-            </select>
-          </label>
-        </fieldset>
-      </div>
-
       <!-- SHARED -->
       <fieldset>
-        <legend id="upTitle">Artwork or logo</legend>
-        <p class="hint" style="margin:0" id="upHint"></p>
-        <input type="file" id="files" multiple>
+        <legend>Artwork or logo (optional)</legend>
+        <p class="hint" style="margin:0">Upload a logo or picture to engrave. PNG, JPG or PDF. We also attach your preview automatically. Up to 5 files, 10 MB each.</p>
+        <input type="file" id="files" accept=".png,.jpg,.jpeg,.gif,.webp,.heic,.pdf,image/*" multiple>
         <ul class="files" id="fileList"></ul>
       </fieldset>
 
@@ -282,7 +203,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
           </select>
         </label>
         <label id="zipWrap" hidden>Delivery ZIP code <input type="text" id="zip" maxlength="10" inputmode="numeric" autocomplete="postal-code"></label>
-        <div class="eng-only" id="engOnly">
+        <div id="engOnly">
           <label>Who supplies the item?
             <select id="supply">
               <option value="We supply the item">You supply the item</option>
@@ -361,7 +282,6 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     {name:'Bold',css:"'Bebas Neue', sans-serif",family:'Bebas Neue'},
     {name:'Fun',css:"'Pacifico', cursive",family:'Pacifico'}
   ];
-  var COLORS=[['Black','#1c1c1f'],['White','#f2f2f2'],['Gray','#8b8f96'],['Red','#d83a3a'],['Orange','#f08a24'],['Yellow','#f2c52d'],['Green','#2fa65a'],['Blue','#2f6fe0'],['Purple','#7c4fe0'],['Pink','#f06ab0'],['Other','#555a66']];
   var MIN_LETTER_IN=0.12;
   /* ================================================================================== */
 
@@ -380,8 +300,6 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
   function el(tag,a,parent){var n=document.createElementNS(NS,tag);for(var k in a)n.setAttribute(k,a[k]);if(parent)parent.appendChild(n);return n}
   function lines(){return [$('#l1').value,$('#l2').value,$('#l3').value].map(function(s){return s.trim()}).filter(Boolean)}
   function say(c,t){var m=$('#msg');m.className=c;m.textContent=t}
-  function shade(hex,amt){var n=parseInt(hex.slice(1),16),r=n>>16,g=n>>8&255,b=n&255,t=amt<0?0:255,p=Math.abs(amt);
-    function m(c){return Math.round((t-c)*p+c)}return 'rgb('+m(r)+','+m(g)+','+m(b)+')'}
 
   /* ---------- engraving preview (adapted from the live engraving preview) ---------- */
   function drawProduct(p){
@@ -448,31 +366,9 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     $('#cap').textContent=p.id==='tag'?'Size is estimated from the photo. We confirm real sizes on your proof.':'Drag your text to move it. This is a visual guide, we send a proof first.';
   }
 
-  /* ---------- 3D print preview: your color on a layered part, plus the size ---------- */
-  function renderPrint(){
-    while(svg.firstChild)svg.removeChild(svg.firstChild);
-    var c=COLORS[st.color][1],d=el('defs',{},svg);
-    var g=el('linearGradient',{id:'pg',x1:0,y1:0,x2:1,y2:0},d);
-    [[0,shade(c,-.35)],[.3,shade(c,.15)],[.55,c],[1,shade(c,-.45)]].forEach(function(s){el('stop',{offset:s[0],'stop-color':s[1]},g)});
-    var cp=el('clipPath',{id:'pclip'},d);
-    var path='M205 80 C 150 140, 140 235, 190 312 L 330 312 C 380 235, 370 140, 315 80 Z';
-    el('path',{d:path},cp);
-    el('ellipse',{cx:260,cy:330,rx:190,ry:30,fill:'#2b2760',stroke:'#4a43a0','stroke-width':2},svg);
-    el('ellipse',{cx:260,cy:322,rx:150,ry:16,fill:'rgba(0,0,0,.3)'},svg);
-    el('path',{d:path,fill:'url(#pg)'},svg);
-    var grp=el('g',{'clip-path':'url(#pclip)'},svg);
-    for(var y=84;y<312;y+=6){el('line',{x1:120,x2:400,y1:y,y2:y,stroke:'rgba(0,0,0,.22)','stroke-width':1.6},grp);el('line',{x1:120,x2:400,y1:y+2.5,y2:y+2.5,stroke:'rgba(255,255,255,.07)','stroke-width':1},grp)}
-    el('ellipse',{cx:232,cy:170,rx:14,ry:70,fill:'rgba(255,255,255,.16)',transform:'rotate(8 232 170)'},grp);
-    var t=el('text',{x:260,y:390,'text-anchor':'middle','font-family':'Inter,sans-serif','font-size':15,fill:'#ece9ff'},svg);
-    t.textContent=COLORS[st.color][0]==='Other'?'Your color':COLORS[st.color][0];
-    var L=$('#pL').value,Wd=$('#pW').value,Hh=$('#pH').value,u=$('#pU').value;
-    $('#dims').textContent=(L||Wd||Hh)?'Size about '+(L||'?')+' x '+(Wd||'?')+' x '+(Hh||'?')+' '+(u==='in'?'in':'mm')+'.':'Add a size, or upload an STL file and we read it for you.';
-    $('#warn').hidden=true;
-    $('#cap').textContent='Color preview. The real shape comes from your file or your description.';
-  }
   function render(){
-    W=(st.mode==='engrave'&&PRODUCTS[st.p].photo)?400:520;H=400;svg.setAttribute('viewBox','0 0 '+W+' '+H);
-    if(st.mode==='engrave')renderEngrave();else renderPrint();
+    W=PRODUCTS[st.p].photo?400:520;H=400;svg.setAttribute('viewBox','0 0 '+W+' '+H);
+    renderEngrave();
   }
 
   /* ---------- chips and questions ---------- */
@@ -504,30 +400,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
   ['#l1','#l2','#l3'].forEach(function(s){$(s).addEventListener('input',render)});
   $('#size').addEventListener('input',function(){st.size=+this.value;render()});
   $('#center').addEventListener('click',function(){st.ox=st.oy=0;render()});
-  ['#pL','#pW','#pH','#pU'].forEach(function(s){$(s).addEventListener('input',render)});
-  (function(){
-    var box=$('#swatches');
-    COLORS.forEach(function(c,i){
-      var b=document.createElement('button');b.type='button';b.className='sw';b.style.background=c[1];b.setAttribute('aria-label',c[0]);b.title=c[0];b.setAttribute('aria-pressed',i===st.color);
-      b.addEventListener('click',function(){st.color=i;[].forEach.call(box.children,function(x,j){x.setAttribute('aria-pressed',j===i)});$('#pColorOtherWrap').hidden=c[0]!=='Other';render()});
-      box.appendChild(b);
-    });
-  })();
   renderQs();
-
-  /* ---------- mode switch ---------- */
-  function setMode(m){
-    st.mode=m;
-    $('#tabE').setAttribute('aria-selected',m==='engrave');$('#tabP').setAttribute('aria-selected',m==='print');
-    $('#engPanels').hidden=m!=='engrave';$('#prtPanels').hidden=m!=='print';$('#engOnly').hidden=m!=='engrave';
-    $('#center').hidden=m!=='engrave';$('#png').hidden=m!=='engrave';
-    $('#upTitle').textContent=m==='engrave'?'Artwork or logo (optional)':'Your 3D file (optional)';
-    $('#upHint').textContent=m==='engrave'?'Upload a logo or picture to engrave. PNG, JPG or PDF. We also attach your preview automatically. Up to 5 files, 10 MB each.':'Upload an STL, OBJ or 3MF file, or a photo or sketch of what you want. Up to 6 files, 10 MB each.';
-    $('#files').accept=m==='engrave'?'.png,.jpg,.jpeg,.gif,.webp,.heic,.pdf,image/*':'.stl,.obj,.3mf,.png,.jpg,.jpeg,.heic,.pdf,image/*';
-    files=[];renderFiles();$('#stlInfo').hidden=true;say('','');render();
-  }
-  $('#tabE').addEventListener('click',function(){setMode('engrave')});
-  $('#tabP').addEventListener('click',function(){setMode('print')});
 
   $('#when').addEventListener('change',function(){$('#dateWrap').hidden=this.value!=='By a date';$('#rushNote').hidden=this.value!=='Rush'});
   $('#deliv').addEventListener('change',function(){$('#zipWrap').hidden=this.value==='Pickup in Keyport, NJ'});
@@ -535,7 +408,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
 
   /* ---------- drag to move text ---------- */
   function pt(e){var q=svg.createSVGPoint();q.x=e.clientX;q.y=e.clientY;return q.matrixTransform(svg.getScreenCTM().inverse())}
-  svg.addEventListener('pointerdown',function(e){if(st.mode!=='engrave'||!e.target.closest('.design'))return;var q=pt(e);drag={x:q.x-st.ox,y:q.y-st.oy};svg.setPointerCapture(e.pointerId);e.preventDefault()});
+  svg.addEventListener('pointerdown',function(e){if(!e.target.closest('.design'))return;var q=pt(e);drag={x:q.x-st.ox,y:q.y-st.oy};svg.setPointerCapture(e.pointerId);e.preventDefault()});
   svg.addEventListener('pointermove',function(e){if(!drag)return;var q=pt(e);st.ox=q.x-drag.x;st.oy=q.y-drag.y;render()});
   function endDrag(){drag=null}svg.addEventListener('pointerup',endDrag);svg.addEventListener('pointercancel',endDrag);
 
@@ -572,7 +445,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     pngBlob().then(function(b){var a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='engraving-preview.png';a.click();setTimeout(function(){URL.revokeObjectURL(a.href)},1000)}).catch(function(){say('err','Could not make the preview image on this device.')});
   });
 
-  /* ---------- files, with an STL size reader for 3D printing ---------- */
+  /* ---------- files ---------- */
   var OK=/\.(png|jpe?g|gif|webp|heic|pdf|stl|obj|3mf)$/i;
   function renderFiles(){
     var ul=$('#fileList');ul.innerHTML='';
@@ -584,39 +457,14 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
       li.appendChild(s);li.appendChild(b);ul.appendChild(li);
     });
   }
-  function stlBox(buf){
-    var dv=new DataView(buf),n=buf.byteLength>=84?dv.getUint32(80,true):0,min=[1e30,1e30,1e30],max=[-1e30,-1e30,-1e30],i,j,v;
-    function add(a,b,c){var q=[a,b,c];for(var k=0;k<3;k++){if(q[k]<min[k])min[k]=q[k];if(q[k]>max[k])max[k]=q[k]}}
-    if(n>0&&buf.byteLength===84+n*50){
-      for(i=0;i<n;i++){var o=84+i*50+12;for(j=0;j<3;j++){add(dv.getFloat32(o+j*12,true),dv.getFloat32(o+j*12+4,true),dv.getFloat32(o+j*12+8,true))}}
-    }else{
-      var txt=new TextDecoder().decode(buf),re=/vertex\s+(\S+)\s+(\S+)\s+(\S+)/g,m,c=0;
-      while((m=re.exec(txt))){add(parseFloat(m[1]),parseFloat(m[2]),parseFloat(m[3]));c++}
-      if(!c)return null;
-    }
-    var d=[max[0]-min[0],max[1]-min[1],max[2]-min[2]];
-    return d.every(function(x){return isFinite(x)&&x>0})?d:null;
-  }
-  function readStl(f){
-    if(!/\.stl$/i.test(f.name))return;
-    var fr=new FileReader();
-    fr.onload=function(){
-      var d;try{d=stlBox(fr.result)}catch(e){d=null}
-      if(!d)return;
-      $('#pU').value='mm';$('#pL').value=d[0].toFixed(1);$('#pW').value=d[1].toFixed(1);$('#pH').value=d[2].toFixed(1);
-      $('#stlInfo').hidden=false;$('#stlInfo').textContent='Read from '+f.name+': about '+d[0].toFixed(1)+' x '+d[1].toFixed(1)+' x '+d[2].toFixed(1)+' mm ('+(d[0]/25.4).toFixed(2)+' x '+(d[1]/25.4).toFixed(2)+' x '+(d[2]/25.4).toFixed(2)+' in), assuming the file is in millimeters. Fix it above if that looks wrong.';
-      render();
-    };
-    fr.readAsArrayBuffer(f);
-  }
   $('#files').addEventListener('change',function(e){
     say('','');
-    var cap=st.mode==='engrave'?5:6;
+    var cap=5;
     Array.prototype.slice.call(e.target.files).forEach(function(f){
       if(!OK.test(f.name)){say('err',f.name+' is not a supported file type.');return}
       if(f.size>MAXF){say('err',f.name+' is over 10 MB.');return}
       if(files.length>=cap){say('err','Up to '+cap+' files per request.');return}
-      files.push(f);if(st.mode==='print')readStl(f);
+      files.push(f);
     });
     e.target.value='';renderFiles();
   });
@@ -625,26 +473,15 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
   function val(id){return $(id).value.trim()}
   function buildMessage(){
     var out=[],q=function(k,v){if(v)out.push(k+': '+v)};
-    if(st.mode==='engrave'){
-      var p=PRODUCTS[st.p],L=lines();
-      out.push('MOCK-UP STUDIO REQUEST: LASER ENGRAVING');
-      q('Product',p.name);
-      q('Engraving text',L.length?L.map(function(l){return '"'+l+'"'}).join(' / '):'(artwork only, see files)');
-      q('Font',FONTS[st.f].family+', alignment '+(st.align==='start'?'left':st.align==='end'?'right':'center')+', size '+st.size+'%');
-      q('Preview size and position',engSpec.size+', '+engSpec.pos);
-      out.push('--- Product questions');
-      p.qs.forEach(function(x){q(x.k,st.qa[x.k])});
-      q('Item supply',$('#supply').value);
-    }else{
-      out.push('MOCK-UP STUDIO REQUEST: 3D PRINTING');
-      q('What to print',val('#pWhat'));
-      q('3D file',$('#pFile').value);
-      var L=val('#pL'),Wd=val('#pW'),Hh=val('#pH');
-      if(L||Wd||Hh)q('Size',(L||'?')+' x '+(Wd||'?')+' x '+(Hh||'?')+' '+$('#pU').value);
-      var cn=COLORS[st.color][0];q('Color',cn==='Other'?'Other: '+(val('#pColorOther')||'not specified'):cn);
-      q('Material',$('#pMat').value);q('Print quality',$('#pQual').value);
-      q('Main use',$('#pUse').value);q('Touches food or drinks',$('#pFood').value);q('Finish',$('#pFin').value);
-    }
+    var p=PRODUCTS[st.p],L=lines();
+    out.push('MOCK-UP STUDIO REQUEST: LASER ENGRAVING');
+    q('Product',p.name);
+    q('Engraving text',L.length?L.map(function(l){return '"'+l+'"'}).join(' / '):'(artwork only, see files)');
+    q('Font',FONTS[st.f].family+', alignment '+(st.align==='start'?'left':st.align==='end'?'right':'center')+', size '+st.size+'%');
+    q('Preview size and position',engSpec.size+', '+engSpec.pos);
+    out.push('--- Product questions');
+    p.qs.forEach(function(x){q(x.k,st.qa[x.k])});
+  q('Item supply',$('#supply').value);
     out.push('--- Order');
     q('For',$('#aud').value);
     var w=$('#when').value;q('Timing',w==='By a date'?'Needed by '+($('#date').value||'(date not given)'):w);
@@ -655,19 +492,18 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
   $('#form').addEventListener('submit',async function(e){
     e.preventDefault();if(sending)return;
     var name=val('#name'),email=val('#email'),qty=String(parseInt($('#qty').value,10)||'');
-    if(st.mode==='engrave'&&!lines().length&&!files.length){say('err','Add some text to engrave, or upload your artwork.');$('#l1').focus();return}
-    if(st.mode==='print'&&!val('#pWhat')&&!files.length){say('err','Tell us what you want printed, or upload a file.');$('#pWhat').focus();return}
+    if(!lines().length&&!files.length){say('err','Add some text to engrave, or upload your artwork.');$('#l1').focus();return}
     if(!qty){say('err','Please enter how many you need.');$('#qty').focus();return}
     if($('#when').value==='By a date'&&!$('#date').value){say('err','Pick the date you need it by.');$('#date').focus();return}
     if($('#deliv').value!=='Pickup in Keyport, NJ'&&!val('#zip')){say('err','Please add your delivery ZIP code.');$('#zip').focus();return}
     if(!name){say('err','Please add your name.');$('#name').focus();return}
     if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){say('err','Please enter a valid email.');$('#email').focus();return}
-    var item=st.mode==='engrave'?PRODUCTS[st.p].name+' (custom engraving)':'3D print: '+(val('#pWhat').slice(0,80)||'see files');
+    var item=PRODUCTS[st.p].name+' (custom engraving)';
     var send=files.slice();
     var btn=$('#send');sending=true;btn.disabled=true;say('ok','Preparing...');
     try{
-      if(st.mode==='engrave'){try{var pb=await pngBlob();pb.name='engraving-preview.png';send.push(pb)}catch(x){}}
-      var payload={name:name,phone:val('#phone'),email:email,need:[st.mode==='engrave'?'Laser Engraving':'3D Printing'],audience:$('#aud').value,quantity:qty,needed_by:$('#when').value==='By a date'?$('#date').value:'',item:item.slice(0,150),message:buildMessage(),heard:'',website:$('#hp').value,file_count:send.length};
+      try{var pb=await pngBlob();pb.name='engraving-preview.png';send.push(pb)}catch(x){}
+      var payload={name:name,phone:val('#phone'),email:email,need:['Laser Engraving'],audience:$('#aud').value,quantity:qty,needed_by:$('#when').value==='By a date'?$('#date').value:'',item:item.slice(0,150),message:buildMessage(),heard:'',website:$('#hp').value,file_count:send.length};
       say('ok','Sending...');
       var r=await fetch('/api/quote',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
       var j=await r.json().catch(function(){return{}});
@@ -682,7 +518,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
       }
       var dr=await fetch('/api/quote/'+j.id+'/done?token='+encodeURIComponent(j.token),{method:'POST'});
       if(!dr.ok)throw new Error('We saved your request but could not finish sending it. Please text 908-248-2374 so we know it came through.');
-      $('#form').reset();files=[];renderFiles();$('#stlInfo').hidden=true;$('#dateWrap').hidden=true;$('#zipWrap').hidden=true;$('#rushNote').hidden=true;renderQs();render();
+      $('#form').reset();files=[];renderFiles();$('#dateWrap').hidden=true;$('#zipWrap').hidden=true;$('#rushNote').hidden=true;renderQs();render();
       say('ok','Request sent. Thanks, '+name.split(/\s+/)[0]+'! Check your email for a confirmation. We will reply with a proof and a quote.'+(failed.length?' These files did not upload: '+failed.join(', ')+'. Please text or email them to us.':''));
       $('#msg').scrollIntoView({block:'center',behavior:'smooth'});
     }catch(err){say('err',err.message||'Something went wrong. Please text 908-248-2374.')}
@@ -692,7 +528,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
   /* ---------- start ---------- */
   var qp=new URLSearchParams(location.search),want=qp.get('p');
   if(want){PRODUCTS.forEach(function(p,i){if(p.id===want)st.p=i});chips($('#products'),PRODUCTS,function(i){return i===st.p},function(i){st.p=i;st.ox=st.oy=0;renderQs()});renderQs()}
-  setMode(qp.get('tab')==='print'?'print':'engrave');
+  render();
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(render);
 })();
 </script>
