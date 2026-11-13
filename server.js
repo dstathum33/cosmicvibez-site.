@@ -513,6 +513,7 @@ async function handle(req, res) {
   if (pathRaw === '/healthz') return text(res, 200, 'ok');
   if (pathRaw.startsWith('/api/')) return api(req, res, pathRaw, query);
   if (pathRaw === '/text' && req.method === 'GET') return textPage(res, query);
+  if (pathRaw === '/llms.txt') return text(res, 200, '# Cosmic Vibez Creations\n\n> Custom laser engraving in Keyport, New Jersey. Personalized gifts, bulk business orders, awards and branded merchandise on wood, metal, leather, acrylic and slate.\n\n- Phone: 908-248-2374\n- Location: Keyport, NJ 07735\n- Quotes are free and no obligation. Pricing depends on item, size and design.\n\n## Pages\n- ' + c.siteUrl + '/: Services, FAQ and free quote request\n- ' + c.siteUrl + '/shop: Customizable products\n- ' + c.siteUrl + '/studio: Mock-up studio to preview an engraving and request a quote\n- ' + c.siteUrl + '/policies: Store policies\n');
   if (pathRaw === '/robots.txt') return text(res, 200, 'User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: ' + c.siteUrl + '/sitemap.xml\n');
   if (pathRaw === '/sitemap.xml') {
     return text(res, 200, '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>' + c.siteUrl + '/</loc></url>\n<url><loc>' + c.siteUrl + '/shop</loc></url>\n<url><loc>' + c.siteUrl + '/studio</loc></url>\n<url><loc>' + c.siteUrl + '/policies</loc></url>\n</urlset>\n', 'application/xml; charset=utf-8');
