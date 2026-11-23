@@ -38,12 +38,15 @@
     e.preventDefault();
     if (sending) return;
     var name = $('#qName').value.trim(), email = $('#qEmail').value.trim(), msg = $('#qMsg').value.trim();
-    if (!name) { say('err', 'Please add your name.'); $('#qName').focus(); return; }
-    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) { say('err', 'Please enter a valid email.'); $('#qEmail').focus(); return; }
     var svcBoxes = Array.prototype.slice.call(document.querySelectorAll('input[name=svc]'));
     var svc = svcBoxes.filter(function (b) { return b.checked; }).map(function (b) { return b.value; });
-    if (svcBoxes.length && !svc.length) { say('err', 'Please pick at least one service.'); return; }
-    if (!msg) { say('err', 'Tell us a little about what you want.'); $('#qMsg').focus(); return; }
+    var bad = [];
+    if (!name) bad.push([$('#qName'), 'Name: please add your name.']);
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) bad.push([$('#qEmail'), 'Email: enter an address like name@example.com.']);
+    if (svcBoxes.length && !svc.length) bad.push([$('#qSvc'), 'Which service: pick at least one.']);
+    if (!msg) bad.push([$('#qMsg'), 'Tell us about it: add a sentence about what you want.']);
+    if (bad.length) { CV.show(form, bad, $('#formMsg')); return; }
+    CV.clear(form, $('#formMsg'));
     var aud = $('input[name=audience]:checked');
     var item = $('#qItem').value.trim();
     if (svc.length) item = (svc.join(', ') + (item ? ': ' + item : '')).slice(0, 150);
@@ -68,7 +71,7 @@
       }
       var dr = await fetch('/api/quote/' + j.id + '/done?token=' + encodeURIComponent(j.token), { method: 'POST' });
       if (!dr.ok) throw new Error('We saved your request but could not finish sending it. Please text 908-248-2374 so we know it came through.');
-      form.reset(); files = []; renderFiles();
+      form.reset(); CV.clearDraft(form); files = []; renderFiles();
       var first = name.split(/\s+/)[0];
       say('ok', 'Request sent. Thanks, ' + first + '! Check your email for a confirmation. We will reply with your free quote.' + (failed.length ? ' These files did not upload: ' + failed.join(', ') + '. Please text or email them to us.' : ''));
       $('#formMsg').scrollIntoView({ block: 'center', behavior: reduce ? 'auto' : 'smooth' });

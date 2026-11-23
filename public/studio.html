@@ -4,9 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark only">
-<title>Mock-Up Studio: Custom Laser Engraving | Cosmic Vibez Creations</title>
-<meta name="description" content="Preview your custom laser engraving, answer a few quick questions, and Cosmic Vibez Creations in Keyport, NJ sends you a proof and quote.">
+<title>Engraving Mock-Up Studio | Cosmic Vibez Creations</title>
+<meta name="description" content="Preview your custom laser engraving, answer a few quick questions, and Cosmic Vibez Creations in Keyport, NJ sends you a proof and a free, no-obligation quote.">
 <link rel="canonical" href="https://cosmicvibezcreations.com/studio">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Engraving Mock-Up Studio | Cosmic Vibez Creations">
+<meta property="og:description" content="Preview your custom laser engraving, answer a few quick questions, and Cosmic Vibez Creations in Keyport, NJ sends you a proof and a free, no-obligation quote.">
+<meta property="og:url" content="https://cosmicvibezcreations.com/studio">
+<meta property="og:image" content="https://cosmicvibezcreations.com/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
 <link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -120,18 +127,19 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
 [hidden]{display:none!important}
 #nudge{font-size:14px;color:var(--muted);margin:0 0 4px}
 </style>
+<link rel="stylesheet" href="/ux.css">
 </head>
 <body>
+<script src="/ux.js"></script>
 <header class="nav">
   <div class="wrap">
-    <a class="brand" href="/" aria-label="Cosmic Vibez Creations home"><img class="brand-icon" src="/logo-icon.png" width="44" height="43" alt=""><img class="brand-word" src="/logo-wordmark.png" width="177" height="28" alt="Cosmic Vibez Creations"></a>
-    <div class="r"><a class="btn ghost" href="/">Home</a><a class="btn ghost" href="/shop">Shop</a><a class="btn" href="/#quote">Free Quote</a></div>
+    <a class="brand" href="/" aria-label="Cosmic Vibez Creations home"><picture><source srcset="/logo-icon.webp" type="image/webp"><img class="brand-icon" src="/logo-icon.png" width="44" height="43" alt=""></picture><picture><source srcset="/logo-wordmark.webp" type="image/webp"><img class="brand-word" src="/logo-wordmark.png" width="177" height="28" alt="Cosmic Vibez Creations"></picture></a>
+    <div class="r"><a class="btn ghost" href="/">Home</a><a class="btn ghost" href="/shop">Shop</a><a class="btn" href="/#quote">Get a Free Quote</a></div>
   </div>
 </header>
 <main class="wrap">
   <div class="head">
-    <span class="eyebrow">Mock-Up Studio</span>
-    <h1>Design it, then send it to us</h1>
+<h1>Design it, then send it to us</h1>
     <p class="lead">Preview your engraving, answer a few quick questions, and we reply with a proof and a quote. Nothing is charged until you approve.</p>
   </div>
 
@@ -228,7 +236,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
       </fieldset>
 
       <div class="hp" aria-hidden="true"><label>Website<input type="text" id="hp" tabindex="-1" autocomplete="off"></label></div>
-      <button class="btn" type="submit" id="send">Send my design</button>
+      <button class="btn" type="submit" id="send">Get a Free Quote</button>
       <p id="msg" role="status" aria-live="polite"></p>
       <p class="hint">Nothing is made or charged yet. We review it, send a proof and a secure payment link, and start once you approve and pay. Details are on our <a href="/policies">Store Policies</a>. The preview is a visual guide, not a final cut file.</p>
     </form>
@@ -240,6 +248,8 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     <span>Laser Engraving &bull; 3D Printing</span>
     <span style="display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center"><a href="/wood-engraving">Wood Engraving</a><a href="/metal-engraving">Metal Engraving</a><a href="/drinkware-engraving">Tumblers &amp; Drinkware</a><a href="/name-plates">Name Plates &amp; Signs</a><a href="/3d">3D Printing, Modeling &amp; Scanning</a><a href="/engraving-keyport-nj">Engraving in Keyport, NJ</a></span>
     <span><a href="https://maps.google.com/?q=Keyport%2C%20NJ%2007735" target="_blank" rel="noopener">Keyport, NJ 07735</a> &bull; <a href="/">Home</a> &bull; <a href="/shop">Shop</a> &bull; <a href="/policies">Store Policies</a></span>
+    <span>Pickup in Keyport by appointment &bull; <a href="tel:+19082482374">Call or text 908-248-2374</a></span>
+    <span><a href="mailto:Cosmicvibezcreations@gmail.com">Cosmicvibezcreations@gmail.com</a></span>
     <span>&copy; 2023 CosmicVibezCreations LLC</span>
   </div>
 </footer>
@@ -509,12 +519,15 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
   $('#form').addEventListener('submit',async function(e){
     e.preventDefault();if(sending)return;
     var name=val('#name'),email=val('#email'),qty=String(parseInt($('#qty').value,10)||'');
-    if(!lines().length&&!files.length){say('err','Add some text to engrave, or upload your artwork.');$('#l1').focus();return}
-    if(!qty){say('err','Please enter how many you need.');$('#qty').focus();return}
-    if($('#when').value==='By a date'&&!$('#date').value){say('err','Pick the date you need it by.');$('#date').focus();return}
-    if($('#deliv').value!=='Pickup in Keyport, NJ'&&!val('#zip')){say('err','Please add your delivery ZIP code.');$('#zip').focus();return}
-    if(!name){say('err','Please add your name.');$('#name').focus();return}
-    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)){say('err','Please enter a valid email.');$('#email').focus();return}
+    var bad=[];
+    if(!lines().length&&!files.length)bad.push([$('#l1'),'Line 1: add some text to engrave, or upload your artwork.']);
+    if(!qty)bad.push([$('#qty'),'How many: enter a number, such as 1.']);
+    if($('#when').value==='By a date'&&!$('#date').value)bad.push([$('#date'),'Needed by: pick the date you need it by.']);
+    if($('#deliv').value!=='Pickup in Keyport, NJ'&&!val('#zip'))bad.push([$('#zip'),'Delivery ZIP code: add the ZIP we should deliver to.']);
+    if(!name)bad.push([$('#name'),'Name: please add your name.']);
+    if(!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email))bad.push([$('#email'),'Email: enter an address like name@example.com.']);
+    if(bad.length){CV.show($('#form'),bad,$('#msg'));return}
+    CV.clear($('#form'),$('#msg'));
     var item=PRODUCTS[st.p].name+' (custom engraving)';
     var send=files.slice();
     var btn=$('#send');sending=true;btn.disabled=true;say('ok','Preparing...');
@@ -535,7 +548,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
       }
       var dr=await fetch('/api/quote/'+j.id+'/done?token='+encodeURIComponent(j.token),{method:'POST'});
       if(!dr.ok)throw new Error('We saved your request but could not finish sending it. Please text 908-248-2374 so we know it came through.');
-      $('#form').reset();files=[];renderFiles();$('#dateWrap').hidden=true;$('#zipWrap').hidden=true;$('#rushNote').hidden=true;renderQs();render();
+      $('#form').reset();CV.clearDraft($('#form'));files=[];renderFiles();$('#dateWrap').hidden=true;$('#zipWrap').hidden=true;$('#rushNote').hidden=true;renderQs();render();
       say('ok','Request sent. Thanks, '+name.split(/\s+/)[0]+'! Check your email for a confirmation. We will reply with a proof and a quote.'+(failed.length?' These files did not upload: '+failed.join(', ')+'. Please text or email them to us.':''));
       $('#msg').scrollIntoView({block:'center',behavior:'smooth'});
     }catch(err){say('err',err.message||'Something went wrong. Please text 908-248-2374.')}

@@ -1,0 +1,45 @@
+/* Shared usability layer: tap targets, phone bar, form errors, press feedback, reduced motion. */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:48px;text-align:center}
+.chip{min-height:48px}
+.chip span{display:inline-flex;align-items:center;min-height:48px}
+.sw{width:48px;height:48px}
+.burger{min-width:48px;min-height:48px}
+input:not([type=checkbox]):not([type=radio]):not([type=file]):not([type=range]),select,textarea{min-height:48px}
+summary{min-height:48px;display:flex;align-items:center}
+footer a{display:inline-flex;align-items:center;min-height:48px;padding:0 6px}
+.more a{display:inline-flex;align-items:center;min-height:48px}
+.eyebrow{display:none}
+h1,h2,h3{text-wrap:balance}
+.lead,.hero p{text-wrap:pretty}
+
+/* press and hover feedback */
+.btn,.chip span,.chip,.more a,.card{transition:transform .15s ease,border-color .15s ease,box-shadow .15s ease,filter .15s ease}
+.btn:hover{filter:brightness(1.08)}
+.btn:active,.chip:active,.chip:active span,.more a:active{transform:scale(.97)}
+
+/* field errors: under the field, named, with a summary line */
+.ferr{color:#ff9cc4;font-size:14px;margin:6px 0 0;display:flex;gap:6px;align-items:flex-start}
+.ferr::before{content:"!";flex:none;display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#ff9cc4;color:#0a0919;font:800 12px/1 Inter,sans-serif;margin-top:2px}
+[aria-invalid="true"]{border-color:#ff9cc4!important}
+.chips[aria-invalid="true"]{outline:1.5px solid #ff9cc4;outline-offset:6px;border-radius:12px}
+
+/* phone bar: call, text and the main action in one tap */
+.cvbar{display:none}
+@media(max-width:860px){
+  .cvbar{display:grid;grid-template-columns:1fr 1fr 1.7fr;gap:8px;position:fixed;left:0;right:0;bottom:0;z-index:55;padding:10px 12px calc(10px + env(safe-area-inset-bottom));background:rgba(10,9,25,.96);border-top:1px solid var(--line,#2c2762)}
+  .cvbar .btn{padding:0 8px;font-size:14px;white-space:nowrap}
+  body{padding-bottom:78px}
+  .pickbar{bottom:88px!important}
+  .side{order:-1}
+}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .btn:active,.chip:active,.chip:active span,.more a:active{transform:none}
+}
+.brand{min-height:48px}
+footer a{min-width:48px;justify-content:center}
+input[type=range],input[type=file]{min-height:48px}
+.links a:not(.btn){display:inline-flex;align-items:center;min-height:48px}
+.cvbar .btn.ghost{background:var(--panel,#15122f)}
+@media(max-width:860px){.nav .r .btn:not(.ghost){display:none}}
