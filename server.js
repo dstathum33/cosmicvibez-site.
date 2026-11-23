@@ -474,12 +474,31 @@ function textPage(res, query) {
   text(res, 200, html, 'text/html; charset=utf-8');
 }
 
+/* old Wix addresses that Google may still list, mapped to their new home */
+const OLD_URLS = {
+  '/laser-engraving': '/', '/3d-printing': '/3d', '/store-policies': '/policies', '/galley': '/shop', '/gallery': '/shop',
+};
+/* public pages: [path, file, short description for llms.txt] */
+const PAGES = [
+  ['/', '/index.html', 'Services, FAQ and free quote request'],
+  ['/shop', '/shop.html', 'Customizable products'],
+  ['/studio', '/studio.html', 'Mock-up studio to preview an engraving and request a quote'],
+  ['/wood-engraving', '/wood-engraving.html', 'Custom wood engraving: cutting boards, signs, gifts'],
+  ['/metal-engraving', '/metal-engraving.html', 'Custom metal engraving and marking'],
+  ['/drinkware-engraving', '/drinkware-engraving.html', 'Engraved tumblers and drinkware'],
+  ['/name-plates', '/name-plates.html', 'Engraved name plates, plaques and signs'],
+  ['/engraving-keyport-nj', '/engraving-keyport-nj.html', 'Laser engraving near Keyport, Monmouth County, NJ'],
+  ['/3d', '/3d.html', '3D printing, 3D modeling and 3D scanning'],
+  ['/policies', '/policies.html', 'Store policies'],
+];
+
 function serveStatic(req, res, pathRaw) {
   if (req.method !== 'GET' && req.method !== 'HEAD') return text(res, 405, 'Method not allowed');
   let p;
   try { p = decodeURIComponent(pathRaw); } catch (e) { return text(res, 400, 'Bad request'); }
   if (p.includes('\0')) return text(res, 400, 'Bad request');
-  const map = { '/': '/index.html', '/policies': '/policies.html', '/shop': '/shop.html', '/studio': '/studio.html', '/customize': '/studio.html', '/admin': '/admin.html', '/admin/': '/admin.html' };
+  const map = { '/customize': '/studio.html', '/admin': '/admin.html', '/admin/': '/admin.html' };
+  for (const pg of PAGES) map[pg[0]] = pg[1];
   p = map[p] || p;
   if (p.split('/').some((seg) => seg.startsWith('.'))) return text(res, 404, 'Not found');
   const abs = path.resolve(PUBLIC, '.' + p);
@@ -511,12 +530,17 @@ async function handle(req, res) {
   const pathRaw = qi < 0 ? req.url : req.url.slice(0, qi);
   const query = new URLSearchParams(qi < 0 ? '' : req.url.slice(qi + 1));
   if (pathRaw === '/healthz') return text(res, 200, 'ok');
+  const moved = OLD_URLS[pathRaw.replace(/\/+$/, '').toLowerCase()];
+  if (moved && (req.method === 'GET' || req.method === 'HEAD')) {
+    res.writeHead(301, { Location: c.siteUrl + moved });
+    return res.end();
+  }
   if (pathRaw.startsWith('/api/')) return api(req, res, pathRaw, query);
   if (pathRaw === '/text' && req.method === 'GET') return textPage(res, query);
-  if (pathRaw === '/llms.txt') return text(res, 200, '# Cosmic Vibez Creations\n\n> Custom laser engraving in Keyport, New Jersey. Personalized gifts, bulk business orders, awards and branded merchandise on wood, metal, leather, acrylic and slate.\n\n- Phone: 908-248-2374\n- Location: Keyport, NJ 07735\n- Quotes are free and no obligation. Pricing depends on item, size and design.\n\n## Pages\n- ' + c.siteUrl + '/: Services, FAQ and free quote request\n- ' + c.siteUrl + '/shop: Customizable products\n- ' + c.siteUrl + '/studio: Mock-up studio to preview an engraving and request a quote\n- ' + c.siteUrl + '/policies: Store policies\n');
+  if (pathRaw === '/llms.txt') return text(res, 200, '# Cosmic Vibez Creations\n\n> Custom laser engraving in Keyport, New Jersey. Personalized gifts, bulk business orders, awards and branded merchandise on wood, metal, leather, acrylic and slate.\n\n- Phone: 908-248-2374\n- Location: Keyport, NJ 07735\n- Quotes are free and no obligation. Pricing depends on item, size and design.\n- Also offers 3D printing, 3D modeling and 3D scanning (see /3d).\n\n## Pages\n' + PAGES.map((pg) => '- ' + c.siteUrl + pg[0] + ': ' + pg[2]).join('\n') + '\n');
   if (pathRaw === '/robots.txt') return text(res, 200, 'User-agent: *\nAllow: /\nDisallow: /admin\nDisallow: /api/\nSitemap: ' + c.siteUrl + '/sitemap.xml\n');
   if (pathRaw === '/sitemap.xml') {
-    return text(res, 200, '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n<url><loc>' + c.siteUrl + '/</loc></url>\n<url><loc>' + c.siteUrl + '/shop</loc></url>\n<url><loc>' + c.siteUrl + '/studio</loc></url>\n<url><loc>' + c.siteUrl + '/policies</loc></url>\n</urlset>\n', 'application/xml; charset=utf-8');
+    return text(res, 200, '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + PAGES.map((pg) => '<url><loc>' + c.siteUrl + (pg[0] === '/' ? '/' : pg[0]) + '</loc></url>').join('\n') + '\n</urlset>\n', 'application/xml; charset=utf-8');
   }
   return serveStatic(req, res, pathRaw);
 }
