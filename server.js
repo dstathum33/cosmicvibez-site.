@@ -124,19 +124,20 @@ loadQuotes();
 /* ---------- Mock-Up Studio prices (edited in /admin/prices, kept on the disk) ---------- */
 const PRICES_FILE = path.join(DATA_DIR, 'prices.json');
 /* The products, their size question and answers, and the default size breakpoints (square inches).
-   Prices start blank: a blank price means the customer sees "we'll reply with your quote". */
+   A blank price means the customer sees "we'll reply with your quote" and gets no Buy now button. */
 const PRICE_DEFAULTS = {
-  tag: { name: 'Leather Keychain Tag', q: null, items: ['_base'], tiers: [0.4, 0.7, 1.1] },
-  board: { name: 'Cutting Board', q: 'Board size', items: ['Small (about 8 x 6 in)', 'Medium (about 11 x 8 in)', 'Large (about 15 x 11 in)'], tiers: [5, 12, 24, 40] },
-  coaster: { name: 'Slate Coaster', q: 'Set size', items: ['Single coaster', 'Set of 4', 'Set of 6'], tiers: [2, 4, 6, 8] },
-  tumbler: { name: '20 oz Tumbler', q: 'Tumbler size', items: ['20 oz', '30 oz', '40 oz'], tiers: [2, 4, 6, 9.5] },
-  sign: { name: 'Acrylic Sign', q: 'Thickness', items: ['1/8 inch', '1/4 inch'], tiers: [8, 20, 40, 60] },
-  patch: { name: 'Leather Patch', q: null, items: ['_base'], tiers: [1, 2, 3.5, 4.6] },
+  tag: { name: 'Leather Keychain Tag', q: null, items: ['_base'], tiers: [0.4, 0.7, 1.1], seed: { _base: 25 } },
+  board: { name: 'Cutting Board', q: 'Board size', items: ['Small (about 8 x 6 in)', 'Medium (about 11 x 8 in)', 'Large (about 15 x 11 in)'], tiers: [5, 12, 24, 40], seed: { 'Small (about 8 x 6 in)': 20, 'Medium (about 11 x 8 in)': 35, 'Large (about 15 x 11 in)': 50 } },
+  coaster: { name: 'Slate Coaster', q: 'Set size', items: ['Single coaster', 'Set of 4', 'Set of 6'], tiers: [2, 4, 6, 8], seed: { 'Single coaster': 5, 'Set of 4': 15, 'Set of 6': 25 } },
+  tumbler: { name: '20 oz Tumbler', q: 'Tumbler size', items: ['20 oz', '30 oz', '40 oz'], tiers: [2, 4, 6, 9.5], seed: { '20 oz': 25, '30 oz': 40, '40 oz': 50 } },
+  sign: { name: 'Acrylic Sign', q: 'Sign size', items: ['4 x 4 in', '6 x 6 in', '8 x 8 in', '8 x 10 in', '12 x 8 in'], tiers: [8, 20, 40, 60], seed: { '4 x 4 in': 20, '6 x 6 in': 35, '8 x 8 in': 50, '8 x 10 in': 50, '12 x 8 in': 100 } },
+  patch: { name: 'Leather Patch', q: null, items: ['_base'], tiers: [1, 2, 3.5, 4.6], seed: { _base: 25 } },
 };
+/* Starting prices come from the owner. Prices are all-in (the size add-on starts at $0) and can be changed in /admin/prices. */
 function defaultPrices() {
   const o = {};
   for (const [id, d] of Object.entries(PRICE_DEFAULTS)) {
-    o[id] = { items: Object.fromEntries(d.items.map((k) => [k, ''])), tiers: d.tiers.map((u) => ({ upTo: u, add: '' })) };
+    o[id] = { items: Object.fromEntries(d.items.map((k) => [k, d.seed[k] === undefined ? '' : d.seed[k]])), tiers: d.tiers.map((u) => ({ upTo: u, add: 0 })) };
   }
   return o;
 }
@@ -153,7 +154,7 @@ function sanitizePrices(input) {
     const p = src[id] || {};
     const items = {};
     for (const k of d.items) items[k] = cleanPrice(p.items && p.items[k]);
-    let tiers = Array.isArray(p.tiers) && p.tiers.length ? p.tiers : d.tiers.map((u) => ({ upTo: u, add: '' }));
+    let tiers = Array.isArray(p.tiers) && p.tiers.length ? p.tiers : d.tiers.map((u) => ({ upTo: u, add: 0 }));
     if (tiers.length > 8) throw httpErr(400, d.name + ' can have up to 8 size steps.');
     let last = 0;
     tiers = tiers.map((t) => {
@@ -295,9 +296,9 @@ function verifyStripe(raw, header, secret) {
 }
 function markPaid(s) {
   const qid = s.metadata && s.metadata.quote_id;
-  const q = quotes.find((x) => x.id === qid) || quotes.find((x) => x.payments.some((pm) => pm.id === s.payment_link));
+  const q = quotes.find((x) => x.id === qid) || quotes.find((x) => x.payments.some((pm) => pm.id === s.id || pm.id === s.payment_link));
   if (!q) return;
-  const pay = q.payments.find((pm) => pm.id === s.payment_link) || q.payments.find((pm) => !pm.paid_at && pm.amount_cents === s.amount_total);
+  const pay = q.payments.find((pm) => pm.id === s.id || pm.id === s.payment_link) || q.payments.find((pm) => !pm.paid_at && pm.amount_cents === s.amount_total);
   if (!pay || pay.paid_at) return;
   pay.paid_at = nowIso(); pay.session = s.id;
   if (q.status !== 'completed' && q.status !== 'cancelled') q.status = q.payments.every((x) => x.paid_at) ? 'paid' : 'in_progress';
@@ -394,6 +395,52 @@ async function postDone(req, res, id, query) {
   if (!q.done) { q.done = true; q.updated = nowIso(); saveQuotes(); }
   await notify(q, false);
   json(res, 200, { ok: true });
+}
+
+/* Buy now: the server works out the price from the saved price list (never from the browser), then opens a Stripe Checkout page. */
+function buyPrice(b) {
+  const id = String(b.product || '');
+  const d = PRICE_DEFAULTS[id];
+  if (!d) throw httpErr(400, 'Pick a product first.');
+  const key = d.q ? String((b.answers && b.answers[d.q]) || '') : '_base';
+  const item = prices[id].items[key];
+  if (item === '' || item === undefined) throw httpErr(400, 'That size needs a quote. Please use Get a Free Quote.');
+  const area = Math.min(1000, Math.max(0.01, Number(b.area) || 0.01));
+  const t = prices[id].tiers.find((x) => area <= x.upTo) || prices[id].tiers[prices[id].tiers.length - 1];
+  const each = Math.round((item + (t && t.add !== '' ? t.add : 0)) * 100);
+  const qty = Number(b.quantity);
+  if (!Number.isInteger(qty) || qty < 1 || qty > 50) throw httpErr(400, 'Buy now is for 1 to 50 items. For more, please use Get a Free Quote.');
+  if (each < 50 || each * qty > 500000) throw httpErr(400, 'Please use Get a Free Quote for this one.');
+  return { each, qty, total: each * qty, name: d.name + (key && key !== '_base' ? ' (' + key + ')' : '') };
+}
+async function postBuy(req, res, id, query) {
+  if (id === '0') { req.resume(); return json(res, 200, { ok: true, url: null }); }
+  const q = authedQuote(id, query);
+  const b = await readJson(req, 4096);
+  if (!allow('buy-ip:' + getIp(req), 10, HOUR)) throw httpErr(429, 'Too many tries. Please text ' + PHONE_DISPLAY + '.');
+  const pr = buyPrice(b);
+  if (!q.done) {
+    q.done = true;
+    q.message = (q.message + '\n--- BUY NOW: customer chose to pay ' + money(pr.total) + ' (' + pr.qty + ' x ' + money(pr.each) + ') at checkout.').slice(0, 4300);
+    q.updated = nowIso(); saveQuotes();
+  }
+  await notify(q, false);
+  if (!env('STRIPE_SECRET_KEY')) return json(res, 200, { ok: true, url: null });
+  const c = C();
+  let s;
+  try {
+    s = await stripePost('checkout/sessions', {
+      mode: 'payment', 'line_items[0][quantity]': String(pr.qty), 'line_items[0][price_data][currency]': 'usd',
+      'line_items[0][price_data][unit_amount]': String(pr.each), 'line_items[0][price_data][product_data][name]': 'Cosmic Vibez Creations: ' + pr.name + ' (Quote #' + q.num + ')',
+      customer_email: q.email, 'metadata[quote_id]': q.id, 'metadata[quote_num]': String(q.num),
+      success_url: c.siteUrl + '/paid.html', cancel_url: c.siteUrl + '/studio',
+    });
+  } catch (e) { return json(res, 200, { ok: true, url: null }); }
+  if (!/^https:\/\//.test(String(s.url || ''))) return json(res, 200, { ok: true, url: null });
+  q.payments.push({ id: s.id, url: s.url, amount_cents: pr.total, label: 'Buy now: ' + pr.name + ' x' + pr.qty, created: nowIso(), paid_at: null });
+  if (['new', 'in_progress', 'quoted'].includes(q.status)) q.status = 'awaiting_payment';
+  q.updated = nowIso(); saveQuotes();
+  json(res, 200, { ok: true, url: s.url });
 }
 
 async function createPayLink(req, res, q) {
@@ -518,10 +565,10 @@ async function adminApi(req, res, p, query) {
 async function api(req, res, p, query) {
   const m = req.method;
   if (p.startsWith('/api/admin/')) return adminApi(req, res, p, query);
-  if (m === 'GET' && p === '/api/prices') return json(res, 200, { products: prices });
+  if (m === 'GET' && p === '/api/prices') return json(res, 200, { products: prices, buy: !!env('STRIPE_SECRET_KEY') });
   if (m === 'POST' && p === '/api/quote') return postQuote(req, res);
-  let mm = /^\/api\/quote\/([a-f0-9]{10}|0)\/(files|done)$/.exec(p);
-  if (m === 'POST' && mm) return mm[2] === 'files' ? postFile(req, res, mm[1], query) : postDone(req, res, mm[1], query);
+  let mm = /^\/api\/quote\/([a-f0-9]{10}|0)\/(files|done|buy)$/.exec(p);
+  if (m === 'POST' && mm) return mm[2] === 'files' ? postFile(req, res, mm[1], query) : mm[2] === 'buy' ? postBuy(req, res, mm[1], query) : postDone(req, res, mm[1], query);
   if (m === 'POST' && p === '/api/stripe/webhook') return webhook(req, res);
   throw httpErr(404, 'Not found.');
 }
@@ -555,6 +602,8 @@ const PAGES = [
   ['/engraving-keyport-nj', '/engraving-keyport-nj.html', 'Laser engraving near Keyport, Monmouth County, NJ'],
   ['/3d', '/3d.html', '3D printing, 3D modeling and 3D scanning'],
   ['/policies', '/policies.html', 'Store policies'],
+  ['/terms', '/terms.html', 'Terms of agreement for orders'],
+  ['/privacy', '/privacy.html', 'Privacy policy'],
 ];
 
 function serveStatic(req, res, pathRaw) {
