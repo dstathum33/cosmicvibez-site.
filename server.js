@@ -275,7 +275,7 @@ async function sweep() {
 
 /* ---------- Stripe ---------- */
 async function stripePost(p, params) {
-  const key = env('STRIPE_SECRET_KEY');
+  const key = String(env('STRIPE_SECRET_KEY', '')).trim().replace(/^["']|["']$/g, '');
   if (!key) throw httpErr(503, 'Stripe is not connected yet. Add STRIPE_SECRET_KEY on the server.');
   const r = await fetch('https://api.stripe.com/v1/' + p, {
     method: 'POST', headers: { Authorization: 'Bearer ' + key, 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -435,8 +435,8 @@ async function postBuy(req, res, id, query) {
       customer_email: q.email, 'metadata[quote_id]': q.id, 'metadata[quote_num]': String(q.num),
       success_url: c.siteUrl + '/paid.html', cancel_url: c.siteUrl + '/studio',
     });
-  } catch (e) { return json(res, 200, { ok: true, url: null }); }
-  if (!/^https:\/\//.test(String(s.url || ''))) return json(res, 200, { ok: true, url: null });
+  } catch (e) { console.error('Stripe checkout failed for quote #' + q.num + ':', e.message); return json(res, 200, { ok: true, url: null }); }
+  if (!/^https:\/\//.test(String(s.url || ''))) { console.error('Stripe returned no checkout URL for quote #' + q.num); return json(res, 200, { ok: true, url: null }); }
   q.payments.push({ id: s.id, url: s.url, amount_cents: pr.total, label: 'Buy now: ' + pr.name + ' x' + pr.qty, created: nowIso(), paid_at: null });
   if (['new', 'in_progress', 'quoted'].includes(q.status)) q.status = 'awaiting_payment';
   q.updated = nowIso(); saveQuotes();
