@@ -17,7 +17,7 @@
 <link rel="icon" href="/favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&family=Great+Vibes&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Bebas+Neue&family=Pacifico&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600&family=Great+Vibes&family=Playfair+Display:wght@700&family=Montserrat:wght@700&family=Bebas+Neue&family=Pacifico&family=Poppins:wght@600&family=Lobster&family=Dancing+Script:wght@700&family=Oswald:wght@500&family=Raleway:wght@700&family=Lora:wght@600&family=Cinzel:wght@700&family=Anton&family=Caveat:wght@700&family=Abril+Fatface&display=swap" rel="stylesheet">
 <style>
 :root{--space:#0a0919;--space2:#0f0d26;--panel:#15122f;--panel2:#1b1740;--line:#2c2762;--violet:#7c5cff;--cyan:#35e4e8;--pink:#ff5fa2;--gold:#ffc857;--text:#ece9ff;--muted:#a9a4d6}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -168,9 +168,12 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
           <label>Line 1 <input type="text" id="l1" maxlength="40" autocomplete="off" placeholder="Name or short text"></label>
           <label>Line 2 <small>(optional)</small><input type="text" id="l2" maxlength="40" autocomplete="off"></label>
           <label>Line 3 <small>(optional)</small><input type="text" id="l3" maxlength="40" autocomplete="off"></label>
-          <span class="sub">Font style</span>
+          <span class="sub">Font (15 to choose from)</span>
           <div class="row fontchips" id="fonts" style="margin:0"></div>
-          <label>Text size <input type="range" id="size" min="30" max="100" value="80"></label>
+          <label>Engraving size <small id="sizeOut"></small>
+            <input type="range" id="size" min="20" max="100" value="80" aria-describedby="sizeHelp"></label>
+          <p class="hint" id="sizeHelp" style="margin:0">Drag to make your engraving bigger or smaller. The size and price update as you drag.</p>
+          <p class="price" id="priceLine2" style="margin:0" aria-live="polite"></p>
           <div class="row" id="align" style="margin:0"></div>
           <p class="hint" style="margin:0">Drag the text on the preview to move it. It stays inside the engraving area.</p>
         </fieldset>
@@ -289,20 +292,26 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
          {k:'Leather color',t:'select',o:['Brown (shown)','Black','Tan']}]}
   ];
   var FONTS=[
-    {name:'Script',css:"'Great Vibes', cursive",family:'Great Vibes'},
-    {name:'Classic',css:"'Playfair Display', serif",family:'Playfair Display',weight:700},
-    {name:'Modern',css:"'Montserrat', sans-serif",family:'Montserrat',weight:700},
-    {name:'Bold',css:"'Bebas Neue', sans-serif",family:'Bebas Neue'},
-    {name:'Fun',css:"'Pacifico', cursive",family:'Pacifico'}
+    {name:'Montserrat',css:"'Montserrat', sans-serif",family:'Montserrat',weight:700},
+    {name:'Playfair Display',css:"'Playfair Display', serif",family:'Playfair Display',weight:700},
+    {name:'Poppins',css:"'Poppins', sans-serif",family:'Poppins',weight:600},
+    {name:'Great Vibes',css:"'Great Vibes', cursive",family:'Great Vibes'},
+    {name:'Bebas Neue',css:"'Bebas Neue', sans-serif",family:'Bebas Neue'},
+    {name:'Dancing Script',css:"'Dancing Script', cursive",family:'Dancing Script',weight:700},
+    {name:'Pacifico',css:"'Pacifico', cursive",family:'Pacifico'},
+    {name:'Lobster',css:"'Lobster', cursive",family:'Lobster'},
+    {name:'Oswald',css:"'Oswald', sans-serif",family:'Oswald',weight:500},
+    {name:'Raleway',css:"'Raleway', sans-serif",family:'Raleway',weight:700},
+    {name:'Lora',css:"'Lora', serif",family:'Lora',weight:600},
+    {name:'Cinzel',css:"'Cinzel', serif",family:'Cinzel',weight:700},
+    {name:'Anton',css:"'Anton', sans-serif",family:'Anton'},
+    {name:'Caveat',css:"'Caveat', cursive",family:'Caveat',weight:700},
+    {name:'Abril Fatface',css:"'Abril Fatface', serif",family:'Abril Fatface'}
   ];
-  /* PRICES: fill in your real prices by size. Leave blank and customers see "we'll send your quote".
-     Format: productId: { q: 'the question label', p: { 'answer text': '$25' } } */
-  var PRICES={
-    board:{q:'Board size',p:{'Small (about 8 x 6 in)':'','Medium (about 11 x 8 in)':'','Large (about 15 x 11 in)':''}},
-    coaster:{q:'Set size',p:{'Single coaster':'','Set of 4':'','Set of 6':''}},
-    tumbler:{q:'Tumbler size',p:{'20 oz':'','30 oz':'','40 oz':''}},
-    sign:{q:'Thickness',p:{'1/8 inch':'','1/4 inch':''}}
-  };
+  /* PRICES come from the admin page (/admin/prices) through /api/prices. Until they load, or when a price is blank,
+     customers see "we'll reply with your quote". */
+  var PRICES=null;
+  var PRICE_Q={board:'Board size',coaster:'Set size',tumbler:'Tumbler size',sign:'Thickness'};
   var MIN_LETTER_IN=0.12;
   /* ================================================================================== */
 
@@ -353,7 +362,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     var L=lines(),m=MAT[p.material],f=FONTS[st.f],a=view.a,notes=[];
     if(!L.length)L=['Your Text Here'];
     var g=el('g',{'class':'design'},body);
-    var fs=a.h/L.length*.78*st.size/100,lh=1.12,xs=st.align==='start'?a.x:st.align==='end'?a.x+a.w:a.x+a.w/2;
+    var fs=a.h/L.length*.78,lh=1.12,xs=st.align==='start'?a.x:st.align==='end'?a.x+a.w:a.x+a.w/2;
     function build(size){
       while(g.firstChild)g.removeChild(g.firstChild);
       [[m.glow,.9],[m.burn,0]].forEach(function(layer){
@@ -364,8 +373,9 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
       });
       return g.getBBox();
     }
-    var bb=build(fs),k=Math.min(1,a.w/bb.width,a.h/bb.height);
-    if(k<1){fs*=k*.98;bb=build(fs)}
+    /* 100% on the slider = the biggest the text can be and still fit the engraving area */
+    var bb=build(fs),k=Math.min(a.w/bb.width,a.h/bb.height);
+    fs*=k*.98*st.size/100;bb=build(fs);
     var room={x:a.x-bb.x,y:a.y-bb.y,w:a.w-bb.width,h:a.h-bb.height};
     st.ox=Math.max(-room.w/2,Math.min(room.w/2,st.ox));st.oy=Math.max(-room.h/2,Math.min(room.h/2,st.oy));
     g.setAttribute('transform','translate('+(room.x+room.w/2+st.ox)+' '+(room.y+room.h/2+st.oy)+')');
@@ -383,19 +393,37 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     var pos=!px&&!py?'centered':[px,py].filter(Boolean).join(' and ')+' from center';
     $('#dims').textContent='Engraving size about '+wIn.toFixed(2)+' x '+hIn.toFixed(2)+' in on a '+(p.id==='tag'?'round leather tag':p.name.toLowerCase())+', '+pos+'.';
     $('#warn').hidden=!r.notes.length;$('#warn').textContent=r.notes.join(' ');
-    engSpec={size:wIn.toFixed(2)+' x '+hIn.toFixed(2)+' in',pos:pos};
+    engSpec={size:wIn.toFixed(2)+' x '+hIn.toFixed(2)+' in',pos:pos,area:wIn*hIn};
+    $('#sizeOut').textContent='(about '+wIn.toFixed(1)+' x '+hIn.toFixed(1)+' in)';
     $('#cap').textContent=p.id==='tag'?'Size is estimated from the photo. We confirm real sizes on your proof.':'Drag your text to move it. This is a visual guide, we send a proof first.';
   }
 
-  function priceText(){
-    var p=PRODUCTS[st.p],pr=PRICES[p.id],v=pr&&pr.p[st.qa[pr.q]];
-    return v?'Starting at '+v+' each for this size. Final price is confirmed with your proof.':"Pricing: we'll reply with your quote.";
+  function dollars(n){return '$'+(Math.round(n*100)/100).toFixed(2).replace(/\.00$/,'')}
+  function priceInfo(){
+    var p=PRODUCTS[st.p],pr=PRICES&&PRICES[p.id];
+    if(!pr||!engSpec.area)return null;
+    var key=PRICE_Q[p.id]?st.qa[PRICE_Q[p.id]]:'_base',item=pr.items[key];
+    if(item===''||item===undefined||isNaN(Number(item)))return null;
+    var t=pr.tiers.filter(function(x){return engSpec.area<=Number(x.upTo)})[0]||pr.tiers[pr.tiers.length-1];
+    var add=t&&t.add!==''&&!isNaN(Number(t.add))?Number(t.add):0;
+    return {item:Number(item),add:add,each:Number(item)+add};
   }
+  function priceText(){
+    var i=priceInfo();
+    if(!i)return "Pricing: we'll reply with your quote.";
+    var qty=Math.max(1,parseInt($('#qty').value,10)||1);
+    var s='Starting at '+dollars(i.each)+' each at this size';
+    if(i.add>0)s+=' ('+dollars(i.item)+' item + '+dollars(i.add)+' for engraving size)';
+    if(qty>1)s+='. '+qty+' x '+dollars(i.each)+' = '+dollars(i.each*qty);
+    return s+'. Final price is confirmed with your proof.';
+  }
+  function showPrice(){var t=priceText();$('#priceLine').textContent=t;$('#priceLine2').textContent=t}
   function render(){
-    $('#priceLine').textContent=priceText();
     W=PRODUCTS[st.p].photo?400:520;H=400;svg.setAttribute('viewBox','0 0 '+W+' '+H);
     renderEngrave();
+    showPrice();
   }
+  fetch('/api/prices').then(function(r){return r.ok?r.json():null}).then(function(j){if(j&&j.products){PRICES=j.products;showPrice()}}).catch(function(){});
 
   /* ---------- chips and questions ---------- */
   function chips(box,items,isOn,onPick,styleOf){
@@ -426,6 +454,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
   chips($('#align'),ALIGN,function(i){return ALIGN[i].v===st.align},function(i){st.align=ALIGN[i].v});
   ['#l1','#l2','#l3'].forEach(function(s){$(s).addEventListener('input',render)});
   $('#size').addEventListener('input',function(){st.size=+this.value;render()});
+  $('#qty').addEventListener('input',showPrice);
   $('#center').addEventListener('click',function(){st.ox=st.oy=0;render()});
   renderQs();
 
@@ -504,7 +533,8 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     out.push('MOCK-UP STUDIO REQUEST: LASER ENGRAVING');
     q('Product',p.name);
     q('Engraving text',L.length?L.map(function(l){return '"'+l+'"'}).join(' / '):'(artwork only, see files)');
-    q('Font',FONTS[st.f].family+', alignment '+(st.align==='start'?'left':st.align==='end'?'right':'center')+', size '+st.size+'%');
+    q('Font',FONTS[st.f].family+', alignment '+(st.align==='start'?'left':st.align==='end'?'right':'center'));
+    q('Engraving size chosen',engSpec.size+' (about '+(engSpec.area||0).toFixed(1)+' sq in), slider at '+st.size+'%');
     q('Preview size and position',engSpec.size+', '+engSpec.pos);
     out.push('--- Product questions');
     p.qs.forEach(function(x){q(x.k,st.qa[x.k])});

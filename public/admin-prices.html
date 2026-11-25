@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark only">
+<meta name="robots" content="noindex, nofollow">
+<title>Studio Prices | Cosmic Vibez Creations</title>
+<link rel="icon" href="/favicon.png">
+<style>
+:root{--space:#0a0919;--space2:#0f0d26;--panel:#15122f;--panel2:#1b1740;--line:#2c2762;--violet:#7c5cff;--cyan:#35e4e8;--pink:#ff5fa2;--gold:#ffc857;--text:#ece9ff;--muted:#a9a4d6;--ok:#4ade80}
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+html{background:var(--space);color-scheme:dark only;-webkit-text-size-adjust:100%}
+body{background:var(--space);color:var(--text);font:400 15px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;min-height:100vh;overflow-x:hidden}
+a{color:var(--cyan)}
+button,input{font:inherit;color:var(--text)}
+.wrap{max-width:860px;margin:0 auto;padding:0 14px}
+header{position:sticky;top:0;z-index:20;background:rgba(10,9,25,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+header .wrap{display:flex;align-items:center;gap:12px;min-height:60px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
+header h1{font-size:17px;flex:1;min-width:140px}
+.btn{border:0;border-radius:999px;padding:10px 18px;font-weight:600;font-size:14px;cursor:pointer;color:#0a0919;background:linear-gradient(90deg,var(--cyan),var(--violet) 60%,var(--pink));text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
+.btn.ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
+.btn:disabled{opacity:.5;cursor:default}
+input{width:100%;background:var(--space2);border:1.5px solid var(--line);border-radius:10px;padding:10px 12px;min-height:44px;appearance:none;-webkit-appearance:none;color-scheme:dark}
+input:focus,button:focus-visible{outline:2px solid var(--cyan);outline-offset:1px}
+.intro{margin:18px 0;background:rgba(255,200,87,.1);border:1px dashed var(--gold);color:var(--gold);border-radius:12px;padding:12px 14px;font-size:14px}
+.intro b{color:var(--text)}
+.card{background:linear-gradient(160deg,var(--panel2),var(--panel));border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px;display:grid;gap:14px}
+.card h2{font-size:18px}
+.card h3{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--cyan);margin-bottom:4px}
+.card p.help{font-size:13px;color:var(--muted)}
+.rows{display:grid;gap:8px}
+.row{display:grid;grid-template-columns:1fr 150px;gap:10px;align-items:center}
+.row.step{grid-template-columns:1fr 1fr 44px}
+.row label,.row .lab{font-size:14px;color:var(--text)}
+.money{position:relative}
+.money span{position:absolute;left:12px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none}
+.money input{padding-left:24px}
+.x{background:transparent;border:1.5px solid var(--line);border-radius:10px;min-height:44px;cursor:pointer;color:var(--pink)}
+.bar{position:sticky;bottom:0;background:rgba(10,9,25,.95);border-top:1px solid var(--line);padding:12px 0;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+#msg{font-size:14px}
+.err{color:var(--pink)}.ok{color:var(--ok)}
+.colh{display:grid;grid-template-columns:1fr 1fr 44px;gap:10px;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+@media(max-width:560px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Studio prices</h1>
+    <a class="btn ghost" href="/admin">Back to quotes</a>
+    <a class="btn ghost" href="/studio" target="_blank" rel="noopener">Open the Studio</a>
+  </div>
+</header>
+<main class="wrap">
+  <div id="signin" hidden class="intro">You are not signed in. <a href="/admin">Sign in on the Quotes page</a>, then come back here.</div>
+  <div id="app" hidden>
+    <div class="intro"><b>How the Studio price works.</b> The customer drags the Engraving size slider and the price updates. Price = the <b>item price</b> for the size they pick + the <b>size add-on</b> for how big their engraving is (in square inches, width x height). Leave an item price blank and customers see "we'll reply with your quote" for it. A blank size add-on counts as $0. Prices are shown as "starting at" and are confirmed on your proof.</div>
+    <div id="cards"></div>
+    <div class="bar">
+      <button class="btn" id="save" type="button">Save prices</button>
+      <span id="msg" role="status" aria-live="polite"></span>
+    </div>
+  </div>
+</main>
+<script>
+(function(){
+  var $=function(s){return document.querySelector(s)};
+  var data=null,meta=null;
+  function say(c,t){var m=$('#msg');m.className=c;m.textContent=t}
+  function h(tag,attrs,kids){var n=document.createElement(tag);for(var k in (attrs||{})){if(k==='text')n.textContent=attrs[k];else n.setAttribute(k,attrs[k])}(kids||[]).forEach(function(c){n.appendChild(c)});return n}
+  function money(id,val,onInput,label){
+    var w=h('div',{'class':'money'});w.appendChild(h('span',{text:'$'}));
+    var i=h('input',{type:'text',inputmode:'decimal',autocomplete:'off','aria-label':label,placeholder:'blank'});i.value=val===''?'':val;
+    i.addEventListener('input',function(){onInput(i.value.trim().replace(/^\$/,''))});w.appendChild(i);return w;
+  }
+  async function api(method,body){
+    var r=await fetch('/api/admin/prices',{method:method,headers:{'Content-Type':'application/json','X-Admin':'1'},body:body?JSON.stringify(body):undefined});
+    var j=await r.json().catch(function(){return{}});
+    if(r.status===401){$('#signin').hidden=false;$('#app').hidden=true;throw new Error('signin')}
+    if(!r.ok)throw new Error(j.error||'Something went wrong.');
+    return j;
+  }
+  function render(){
+    var box=$('#cards');box.innerHTML='';
+    Object.keys(meta).forEach(function(id){
+      var m=meta[id],d=data[id],card=h('section',{'class':'card'});
+      card.appendChild(h('h2',{text:m.name}));
+      var a=h('div'),rows=h('div',{'class':'rows'});
+      a.appendChild(h('h3',{text:m.q?('Item price by '+m.q.toLowerCase()):'Item price'}));
+      a.appendChild(h('p',{'class':'help',text:m.q?'What you charge for the item with a basic engraving.':'What you charge for the item with a basic engraving.'}));
+      m.items.forEach(function(k){
+        var row=h('div',{'class':'row'});
+        row.appendChild(h('div',{'class':'lab',text:k==='_base'?m.name:k}));
+        row.appendChild(money(id,d.items[k],function(v){d.items[k]=v},'Price for '+(k==='_base'?m.name:k)));
+        rows.appendChild(row);
+      });
+      a.appendChild(rows);card.appendChild(a);
+      var b=h('div');b.appendChild(h('h3',{text:'Size add-on (bigger engraving costs more)'}));
+      b.appendChild(h('p',{'class':'help',text:'Each step says: up to this many square inches, add this much. The last step also covers anything larger. Example: up to 4 sq in adds $0, up to 12 sq in adds $6.'}));
+      var steps=h('div',{'class':'rows'});
+      var head=h('div',{'class':'colh'});head.appendChild(h('span',{text:'Up to (sq in)'}));head.appendChild(h('span',{text:'Add'}));head.appendChild(h('span'));steps.appendChild(head);
+      d.tiers.forEach(function(t,i){
+        var row=h('div',{'class':'row step'});
+        var u=h('input',{type:'text',inputmode:'decimal','aria-label':m.name+' step '+(i+1)+' up to square inches'});u.value=t.upTo;
+        u.addEventListener('input',function(){t.upTo=u.value.trim()});row.appendChild(u);
+        row.appendChild(money(id,t.add,function(v){t.add=v},m.name+' step '+(i+1)+' add-on price'));
+        var x=h('button',{type:'button','class':'x','aria-label':'Remove step '+(i+1),text:'X'});
+        x.addEventListener('click',function(){if(d.tiers.length>1){d.tiers.splice(i,1);render()}});
+        row.appendChild(x);steps.appendChild(row);
+      });
+      b.appendChild(steps);
+      var add=h('button',{type:'button','class':'btn ghost',text:'Add a size step',style:'margin-top:10px'});
+      add.addEventListener('click',function(){if(d.tiers.length<8){var last=d.tiers[d.tiers.length-1];d.tiers.push({upTo:Math.round((Number(last.upTo)*1.5)*100)/100,add:''});render()}});
+      b.appendChild(add);card.appendChild(b);box.appendChild(card);
+    });
+  }
+  async function load(){
+    try{var j=await api('GET');data=j.products;meta=j.meta;$('#signin').hidden=true;$('#app').hidden=false;render()}catch(e){if(e.message!=='signin')say('err',e.message)}
+  }
+  $('#save').addEventListener('click',async function(){
+    var btn=this;btn.disabled=true;say('','Saving...');
+    try{var j=await api('PUT',{products:data});data=j.products;meta=j.meta;render();say('ok','Saved. The Studio now uses these prices.')}
+    catch(e){if(e.message!=='signin')say('err',e.message)}
+    finally{btn.disabled=false}
+  });
+  load();
+})();
+</script>
+</body>
+</html>

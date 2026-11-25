@@ -121,6 +121,61 @@ function view(q) {
 }
 loadQuotes();
 
+/* ---------- Mock-Up Studio prices (edited in /admin/prices, kept on the disk) ---------- */
+const PRICES_FILE = path.join(DATA_DIR, 'prices.json');
+/* The products, their size question and answers, and the default size breakpoints (square inches).
+   Prices start blank: a blank price means the customer sees "we'll reply with your quote". */
+const PRICE_DEFAULTS = {
+  tag: { name: 'Leather Keychain Tag', q: null, items: ['_base'], tiers: [0.4, 0.7, 1.1] },
+  board: { name: 'Cutting Board', q: 'Board size', items: ['Small (about 8 x 6 in)', 'Medium (about 11 x 8 in)', 'Large (about 15 x 11 in)'], tiers: [5, 12, 24, 40] },
+  coaster: { name: 'Slate Coaster', q: 'Set size', items: ['Single coaster', 'Set of 4', 'Set of 6'], tiers: [2, 4, 6, 8] },
+  tumbler: { name: '20 oz Tumbler', q: 'Tumbler size', items: ['20 oz', '30 oz', '40 oz'], tiers: [2, 4, 6, 9.5] },
+  sign: { name: 'Acrylic Sign', q: 'Thickness', items: ['1/8 inch', '1/4 inch'], tiers: [8, 20, 40, 60] },
+  patch: { name: 'Leather Patch', q: null, items: ['_base'], tiers: [1, 2, 3.5, 4.6] },
+};
+function defaultPrices() {
+  const o = {};
+  for (const [id, d] of Object.entries(PRICE_DEFAULTS)) {
+    o[id] = { items: Object.fromEntries(d.items.map((k) => [k, ''])), tiers: d.tiers.map((u) => ({ upTo: u, add: '' })) };
+  }
+  return o;
+}
+function cleanPrice(v) {
+  if (v === '' || v === null || v === undefined) return '';
+  const n = Number(v);
+  if (!isFinite(n) || n < 0 || n > 100000) throw httpErr(400, 'One of the prices does not look right. Use numbers like 25 or 12.50.');
+  return Math.round(n * 100) / 100;
+}
+function sanitizePrices(input) {
+  const src = (input && input.products) || {};
+  const out = {};
+  for (const [id, d] of Object.entries(PRICE_DEFAULTS)) {
+    const p = src[id] || {};
+    const items = {};
+    for (const k of d.items) items[k] = cleanPrice(p.items && p.items[k]);
+    let tiers = Array.isArray(p.tiers) && p.tiers.length ? p.tiers : d.tiers.map((u) => ({ upTo: u, add: '' }));
+    if (tiers.length > 8) throw httpErr(400, d.name + ' can have up to 8 size steps.');
+    let last = 0;
+    tiers = tiers.map((t) => {
+      const u = Number(t && t.upTo);
+      if (!isFinite(u) || u <= last || u > 1000) throw httpErr(400, d.name + ': each size step must be larger than the one before it.');
+      last = u;
+      return { upTo: Math.round(u * 100) / 100, add: cleanPrice(t.add) };
+    });
+    out[id] = { items, tiers };
+  }
+  return out;
+}
+let prices = defaultPrices();
+try { prices = sanitizePrices({ products: JSON.parse(fs.readFileSync(PRICES_FILE, 'utf8')).products }); }
+catch (e) { if (e.code !== 'ENOENT') console.error('prices.json could not be read, using blank prices:', e.message); }
+function savePrices() {
+  const tmp = PRICES_FILE + '.tmp';
+  fs.writeFileSync(tmp, JSON.stringify({ products: prices, saved: new Date().toISOString() }));
+  fs.renameSync(tmp, PRICES_FILE);
+}
+const priceMeta = () => Object.fromEntries(Object.entries(PRICE_DEFAULTS).map(([id, d]) => [id, { name: d.name, q: d.q, items: d.items }]));
+
 /* ---------- email (Resend) ---------- */
 async function sendMail({ to, subject, html, text: plain, replyTo }) {
   const key = env('RESEND_API_KEY');
@@ -410,6 +465,15 @@ async function adminApi(req, res, p, query) {
   if (m === 'GET' && p === '/api/admin/quotes') {
     return json(res, 200, { quotes: quotes.slice().sort((a, b) => b.num - a.num).map(view), stripe: !!env('STRIPE_SECRET_KEY') });
   }
+  if (p === '/api/admin/prices') {
+    if (m === 'GET') return json(res, 200, { products: prices, meta: priceMeta() });
+    if (m === 'PUT') {
+      const b = await readJson(req, 32768);
+      prices = sanitizePrices(b); savePrices();
+      return json(res, 200, { ok: true, products: prices, meta: priceMeta() });
+    }
+    throw httpErr(405, 'Method not allowed.');
+  }
   if (m === 'POST' && p === '/api/admin/delete-finished') {
     const gone = quotes.filter((q) => q.status === 'completed' || q.status === 'cancelled');
     gone.forEach((q) => fs.rmSync(path.join(FILES_DIR, q.id), { recursive: true, force: true }));
@@ -454,6 +518,7 @@ async function adminApi(req, res, p, query) {
 async function api(req, res, p, query) {
   const m = req.method;
   if (p.startsWith('/api/admin/')) return adminApi(req, res, p, query);
+  if (m === 'GET' && p === '/api/prices') return json(res, 200, { products: prices });
   if (m === 'POST' && p === '/api/quote') return postQuote(req, res);
   let mm = /^\/api\/quote\/([a-f0-9]{10}|0)\/(files|done)$/.exec(p);
   if (m === 'POST' && mm) return mm[2] === 'files' ? postFile(req, res, mm[1], query) : postDone(req, res, mm[1], query);
@@ -497,7 +562,7 @@ function serveStatic(req, res, pathRaw) {
   let p;
   try { p = decodeURIComponent(pathRaw); } catch (e) { return text(res, 400, 'Bad request'); }
   if (p.includes('\0')) return text(res, 400, 'Bad request');
-  const map = { '/customize': '/studio.html', '/admin': '/admin.html', '/admin/': '/admin.html' };
+  const map = { '/customize': '/studio.html', '/admin': '/admin.html', '/admin/': '/admin.html', '/admin/prices': '/admin-prices.html' };
   for (const pg of PAGES) map[pg[0]] = pg[1];
   p = map[p] || p;
   if (p.split('/').some((seg) => seg.startsWith('.'))) return text(res, 404, 'Not found');
