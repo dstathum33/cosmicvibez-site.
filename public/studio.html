@@ -91,6 +91,8 @@ input:focus,textarea:focus{outline:2px solid var(--violet);outline-offset:1px}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 button.btn{cursor:pointer;font-size:16px;padding:15px 26px}
 .cta{display:flex;flex-wrap:wrap;gap:12px}.cta .btn{flex:1 1 220px}
+@media(max-width:860px){.cta{position:sticky;bottom:0;z-index:40;background:rgba(10,9,25,.96);padding:10px 0;margin:0 -4px;border-top:1px solid var(--line)}.cta .btn{flex:1 1 140px}}
+#buyHint{color:var(--gold);font-size:14px;font-weight:600;margin:6px 0 0}
 #send.alt{background:transparent;color:var(--text);border:1.5px solid var(--line)}
 .more{border:1px solid var(--line);border-radius:12px;background:var(--space2)}.more summary{cursor:pointer;padding:13px 14px;font-weight:600;min-height:48px;display:flex;align-items:center}.morebody{display:grid;gap:14px;padding:4px 14px 16px}
 .trust{font-size:13px;color:var(--muted);margin:0}.trust strong{color:var(--text)}
@@ -250,6 +252,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
         <button class="btn" type="submit" id="buy" value="buy" hidden>Buy now</button>
         <button class="btn" type="submit" id="send" value="quote">Get a Free Quote</button>
       </div>
+      <p id="buyHint" hidden>Pick a size and quantity above and your Buy now button appears here.</p>
       <p id="msg" role="status" aria-live="polite"></p>
       <p class="trust" id="trust"><span id="buyline"><strong>Buy now</strong> charges the full price on a secure Stripe page. </span>We send you a proof first and nothing is engraved until you approve it. You can cancel within 12 hours for a refund minus a design fee, and if we make a mistake we remake it or refund you (tell us within 3 days). See our <a href="/terms">Terms</a> and <a href="/policies">Store Policies</a>.</p>
       <p class="hint" id="whyQuote" hidden>Buy now is for standard sizes picked up in Keyport. For rush, delivery, your own item, other sizes or bigger jobs, use Get a Free Quote and we reply with an exact price.</p>
@@ -440,6 +443,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
     $('#buy').hidden=!on;if(on)$('#buy').textContent='Buy now: '+dollars(i.each*qty);
     $('#send').classList.toggle('alt',on);
     $('#whyQuote').hidden=!(BUY&&i&&!on);
+    $('#buyHint').hidden=!(BUY&&!i);
     $('#buyline').hidden=!on;
   }
   function render(){
@@ -624,6 +628,7 @@ select:focus{outline:2px solid var(--violet);outline-offset:1px}
   /* ---------- start ---------- */
   var qp=new URLSearchParams(location.search),want=qp.get('p');
   if(want){PRODUCTS.forEach(function(p,i){if(p.id===want)st.p=i});chips($('#products'),PRODUCTS,function(i){return i===st.p},function(i){st.p=i;st.ox=st.oy=0;renderQs()});renderQs()}
+  if(qp.get('buy')){setTimeout(function(){var el=$('#priceLine2');if(el&&el.scrollIntoView)el.scrollIntoView({block:'center'})},300)}
   render();
   if(document.fonts&&document.fonts.ready)document.fonts.ready.then(render);
 })();
