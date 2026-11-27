@@ -59,6 +59,7 @@ main,header,footer{position:relative;z-index:1}
 .links{display:flex;gap:22px;align-items:center}
 .links a{text-decoration:none;font-size:14px;color:var(--muted);font-weight:500}
 .links a:hover{color:var(--text)}
+.links a.nav3d{color:var(--cyan);font-weight:700}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:0;border-radius:999px;padding:13px 24px;font:600 15px/1 Inter,sans-serif;cursor:pointer;text-decoration:none;color:#0a0919;background:linear-gradient(90deg,var(--cyan),var(--violet) 60%,var(--pink));transition:transform .15s,box-shadow .15s}
 .btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(124,92,255,.45)}
 .btn.ghost{background:transparent;color:var(--text);border:1.5px solid var(--line)}
@@ -225,13 +226,13 @@ footer a{color:var(--cyan)}
     <a class="brand" href="#top" aria-label="Cosmic Vibez Creations home"><picture><source srcset="/logo-icon.webp" type="image/webp"><img class="brand-icon" src="/logo-icon.png" width="44" height="43" alt=""></picture><picture><source srcset="/logo-wordmark.webp" type="image/webp"><img class="brand-word" src="/logo-wordmark.png" width="177" height="28" alt="Cosmic Vibez Creations"></picture></a>
     <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="links">&#9776;</button>
     <nav class="links" id="links">
+      <a class="nav3d" href="/3d">3D Printing</a>
       <a href="#services">Services</a>
       <a href="#studio">Preview Engraving</a>
       <a href="#serve">Who We Serve</a>
       <a href="#about">About</a>
       <a href="/shop">Shop</a>
       <a href="/studio">Mock-Up Studio</a>
-      <a href="/3d">3D Printing</a>
       <a class="btn" href="#quote">Get a Free Quote</a>
     </nav>
   </div>
@@ -245,6 +246,7 @@ footer a{color:var(--cyan)}
       <p class="lead">Personalized gifts, keepsakes and bulk business orders on wood, metal, leather and more. Send your idea and we reply with a proof and a free quote.</p>
       <div class="cta">
         <a class="btn" href="#quote">Get a Free Quote</a>
+        <a class="btn ghost" href="/3d">3D Printing</a>
       </div>
       <div class="badges">
         <span class="badge">Wood, Metal, Leather &amp; More</span>
