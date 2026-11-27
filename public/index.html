@@ -228,7 +228,6 @@ footer a{color:var(--cyan)}
     <nav class="links" id="links">
       <a class="nav3d" href="/3d">3D Printing</a>
       <a href="#services">Services</a>
-      <a href="#studio">Preview Engraving</a>
       <a href="#serve">Who We Serve</a>
       <a href="#about">About</a>
       <a href="/shop">Shop</a>
@@ -277,43 +276,6 @@ footer a{color:var(--cyan)}
         <ul><li>Personalized Gifts</li><li>Corporate Branding</li><li>Wedding Favors</li><li>Promo Products</li></ul>
         <button class="btn toggle" type="button" data-svc="Laser Engraving" aria-pressed="false">Add To My Quote</button>
       </article>
-    </div>
-  </div>
-</section>
-
-<section class="studio" id="studio">
-  <div class="wrap">
-<h2>See your words burned in.</h2>
-    <p class="lead">Type a name, a date or a short message, pick a material and watch the laser go. Tap the preview to run it again.</p>
-    <div class="box">
-      <div class="gap">
-        <div class="field">
-          <label for="pvText">Your Text</label>
-          <input id="pvText" type="text" maxlength="28" value="Out Of This World" autocomplete="off">
-        </div>
-        <div>
-          <span class="fl">Material</span>
-          <div class="chips" id="pvMat">
-            <label class="chip"><input type="radio" name="pvmat" value="wood" checked><span>Wood</span></label>
-            <label class="chip"><input type="radio" name="pvmat" value="slate"><span>Slate</span></label>
-            <label class="chip"><input type="radio" name="pvmat" value="metal"><span>Metal</span></label>
-            <label class="chip"><input type="radio" name="pvmat" value="leather"><span>Leather</span></label>
-          </div>
-        </div>
-        <div>
-          <span class="fl">Style</span>
-          <div class="chips" id="pvStyle">
-            <label class="chip"><input type="radio" name="pvstyle" value="bold" checked><span>Bold</span></label>
-            <label class="chip"><input type="radio" name="pvstyle" value="script"><span>Script</span></label>
-            <label class="chip"><input type="radio" name="pvstyle" value="classic"><span>Classic</span></label>
-          </div>
-        </div>
-        <button class="btn" type="button" id="pvUse">Use This In My Quote</button>
-      </div>
-      <div>
-        <div class="canvas-wrap" id="pvWrap" title="Tap to run again"><canvas id="engrave" width="800" height="500" aria-label="Engraving preview"></canvas></div>
-        <p class="hint">A rough preview only. Your real piece gets a proper design and approval before anything is engraved.</p>
-      </div>
     </div>
   </div>
 </section>
@@ -469,61 +431,6 @@ footer a{color:var(--cyan)}
   needBoxes.forEach(function(b){b.addEventListener('change',syncPicks)});
   var qSec=$('#quote');
   if('IntersectionObserver' in window){new IntersectionObserver(function(es){es.forEach(function(en){pickbar.style.display=en.isIntersecting?'none':''})},{threshold:.15}).observe(qSec)}
-
-  /* engraving preview */
-  var cv=$('#engrave'),cx=cv.getContext('2d'),W=cv.width,H=cv.height;
-  var MAT={
-    wood:{base:['#c8975a','#a8743a'],ink:'#2a1305',glow:'#ff7a2a',grain:'rgba(90,50,15,.18)'},
-    slate:{base:['#4b4f58','#2c2f36'],ink:'#d8dce6',glow:'#9ad8ff',grain:'rgba(255,255,255,.05)'},
-    metal:{base:['#b9bec7','#8a909b'],ink:'#2b2f38',glow:'#ffffff',grain:'rgba(255,255,255,.18)'},
-    leather:{base:['#7a4a2b','#552f19'],ink:'#2a140a',glow:'#ffb24a',grain:'rgba(0,0,0,.14)'}
-  };
-  var FONT={bold:'800 {s}px Sora, Arial Black, sans-serif',script:'italic 600 {s}px "Brush Script MT","Segoe Script","Snell Roundhand",cursive',classic:'500 {s}px Georgia, "Times New Roman", serif'};
-  var anim=null,progress=1,started=false;
-  function mat(){return $('input[name=pvmat]:checked').value}
-  function sty(){return $('input[name=pvstyle]:checked').value}
-  function txt(){return ($('#pvText').value||'').trim()||'Your Text Here'}
-  function fit(t,style){var s=140;do{cx.font=FONT[style].replace('{s}',s);s-=6}while(cx.measureText(t).width>W*.86&&s>20);return s+6}
-  function drawBase(m){
-    var g=cx.createLinearGradient(0,0,W,H);g.addColorStop(0,m.base[0]);g.addColorStop(1,m.base[1]);cx.fillStyle=g;cx.fillRect(0,0,W,H);
-    cx.fillStyle=m.grain;for(var i=0;i<46;i++){cx.fillRect(0,(i*H/46)+Math.sin(i*1.7)*3,W,1+(i%3))}
-    var v=cx.createRadialGradient(W/2,H/2,H*.2,W/2,H/2,H*.9);v.addColorStop(0,'rgba(0,0,0,0)');v.addColorStop(1,'rgba(0,0,0,.4)');cx.fillStyle=v;cx.fillRect(0,0,W,H);
-  }
-  function frame(p){
-    var m=MAT[mat()],style=sty(),t=txt();
-    drawBase(m);
-    var s=fit(t,style);cx.font=FONT[style].replace('{s}',s);cx.textAlign='center';cx.textBaseline='middle';
-    var tw=cx.measureText(t).width,x0=W/2-tw/2,cut=x0+tw*p;
-    cx.save();cx.beginPath();cx.rect(0,0,cut,H);cx.clip();
-    cx.shadowColor='rgba(0,0,0,.35)';cx.shadowBlur=2;cx.shadowOffsetY=1;
-    cx.fillStyle=m.ink;cx.fillText(t,W/2,H/2);cx.restore();
-    if(p<1){
-      var lx=cut,ly=H/2+Math.sin(p*60)*s*.28;
-      var gl=cx.createRadialGradient(lx,ly,0,lx,ly,60);gl.addColorStop(0,'#fff');gl.addColorStop(.25,m.glow);gl.addColorStop(1,'rgba(255,255,255,0)');
-      cx.fillStyle=gl;cx.beginPath();cx.arc(lx,ly,60,0,6.283);cx.fill();
-      cx.strokeStyle='rgba(255,60,60,.55)';cx.lineWidth=2;cx.beginPath();cx.moveTo(lx,0);cx.lineTo(lx,ly);cx.stroke();
-    }
-  }
-  function run(){
-    cancelAnimationFrame(anim);
-    if(reduce){frame(1);return}
-    var t0=null,dur=2600;
-    function step(ts){if(!t0)t0=ts;progress=Math.min(1,(ts-t0)/dur);frame(progress);if(progress<1)anim=requestAnimationFrame(step)}
-    anim=requestAnimationFrame(step);
-  }
-  frame(1);
-  if('IntersectionObserver' in window){new IntersectionObserver(function(es,o){if(es[0].isIntersecting&&!started){started=true;run();o.disconnect()}},{threshold:.35}).observe($('#pvWrap'))}
-  else{run()}
-  $('#pvWrap').addEventListener('click',run);
-  $('#pvText').addEventListener('input',function(){cancelAnimationFrame(anim);frame(1)});
-  $$('input[name=pvmat],input[name=pvstyle]').forEach(function(i){i.addEventListener('change',run)});
-  $('#pvUse').addEventListener('click',function(){
-    var box=needBoxes.filter(function(b){return b.value==='Laser Engraving'})[0];box.checked=true;syncPicks();
-    var line='Engraving idea: "'+txt()+'" on '+mat()+', '+sty()+' style.';
-    var ta=$('#qMsg'),rest=ta.value.replace(/Engraving idea:[^\n]*\n?/,'').trim();
-    ta.value=rest?line+'\n'+rest:line;
-    $('#quote').scrollIntoView({behavior:reduce?'auto':'smooth'});
-  });
 
   /* files */
   var files=[],MAXF=10*1024*1024,OK=/\.(png|jpe?g|gif|webp|heic|pdf|stl|obj|3mf)$/i;
