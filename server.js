@@ -309,6 +309,22 @@ function markPaid(s) {
     html: '<div style="font:15px Arial,sans-serif"><h2>Payment received</h2><p>' + esc(q.name) + ' paid <strong>' + money(pay.amount_cents) + '</strong> (' + esc(pay.label) + ') on quote #' + q.num + '.</p>' + btn(c.siteUrl + '/admin', 'Open Admin', '#222222') + '</div>',
     text: q.name + ' paid ' + money(pay.amount_cents) + ' on quote #' + q.num + '.',
   }).catch(() => {});
+  sendMail(receiptMail(q, pay)).then((r) => { if (!r.ok) console.error('receipt email failed for quote', q.num, r.error); }).catch(() => {});
+}
+function receiptMail(q, pay) {
+  const c = C();
+  const first = esc(q.name.split(/\s+/)[0]);
+  const amt = money(pay.amount_cents);
+  const html = '<div style="font:15px/1.6 Arial,sans-serif;max-width:560px"><h2 style="margin:0 0 8px">Thank you, ' + first + '. Your payment is received.</h2>' +
+    '<table style="border-collapse:collapse;margin:12px 0"><tr><td style="padding:4px 16px 4px 0;color:#666">Order</td><td>Quote #' + q.num + '</td></tr>' +
+    '<tr><td style="padding:4px 16px 4px 0;color:#666">Item</td><td>' + esc(pay.label) + '</td></tr>' +
+    '<tr><td style="padding:4px 16px 4px 0;color:#666">Amount paid</td><td><strong>' + esc(amt) + '</strong></td></tr>' +
+    '<tr><td style="padding:4px 16px 4px 0;color:#666">Paid</td><td>' + esc(new Date().toLocaleDateString('en-US', { timeZone: 'America/New_York', year: 'numeric', month: 'long', day: 'numeric' })) + '</td></tr></table>' +
+    '<p><strong>What happens next:</strong> we send you a proof to approve before anything is engraved. Once you approve it, we make your piece and tell you when it is ready for pickup in Keyport, NJ.</p>' +
+    '<p>Cancel within 12 hours for a refund minus a design fee. If we make a mistake, tell us within 3 days and we remake it or refund you. See our <a href="' + esc(c.siteUrl) + '/terms">Terms</a> and <a href="' + esc(c.siteUrl) + '/policies">Store Policies</a>.</p>' +
+    '<p>Questions? Text or call ' + PHONE_DISPLAY + ', or just reply to this email.</p><p style="color:#888;font-size:12px">Cosmic Vibez Creations, Keyport, NJ 07735. Stripe may also email you its own payment receipt.</p></div>';
+  const plain = 'Thank you, ' + q.name.split(/\s+/)[0] + '. Your payment of ' + amt + ' for quote #' + q.num + ' (' + pay.label + ') is received. Next we send you a proof to approve before anything is engraved, then tell you when it is ready for pickup in Keyport, NJ. Questions? Text or call ' + PHONE_DISPLAY + ', or reply to this email.';
+  return { to: q.email, subject: 'Your receipt from Cosmic Vibez Creations (quote #' + q.num + ')', html, text: plain, replyTo: c.alertTo };
 }
 
 /* ---------- admin auth ---------- */
